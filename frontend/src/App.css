@@ -1,0 +1,31 @@
+.App {
+  text-align: left;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.input input {
+  width: 150px;
+  height: 15px;
+  margin: 5px;
+}
+.input button {
+width: 100px;
+margin: 5px;
+}
+
+.userList{
+  width : 200px;
+  height: 30px;
+  border: 2px solid black;
+
+}
+
+
+
+
+
+
