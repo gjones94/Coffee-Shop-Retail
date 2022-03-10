@@ -27,7 +27,7 @@ function Login() {
       while (PwStrength == 0){
         if (/\d/.test(frontPassword)){
             if(/[a-z]/.test(frontPassword)){
-                if(/[A-z]/.test(frontPassword)){
+                if(/[A-Z]/.test(frontPassword)){
                   PwStrength = 1;
                   setresponseText([frontName] +" Has been registered \n Welcome to Beans & Leaves!")
                 }}
