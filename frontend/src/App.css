@@ -24,6 +24,10 @@ margin: 5px;
 
 }
 
+a:hover{
+  text-decoration: underline;
+}
+
 
 
 

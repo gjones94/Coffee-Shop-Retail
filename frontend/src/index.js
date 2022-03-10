@@ -5,6 +5,7 @@ import Home from './Home';
 import Login from './Login';
 import About from './About';
 import Product from './Product';
+import Register from './Register';
 
 import{
   BrowserRouter as Router,
@@ -14,6 +15,7 @@ import{
   Link,
 } from "react-router-dom";
 
+
 ReactDOM.render(
   <Router>
     <Routes>
@@ -22,6 +24,7 @@ ReactDOM.render(
       <Route path ="/Login" element={<Login />}/>
       <Route path ="/About" element={<About />}/>
       <Route path ="/Product" element={<Product />}/>
+      <Route path ="/Register" element={<Register />}/>
 
     </Routes>
   </Router>,

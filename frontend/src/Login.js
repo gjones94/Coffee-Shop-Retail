@@ -32,7 +32,7 @@ function Login() {
                   setresponseText([frontName] +" Has been registered \n Welcome to Beans & Leaves!")
                 }}
         }else {
-            setresponseText("Password is too weak")
+            setresponseText("Password must contain a capital letter, a number, and a lower case letter.")
             submitInfo()}
       }
       Axios.post("/api/insert",{
@@ -49,7 +49,7 @@ function Login() {
 
   const loginCheck = () =>{
   
-    Axios.post("/api/login/auth",{
+    Axios.post("http://localhost:3001/api/login/auth",{
       PassName : frontName,
       PassPW : frontPassword,
     }).then((response) => {
@@ -82,10 +82,8 @@ function Login() {
     }} 
     />
      <label>{responseText}</label>
-
     <button onClick={submitInfo}>Register</button>
-    <button onClick ={loginCheck}
-    >Login</button>
+    <button onClick ={loginCheck}>Login</button>
 
     {UserList.map((val)=> {
       return (

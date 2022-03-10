@@ -62,7 +62,21 @@ app.get('/api/get', (req,res) => {
     })
 
 });
+app.post("/api/register/insert",(req,res) => {
+    const backName = req.body.PassName
+    const backLast = req.body.PassLast
+    const backEmail = req.body.PassEmail
+    const backAddress = req.body.PassAddress
+    const backNumber = req.body.PassNumber
+    const backPw = req.body.PassPw
 
+    const sqlInsert="INSERT INTO users (user_email, user_first_name, user_last_name, user_phone,user_address,password) VALUES (?,?);"
+    db.query(sqlInsert,[backEmail,backName,backLast,backNumber,backAddress,backPw],(res,err) => {
+        console.log(res)
+
+    });
+
+})
 //api for insert 
 app.post("/api/insert",(req,res) => {
     //use body parser to get information from frontend, and stored

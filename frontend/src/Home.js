@@ -27,6 +27,14 @@ function Home(){
       }}>
         Product
       </button>
+
+      <a>
+      <ul onClick ={() =>{
+        navigate("/Register");
+      }}>
+        Register?
+      </ul>
+      </a>
       
     </div>
   );

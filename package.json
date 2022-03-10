@@ -6,12 +6,14 @@
   "scripts": {
     "start": "node server/index.js",
     "deploy": "cd frontend && npm run build && sudo cp -r build /var/www/html && sudo cp ../server/index.js /var/www/html/server && cd /var/www/html && npm start",
-    "devStart": "nodemon index.js",
+    "devStart": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "engines": { "node": "14.19.0"},
+  "engines": {
+    "node": "14.19.0"
+  },
   "dependencies": {
     "body-parser": "^1.19.2",
     "cors": "^2.8.5",
