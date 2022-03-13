@@ -49,7 +49,8 @@ function Login() {
 
   const loginCheck = () =>{
   
-    Axios.post("http://localhost:3001/api/login/auth",{
+    Axios.post("/api/login/auth",{
+    //Axios.post("http://localhost:3001/api/login/auth",{
       PassName : frontName,
       PassPW : frontPassword,
     }).then((response) => {

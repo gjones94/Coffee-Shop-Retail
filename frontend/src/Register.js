@@ -18,7 +18,8 @@ function Register(){
 
 
     const submitInfo = () =>{
-        Axios.post("http://localhost:3001/api/register/insert",{
+        Axios.post("/api/register/insert",{
+        //Axios.post("http://localhost:3001/api/register/insert",{
         PassName: frontName,
         PassLast: frontLast,
         PassEmail: frontEmail,
