@@ -1,0 +1,25 @@
+.input {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  position: inherit;
+}
+.input input {
+  width: 150px;
+  height: 15px;
+  margin: 5px;
+  color: black;
+}
+.input button {
+width: 150px;
+margin: 5px;
+
+}
+
+.userList{
+  width : 200px;
+  height: 30px;
+  border: 2px solid black;
+
+}
