@@ -1,0 +1,141 @@
+.login {
+  background-color: (--var);
+  height: 100%;
+  color: #fff;
+  filter: brightness(95%);
+}
+
+.login__page {
+  background-color: black;
+  width: 400px;
+  height: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__logo {
+  background-color: black;
+  margin-top: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.login__head1 {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 13px;
+  margin-bottom: 9px;
+}
+
+.login__page > form {
+  width: 100%;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__email , .login__password {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.login__input {
+  margin-bottom: 15px;
+  width: 250px;
+  height: 30px;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  border-radius: 18px;
+  text-align: center;
+  background-color: #3d3d3d;
+  color: #fff;
+}
+
+
+.login__head2 {
+  padding: 2rem;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(216, 214, 214);
+}
+
+.login__head3 {
+  padding: 3rem;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(216, 214, 214);
+}
+
+.underlineHead3 {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .login {
+    background-color: var(--black);
+  }
+
+  .login__page {
+    width: 240px;
+    height: 480px;
+    margin-top: 0;
+    margin-top: 5px;
+  }
+
+  .login__logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .login__head1 {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 7px;
+  }
+
+  .login__email , .login__password  {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .login__input {
+    margin-bottom: 11px;
+    width: 220px;
+    height: 25px;
+    font-size: 13px;
+    border-radius: 14px;
+  }
+
+  .login__head2 {
+    padding: 1rem;
+    width: 85%;
+    font-size: 11px;
+  }
+  
+  .login__head3 {
+    width: 85%;
+    font-size: 11px;
+    margin-top: 0px;
+  }
+}
