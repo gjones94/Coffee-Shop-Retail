@@ -25,17 +25,15 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(build_directory));
 
-//send all other requests through the routing done in the build folder index.html
-app.use('/*', (req, res) => {
-	res.sendFile(path.join(__dirname, '../build','index.html'));	
-});
 
 //post function to get login input from front
-app.post('/api/login/auth',(req,res) =>{
+app.post('/api/login/auth', (req,res) =>{
+    console.log("Post called") 
     const tempname = req.body.PassName
     const tempPW = req.body.PassPW
-    console.log("Post called") 
-    sqlFind = "SELECT user_first_name FROM users WHERE user_first_name = ?;" //command to mysql to find user name from user table
+    sqlFind = "SELECT user_email FROM users WHERE user_email = ?;" //command to mysql to find user name from user table
+    console.log("Querying database for:")
+    console.log(tempname)
     db.query(sqlFind,[tempname],(err,result) => {
             if ( result == ""){ //if the result is empty that means nothing was found
                 res.send("Not Found")
@@ -45,8 +43,10 @@ app.post('/api/login/auth',(req,res) =>{
                 sqlFind = "SELECT password FROM users WHERE password = ?;" // checks through password after name
                 db.query(sqlFind,[tempPW],(err,result) => {
                     if (result == ""){
+			console.log("User Not found")
                         res.send("Not Found")
                     }else {
+			console.log("USER FOUND")
                         res.send("Found") //only sends found if both name and password match
                     }
                 })
@@ -62,6 +62,7 @@ app.get('/api/get', (req,res) => {
     console.log("basic get called")
     const sqlSelect = "SELECT * FROM users"; //mysql command to get full list of users
     db.query(sqlSelect,(err,result) =>{
+	 console.log(result);
 	//res.send("Test")
 	    //res.send(result); //sends over the list of users
     })
@@ -96,4 +97,9 @@ app.post("/api/insert",(req,res) => {
 app.listen(3001, () => {
     console.log("build directory: ", build_directory);
     console.log('running on port 3001')
+});
+
+app.use('/*', (req, res) => {
+	console.log("Redirecting to build/indexhtml")
+	res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
