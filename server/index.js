@@ -25,6 +25,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(build_directory));
 
+//send all other requests through the routing done in the build folder index.html
+app.use('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../build','index.html'));	
+});
+
 //post function to get login input from front
 app.post('/api/login/auth',(req,res) =>{
     const tempname = req.body.PassName
