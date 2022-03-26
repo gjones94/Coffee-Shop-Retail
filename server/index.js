@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const mysql = require("mysql");
 
-var check;
-
 const build_directory = path.join(__dirname, '../build');
 
 
@@ -35,39 +33,51 @@ app.post('/api/login/auth', (req,res) =>{
     console.log("Querying database for:")
     console.log(tempname)
     db.query(sqlFind,[tempname],(err,result) => {
-            if ( result == ""){ //if the result is empty that means nothing was found
-                res.send("Not Found")
-            }else {
-            
-
-                sqlFind = "SELECT password FROM users WHERE password = ?;" // checks through password after name
-                db.query(sqlFind,[tempPW],(err,result) => {
-                    if (result == ""){
-			console.log("User Not found")
-                        res.send("Not Found")
-                    }else {
-			console.log("USER FOUND")
-                        res.send("Found") //only sends found if both name and password match
+        if ( result == ""){ //if the result is empty that means nothing was found
+            res.send("Not Found")
+        }else {
+            sqlFind = "SELECT password FROM users WHERE password = ?;" // checks through password after name
+            db.query(sqlFind,[tempPW],(err,result) => {
+                if (result == ""){
+                    console.log("User Not found")
+                    res.send("Not Found")
+                }else {
+                    console.log("USER FOUND")
+                        //only sends found if both name and password match
+                        res.send("Found") 
+                        //initial issue with connection was that this was not matching what the front end was looking for
+                        //this was sending "User Found", and frontend was expecting "Found"
                     }
-                })
+            })
                 
-            }
+        }
     })
   
 })
 
 
-//api to get 
+//api to get user TO-DO MODIFY TO BE A GET FOR JUST USERS
 app.get('/api/get', (req,res) => {
-    console.log("basic get called")
+    console.log("basic get called") //debugging purposes
     const sqlSelect = "SELECT * FROM users"; //mysql command to get full list of users
     db.query(sqlSelect,(err,result) =>{
-	 console.log(result);
-	//res.send("Test")
+        console.log(result);
+        //res.send("Test")
 	    //res.send(result); //sends over the list of users
     })
 
 });
+
+app.get('/api/get/inventory', (req, res) => {
+    console.log("fetch inventory called") //debugging purposes
+    const sqlSelect = "SELECT * FROM item"; //mysql command to get full list of users
+    db.query(sqlSelect,(err,result) =>{
+        console.log(result);
+	    res.send(result); //sends over the list of inventory
+    })
+});
+
+//TO-DO this still needs to be modified to fit with zakariah's front end
 app.post("/api/register/insert",(req,res) => {
     const user_id = null
     const backName = req.body.PassName
@@ -80,7 +90,6 @@ app.post("/api/register/insert",(req,res) => {
     const sqlInsert="INSERT INTO users (user_id, user_email, user_first_name, user_last_name, user_phone,user_address,password) VALUES (?,?,?,?,?,?,?);"
     db.query(sqlInsert,[user_id,backEmail,backName,backLast,backNumber,backAddress,backPw],(res,err) => {
         console.log(res)
-
     });
 
 })
@@ -92,14 +101,15 @@ app.post("/api/insert",(req,res) => {
 
     const sqlInsert = "INSERT INTO users (user_first_name,password) VALUES (?,?);" //mysql command to insert new elements 
     db.query(sqlInsert,[backname,backpassword])
-    });
+});
 
 app.listen(3001, () => {
     console.log("build directory: ", build_directory);
     console.log('running on port 3001')
 });
 
+//places this at the end to serve all other requests
 app.use('/*', (req, res) => {
-	console.log("Redirecting to build/indexhtml")
+	console.log("Redirecting to build/index.html")
 	res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });

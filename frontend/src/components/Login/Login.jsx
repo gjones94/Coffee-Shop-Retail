@@ -4,7 +4,6 @@ import './Login.css';
 import Axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
 
-
 function Login() {
 
   let navigate = useNavigate();
@@ -40,45 +39,37 @@ function Login() {
       PassPW : frontPassword,
     });
   
-    makeList([
-		...UserList,
-		{Name: frontName ,
-		Password : frontPassword},
-             ]);
+    makeList([...UserList, {Name: frontName , Password : frontPassword},]);
   };
 
+  //DELETE this, it was a test
   const goHome = () => {
-	navigate("/about")	
+	  navigate("/about")	
   }
   
   const loginCheck = () =>{
-    alert("Login check callled") 
+    alert("Login check callled") //debugging purposes
     Axios.post("/api/login/auth",{
       PassName : frontName,
       PassPW : frontPassword,
     }).then((response) => {
      
       if (response.data == "Found"){
-	  alert("FOUND"); 
-	   navigate("/home")
+        alert("FOUND"); 
+        navigate("/home")
       }else{
-	  alert("NOT FOUND"); 
-	   navigate("/about")
+	      alert("NOT FOUND"); 
+	      navigate("/about")
       }
 
     });
-    
-    alert("Login check ending..") 
-  
-   }
+  }
 
   const handleSubmit = (event) =>{
 	event.preventDefault();	
 	alert(`The name you entered was : ${frontName}`);
   }
 
-
-  
   return (
     <div className="login">
       <h1 className="heading"> Log <span> In </span></h1>

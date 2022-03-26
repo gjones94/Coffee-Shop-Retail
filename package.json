@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "deploy": "cd frontend && npm run build && sudo cp -r build /var/www/html && sudo cp ../server/index.js /var/www/html/server && cd /var/www/html && npm start",
+    "deploy": "cd frontend && npm run build && sudo cp -r build /var/www/html/site && sudo cp ../server/index.js /var/www/html/site/server && cd /var/www/html/site && npm start",
     "devStart": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
