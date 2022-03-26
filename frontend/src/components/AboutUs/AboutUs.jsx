@@ -25,7 +25,7 @@ const AboutUs = () => {
                         <p>{selector[2].sectionContentParagraph[1]}</p>
                         <p>{selector[2].sectionContentParagraph[2]}</p>
                         {/* eslint-disable-next-line */}
-                        <a href="#" className="btn aboutBtn">{"Contact Us"}</a>
+                        <a href="/Contact" className="btn aboutBtn">{"Contact Us"}</a>
                     </div>
 
                 </div>

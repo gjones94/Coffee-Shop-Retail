@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css'
 
 const NavBar = () => {
@@ -41,8 +41,9 @@ const NavBar = () => {
             <div className="header">
 
                 {/* eslint-disable-next-line */}
-                <a href="#" className="logo">
+                <a href="/Home" className="logo">
                     <img src={'./images/logo.png'} alt="" /> 
+
                 </a>
 
                 <nav className="navbar">

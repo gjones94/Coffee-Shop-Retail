@@ -8,7 +8,7 @@ import MenuSection from './components/MenuSection/MenuSection'
 import Header from './components/Header/Header'
 import AccessoriesSection from './components/AccessoriesSection/AccessoriesSection'
 import ReviewSection from './components/ReviewSection/ReviewSection'
-import LogIn from './components/LogIn/LogIn'
+import Login from './components/Login/Login'
 import { fetchData } from './components/action/action'
 import { useDispatch } from 'react-redux'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -49,7 +49,7 @@ function App() {
                 <Route path="/reviews" element={<ReviewSection/>} />
                 <Route path="/about" element={<AboutUs/>} />
                 <Route path="/contact" element={<ContactSection/>} />
-                <Route path="/LogIn" element={<LogIn/>} />
+                <Route path="/Login" element={<Login/>} />
                 
                 </Routes>
                 <Footer />

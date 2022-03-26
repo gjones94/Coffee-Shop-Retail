@@ -15,7 +15,7 @@ const HomeSection = () => {
                     <h3>{selector[1].headerHeading}</h3>
                     <p>{selector[1].headerParagraph}</p>
                         {/* eslint-disable-next-line */}
-                    <a href="#" className="btn">{selector[1].headerBtn}</a>
+                    <a href="/About" className="btn">{selector[1].headerBtn}</a>
                 </div>
 
             </section>

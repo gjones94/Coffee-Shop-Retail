@@ -1,25 +1,6 @@
 .footer{
-    background:var(--black);
+    background:var(--bg);
     text-align: center;
-}
-
-.footer .share{
-    padding:1rem 0;
-}
-
-.footer .share a{
-    height: 5rem;
-    width: 5rem;
-    line-height: 5rem;
-    font-size: 2rem;
-    color:#fff;
-    border:var(--border);
-    margin:.3rem;
-    border-radius: 50%;
-}
-
-.footer .share a:hover{
-    background-color: var(--main-color);
 }
 
 .footer .links{
@@ -31,10 +12,10 @@
 }
 
 .footer .links a{
-    padding:.7rem 2rem;
+    padding:.7rem 1rem;
     color:#fff;
     border:var(--border);
-    font-size: 1.7rem;
+    font-size: 1.5rem;
 }
 
 .footer .links a:hover{

@@ -1,14 +1,14 @@
 export const homeData = [
     {
-        sectionName: 'NavBar',
+        sectionName: 'header',
         navLogo: './images/logo.png',
-        navliName: ['Home', 'Menu', 'Accessories','Reviews','About','Contact', 'LogIn']
+        navliName: ['Home', 'Menu', 'Accessories','Reviews','About','Contact', 'Login']
     },
     {
-        sectionName: 'header',
+        sectionName: 'home',
         headerBgImage: './images/home-img.jpeg',
         headerHeading: 'Quality Infusions',
-        headerParagraph: 'coffee, tea, and everything in between. Beans & Leaves has what you need.',
+        headerParagraph: 'coffee, tea, and everything in between.',
         headerBtn: 'See More'
     },
     {
@@ -43,7 +43,7 @@ export const homeData = [
         reviewPersonImages: ['./images/pic-1.png','./images/pic-2.png','./images/pic-3.png'],
         reviewParagraphs: ['This stuff is great! I love their selection of infusions and accessories, all offered at fair prices.', 
         "Beans and Leaves had everything I need! Would definitely purchase from them again.",
-        "If you're in the market for coffee or tea, look no further than Beans and leaves."]
+        "If you're in the market for coffee or tea, look no further than Beans and leaves, the best in town."]
     },
     {
         sectionName: ['contact','us'],
@@ -58,6 +58,7 @@ export const homeData = [
 
     {
         sectionName: 'footer',
-        footerDescription: ['Group 13 | all rights reserved']
+        footerDescription: ['Group 13 | all rights reserved'],
+        footerLi: ['Home', 'Menu', 'Accessories','Reviews','About','Contact', 'Login']
     }
 ]
