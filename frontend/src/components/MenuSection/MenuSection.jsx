@@ -13,17 +13,18 @@ const MenuSection = () => {
     //var inventory_list;
 
     useEffect(() => {
-        Axios.get("api/get/inventory").then(
+        Axios.get("api/get/inventory").then( //calls the backend server.js with this api command
             (response) => {
-                setInventory(JSON.parse(JSON.stringify(response.data))); //load the data
+                setInventory(JSON.parse(JSON.stringify(response.data))); //load the data into inventory_list variable
                 setLoading(false); //tells the page that it is no longer loading data, which triggers a new render
             }
         );
     },[]);
 
     const fetchInventory = () => {
+        //DEBUGGING Function to understand how to pull in inventory from database
         //alert("Fetch inventory called");
-        Axios.get("api/get/inventory").then(
+        Axios.get("api/get/inventory").then( //calls the backend api with this fetch command
             (response) => {
                 //inventory_list = JSON.parse(JSON.stringify(response.data)) //gets you the array of objects 
                 
@@ -32,7 +33,6 @@ const MenuSection = () => {
                 
                 for (let i = 0; i < length; i++){
                     var id = String(inventory_list[i].item_id);
-                    alert(imageBase + id + '.png');
                     console.log(inventory_list[i].item_id);
                 }
 
@@ -62,13 +62,13 @@ const MenuSection = () => {
 
                 <h1 className="heading"> OUR <span> MENU </span> </h1>
                 <div className="box-container">
-                    {/*For every item in inventory, create a box and list details of item*/}
+                    {/*For every item in inventory_list, create a box and list details of item*/}
                     {inventory_list.map(item => 
                         {
                             return( 
                                 <div className="box">
-                                    <img src={imageBase + item.item_id + ".png"} alt="" />
-                                    <h3>{item.item_id}</h3>
+                                    <img src={imageBase + item.item_image} alt="" />
+                                    <h3>{item.item_name}</h3>
                                     <div className="price">${item.item_price}<span>{selector[3].menuDiscountPrice}</span></div>
                                     <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>
                                     {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
