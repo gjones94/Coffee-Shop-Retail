@@ -33,7 +33,7 @@ function Login() {
             setresponseText("Password is too weak")
             submitInfo()}
     }
-    Axios.post("api/insert",{
+    Axios.post("/api/insert",{
 
       PassName : frontName,
       PassPW : frontPassword,

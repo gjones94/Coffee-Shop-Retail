@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const mysql = require("mysql");
+const { application } = require("express");
 
 const build_directory = path.join(__dirname, '../build');
 
@@ -102,6 +103,53 @@ app.post("/api/insert",(req,res) => {
     const sqlInsert = "INSERT INTO users (user_first_name,password) VALUES (?,?);" //mysql command to insert new elements 
     db.query(sqlInsert,[backname,backpassword])
 });
+
+//WIP needs a proper database search 
+app.post("/api/admin/user/find",(req,res) => {
+    const Email = req.body.email
+    const Password = req.body.password
+
+    //WIP need to test in proper DB 
+   /* sqlFind = "SELECT user_email FROM users WHERE user_email = ?;" 
+    db.query(sqlFind,[tempname],(err,result) => {
+        if ( result == ""){ //if the result is empty that means nothing was found
+            res.send("Not Found")
+        }else {
+            sqlFind = "SELECT password FROM users WHERE password = ?;" // checks through password after name
+            db.query(sqlFind,[tempPW],(err,result) => {
+                if (result == ""){
+                    console.log("User Not found")
+                    res.send("Not Found")
+                }else {
+                    console.log("USER FOUND")
+                        //only sends found if both name and password match
+                        //if the user is found we will send the row of that user to the frontend to display.
+                       
+                    }
+            })
+                
+        }
+    }) */
+    res.send("test");
+
+});
+
+app.post("/api/admin/user/update",(req,res) => {
+    
+    const Email = req.body.email
+    const FirstName = req.body.firstname
+    const LastName = req.body.lastname
+    const Phone = req.body.phone
+    const Address = req.body.address
+    const Password = req.body.password
+    const UserID = req.body.userID
+
+    //sqlupdate command to update the user we stored earlier with whatever they wanted changed.
+    //THIS MAY NEED TO BE DOUBLE CHECKED
+    sqlUpdate = "UPDATE users SET user_email = ?, user_first_name = ?, user_last_name = ?, user_phone =?, user_address = ?, password =? WHERE user_id = ?"
+    sql.query(sqlUpdate,[Email,FirstName,LastName,Phone,Address,Password,UserID])
+
+})
 
 app.listen(3001, () => {
     console.log("build directory: ", build_directory);

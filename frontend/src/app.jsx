@@ -15,6 +15,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import { homeData } from './components/home/home'
 import { BrowserRouter as Router, Route, Routes, useNavigate, Switch} from 'react-router-dom';
+import AdminUser from './components/AdminUser/AdminUser'
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
                 <Route path="/about" element={<AboutUs/>} />
                 <Route path="/contact" element={<ContactSection/>} />
                 <Route path="/Login" element={<Login/>} />
+                <Route path ="/AdminUser" element ={<AdminUser/>}/>
                 
                 </Routes>
                 <Footer />
