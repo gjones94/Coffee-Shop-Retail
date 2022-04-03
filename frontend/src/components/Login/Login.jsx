@@ -44,7 +44,7 @@ function Login() {
 
   //DELETE this, it was a test
   const goHome = () => {
-	  navigate("/about")	
+	  navigate("/home");
   }
   
   const loginCheck = () =>{
@@ -96,7 +96,7 @@ function Login() {
             placeholder="Password" 
             required 
           />
-	  <button className="btn" type="submit" onClick={goHome} >GO HOME</button>
+	  <button className="btn" type="submit" onClick={goHome} >HOME</button>
           <button className="btn" type="submit" onClick={loginCheck} >Log In</button>
           <span className="login__head2">Sign Up for emails to get special news and offers</span>
           <button className="btn" type="submit" onClick={loginCheck} >Create your Account</button>

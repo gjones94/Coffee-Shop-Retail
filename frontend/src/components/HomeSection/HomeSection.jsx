@@ -10,8 +10,8 @@ const HomeSection = () => {
         <>
 
             <section className="home" id="Home" style={{backgroundImage: `url(${selector[1].headerBgImage})`}}>
-
                 <div className="content">
+                 {/*This is to display the coffee image on the home screen  and See more*/}
                     <h3>{selector[1].headerHeading}</h3>
                     <p>{selector[1].headerParagraph}</p>
                         {/* eslint-disable-next-line */}

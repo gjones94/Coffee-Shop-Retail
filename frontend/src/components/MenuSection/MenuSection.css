@@ -5,9 +5,20 @@
 }
 
 .menu .box-container .box{
-    padding:5rem;
+    padding:10rem;
     text-align: center;
     border:var(--border);    
+}
+
+.menu .box-container .box .text{
+    font-size: 2.5rem;
+    padding: .5rem 0;
+    color: #FFF;
+}
+
+.menu .box-container .box .desc{
+    font-size: 1.0rem;
+    color: #FFF;
 }
 
 .menu .box-container .box img{

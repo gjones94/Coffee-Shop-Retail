@@ -2,7 +2,7 @@ export const homeData = [
     {
         sectionName: 'header',
         navLogo: './images/logo.png',
-        navliName: ['Home', 'Menu', 'Accessories','Reviews','About','Contact', 'Login']
+        navliName: ['Home', 'Menu', 'Reviews','About','Contact', 'Login', 'Admin']
     },
     {
         sectionName: 'home',
@@ -59,6 +59,6 @@ export const homeData = [
     {
         sectionName: 'footer',
         footerDescription: ['Group 13 | all rights reserved'],
-        footerLi: ['Home', 'Menu', 'Accessories','Reviews','About','Contact', 'Login']
+        footerLi: ['Home', 'Menu','Reviews','About','Contact', 'Login', 'Admin']
     }
 ]

@@ -2,6 +2,7 @@
 
 :root{
     --main-color:#fe9920;
+    --disabled:#303030;
     --black:#000000;
     --bg:#3d3d3d;
     --border: 1rem solid #000000(255,255,255,.3);
@@ -65,6 +66,16 @@ section{
     font-size: 1.7rem;
     color:#fff;
     background: var(--main-color);
+    cursor: pointer;
+}
+
+.btnDisabled{
+    margin-top: 1rem;
+    display: inline-block;
+    padding:.9rem 3rem;
+    font-size: 1.7rem;
+    color:#FFF;
+    background: var(--disabled);
     cursor: pointer;
 }
 
