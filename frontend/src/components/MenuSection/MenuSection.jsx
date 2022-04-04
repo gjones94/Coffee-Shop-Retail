@@ -54,6 +54,44 @@ const MenuSection = () => {
         loaded();
     };
 
+    const sortByName = () => {
+        //reset the temp inventory list
+        tempInventory = [];
+        //add all current items to list
+        displayInventory.map(item => {
+            tempInventory.push(item);
+        });
+
+        tempInventory.sort((a,b) => (a.item_name > b.item_name) ? 1 : -1);
+        setDisplayInventory(tempInventory);
+    }
+
+
+    const sortByPrice = () => {
+        //reset the temp inventory list
+        tempInventory = [];
+        //add all current items to list
+        displayInventory.map(item => {
+            tempInventory.push(item);
+        });
+
+        tempInventory.sort((a,b) => (a.item_price > b.item_price) ? 1 : -1);
+        setDisplayInventory(tempInventory);
+    }
+
+
+    const sortByAvailability = () => {
+        //reset the temp inventory list
+        tempInventory = [];
+        //add all current items to list
+        displayInventory.map(item => {
+            tempInventory.push(item);
+        });
+
+        tempInventory.sort((a,b) => (a.item_stock > b.item_stock) ? 1 : -1);
+        setDisplayInventory(tempInventory);
+    }
+
     //const fetchInventory = () => {
         //DEBUGGING Function to understand how to pull in inventory from database
         //alert("Fetch inventory called");
@@ -109,6 +147,15 @@ const MenuSection = () => {
                         id="search"
                     />
                     <button className="btn" type="submit" onClick={search}>Search</button>
+                </div>
+                <div class="box">
+                    <button className="btn" type="submit" onClick={sortByName}>Sort By Name</button>
+                </div>
+                <div class="box">
+                    <button className="btn" type="submit" onClick={sortByAvailability}>Sort By Availability</button>
+                </div>
+                <div class="box">
+                    <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
                 </div>
                 <div className="box-container">
                     {/*For every item in inventory_list, create a box and list details of item*/}
