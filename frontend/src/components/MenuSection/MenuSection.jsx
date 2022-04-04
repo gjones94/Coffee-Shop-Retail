@@ -5,8 +5,9 @@ import './MenuSection.css'
 
 const MenuSection = () => {
 
-    let temp_list = [];
-    const [inventory_list, setInventory] = useState();
+    let tempInventory = [];
+    const [constInventory, setConstInventory] = useState();
+    const [displayInventory, setDisplayInventory] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
     const imageBase = './images/'
@@ -19,58 +20,61 @@ const MenuSection = () => {
     const fetchData = () =>{
         Axios.get("api/get/inventory").then( //calls the backend server.js with this api command
             (response) => {
-                setInventory(JSON.parse(JSON.stringify(response.data)));
+                let items = JSON.parse(JSON.stringify(response.data));
+                setDisplayInventory(items);
+                setConstInventory(items);
                 loaded();
             }
         );
     }
 
-    const populateTemp = () =>{
-        console.log("Populate temp called");
-        inventory_list.forEach(item => {
-            temp_list.push(item);
-        });
-    }
-
     const search = () => {
-        temp_list = []; //reset list
+        tempInventory = []; //reset list
+        setDisplayInventory(constInventory);//reset display inventory
         loading();
         var searchInput = searchValue;
-        inventory_list.map(item => {
-            if(item.item_name.toLowerCase().includes(searchInput.toLowerCase())){
-                console.log("Pushing item", item.item_name);
-                temp_list.push(item);
-            }else{
-                console.log(item.item_name.toLowerCase(), "Does not include", searchInput.toLowerCase());
-            }
-        });
-        setInventory(temp_list);
-        console.log("Here is the inventory\n", inventory_list);
+
+        //check for whitespace
+        if (/^\s*$/.test(searchInput)){
+            loaded();
+            return;
+        }else{
+            constInventory.map(item => {
+                if(item.item_name.toLowerCase().includes(searchInput.toLowerCase())){
+                    console.log("Pushing item", item.item_name);
+                    tempInventory.push(item);
+                }else{
+                    console.log(item.item_name.toLowerCase(), "Does not include", searchInput.toLowerCase());
+                }
+            });
+        }
+        //set display to the filtered list
+        setDisplayInventory(tempInventory);
+        console.log("Here is the display inventory after update\n", displayInventory);
         loaded();
-        alert(searchInput);
     };
 
-    const fetchInventory = () => {
+    //const fetchInventory = () => {
         //DEBUGGING Function to understand how to pull in inventory from database
         //alert("Fetch inventory called");
-        Axios.get("api/get/inventory").then( //calls the backend api with this fetch command
-            (response) => {
+        //Axios.get("api/get/inventory").then( //calls the backend api with this fetch command
+            //(response) => {
                 //inventory_list = JSON.parse(JSON.stringify(response.data)) //gets you the array of objects 
                 
                 //Get the length of the array
-                var length = Object.keys(inventory_list).length
+                //var length = Object.keys(inventory_list).length
                 
-                for (let i = 0; i < length; i++){
-                    var id = String(inventory_list[i].item_id);
-                    console.log(inventory_list[i].item_id);
-                }
+                //for (let i = 0; i < length; i++){
+                    //var id = String(inventory_list[i].item_id);
+                    //console.log(inventory_list[i].item_id);
+                //}
 
                 //console.log(inventory_list) 
                 //console.log(inventory_list[0]) //gets you the 1st object
                 //console.log(inventory_list[0].item_id) //gets you the 1st objects item_id
-                }
-        );
-    }
+                //}
+        //);
+    //}
 
 
     const addToCart = () => {
@@ -109,7 +113,7 @@ const MenuSection = () => {
                 <div className="box-container">
                     {/*For every item in inventory_list, create a box and list details of item*/}
                     
-                    {temp_list.map(item => 
+                    {displayInventory.map(item => 
                         {
                             console.log(item.item_name);
                             var crossout = "";
