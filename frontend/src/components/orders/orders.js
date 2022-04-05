@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
 //import { useSelector } from 'react-redux'
 import './MenuSection.css'
-
+/*
 const MenuSection = () => {
 
     let tempInventory = [];
@@ -67,7 +67,6 @@ const MenuSection = () => {
     return (
         <>
             <section className="menu" id="Menu">
-                {/* OLD ONE <h1 className="heading"> {selector[3].sectionName[0]} <span>{selector[3].sectionName[1]}</span> </h1>*/}
                 <h1 className="heading"> ORDERS </span> </h1>
                 <div class="search-wrapper">
                     <label className="desc" for="search"> Search Orders </label>
@@ -89,7 +88,7 @@ const MenuSection = () => {
                     <button className="btn" type="submit" onClick={sortByTotal}>Sort By Total</button>
                 </div>
                 <div className="box-container">
-                    {/*For every item in inventory_list, create a box and list details of item*/}
+                    //*For every item in inventory_list, create a box and list details of item
                     
                     {displayInventory.map(item => 
                         {
@@ -103,8 +102,7 @@ const MenuSection = () => {
                                         <div className="total">${orders.orders_total}</div>
                                         <div className="user">${orders.orders_user}</div>
                                         <button className="btnDisabled" type="submit">Add to Cart</button>
-                                        {/*<div className="price">${item.item_description}</div>*/}
-                                        {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
+                                        //OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>
                                     </div>
                                 )
                             }
@@ -118,3 +116,4 @@ const MenuSection = () => {
 }
 
 export default MenuSection
+*/
