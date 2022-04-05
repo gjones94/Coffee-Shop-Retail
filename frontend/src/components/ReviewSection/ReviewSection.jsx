@@ -1,25 +1,26 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import './ReviewSection.css'
-
+import p1 from './pic-1.png'
+import p2 from './pic-2.png'
+import p3 from './pic-3.png'
+import quote from './quote-img.png'
 const ReviewSection = () => {
     
-    const selector = useSelector(state => state.reducer1)
     
     return (
         <>
 
             <section className="review" id="Reviews">
 
-                <h1 className="heading"> {selector[5].sectionName[0]} <span>{selector[5].sectionName[1]}</span> </h1>
+                <h1 className="heading"> Customer <span>Reviews</span> </h1>
 
                 <div className="box-container">
 
                     <div className="box">
-                        <img src={selector[5].reviewQuoteImage} alt="" className="quote" />
-                        <p>{selector[5].reviewParagraphs[0]}</p>
-                        <img src={selector[5].reviewPersonImages[0]} className="user" alt="" />
-                        <h3>{selector[5].reviewPersonName[0]}</h3>
+                        <img src={quote} alt="" className="quote" />
+                        <p>"This stuff is great! I love their selection of infusions and accessories, all offered at fair prices."</p>
+                        <img src={p1} className="user" alt="" />
+                        <h3>Johnathan Taylor-Thomas</h3>
                         <div className="stars">
                             <i className="fas fa-star"></i>
                             <i className="fas fa-star"></i>
@@ -30,10 +31,10 @@ const ReviewSection = () => {
                     </div>
 
                     <div className="box">
-                        <img src={selector[5].reviewQuoteImage} alt="" className="quote" />
-                        <p>{selector[5].reviewParagraphs[1]}</p>
-                        <img src={selector[5].reviewPersonImages[1]} className="user" alt="" />
-                        <h3>{selector[5].reviewPersonName[1]}</h3>
+                        <img src={quote} alt="" className="quote" />
+                        <p>"Beans and Leaves had everything I need! Would definitely purchase from them again."</p>
+                        <img src={p2} className="user" alt="" />
+                        <h3>Kate Beckinsale</h3>
                         <div className="stars">
                             <i className="fas fa-star"></i>
                             <i className="fas fa-star"></i>
@@ -44,10 +45,10 @@ const ReviewSection = () => {
                     </div>
                     
                     <div className="box">
-                        <img src={selector[5].reviewQuoteImage} alt="" className="quote" />
-                        <p>{selector[5].reviewParagraphs[2]}</p>
-                        <img src={selector[5].reviewPersonImages[2]} className="user" alt="" />
-                        <h3>{selector[5].reviewPersonName[2]}</h3>
+                        <img src={quote} alt="" className="quote" />
+                        <p>"If you're in the market for coffee or tea, look no further than Beans and leaves, the best in town."</p>
+                        <img src= {p3} className="user" alt="" />
+                        <h3>Chad Chaddsworth</h3>
                         <div className="stars">
                             <i className="fas fa-star"></i>
                             <i className="fas fa-star"></i>

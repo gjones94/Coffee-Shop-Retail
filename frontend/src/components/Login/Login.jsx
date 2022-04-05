@@ -75,14 +75,14 @@ function Login() {
       <h1 className="heading"> Log <span> In </span></h1>
       <div className="login__page">
         <div className="logo">
-          <img className="login__logo" src="./images/menu-3.png" alt="" />
+          <img className="login__logo" src="./images/logo.png" alt="" />
         </div>
         <form onSubmit={handleSubmit}>
           <span className="login__email" >Email Address:</span>
           <input 
             value={frontName} 
             onChange={event => setName(event.target.value)}
-            //className="login__input" 
+            className="login__input" 
 	    //#type="email" 
             //placeholder="Email" 
             //required 
@@ -96,7 +96,6 @@ function Login() {
             placeholder="Password" 
             required 
           />
-	  <button className="btn" type="submit" onClick={goHome} >HOME</button>
           <button className="btn" type="submit" onClick={loginCheck} >Log In</button>
           <span className="login__head2">Sign Up for emails to get special news and offers</span>
           <button className="btn" type="submit" onClick={loginCheck} >Create your Account</button>
