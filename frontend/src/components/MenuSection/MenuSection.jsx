@@ -166,10 +166,10 @@ const MenuSection = () => {
                             var crossout = "";
                             var price;
                             if(item.item_onsale){
-                                price = item.item_saleprice;
-                                crossout = item.item_price;
+                                price = item.item_saleprice.toFixed(2);
+                                crossout = item.item_price.toFixed(2);
                             }else{
-                                price = item.item_price;
+                                price = item.item_price.toFixed(2);
                             }
                             if(item.item_stock > 0){
                                 return( 
