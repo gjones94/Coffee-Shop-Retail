@@ -50,6 +50,7 @@ function App() {
                 <Route path="/contact" element={<ContactSection/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path ="/admin" element ={<AdminUser/>}/>
+                <Route path ="/orders" element ={<Orders/>}/>
                 
                 </Routes>
                 <Footer />
