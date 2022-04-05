@@ -1,30 +1,37 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { Link } from "react-router-dom";
 import './Footer.css'
 
 const Footer = () => {
-
-    const selector = useSelector(state => state.reducer1)
 
     return (
         <>
 
             <section className="footer">
-                <div className="links">
-                    {
-                        selector[8].footerLi.map((item, i) => {
-                            return(
-                                <>
-
-                                    <a href={`${item}`} key={i}>{item}</a>
-    
-                                </>
-                            )
-                        })
-                    }
-
-                </div>
-                <div className="credit">{selector[8].footerDescription[0]} <span>{selector[8].footerDescription[1]}</span> {selector[8].footerDescription[2]}</div>
+                <nav className="links">
+                    <Link style={{textDecoration: 'none'}} to="/">
+                        <span className="header__navItems">Home</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/menu">
+                        <span className="header_navItems">Products</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/reviews">
+                        <span className="header__navItems">Reviews</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/about">
+                        <span className="header__navItems">About</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/contact">
+                        <span className="header_navItems">Contact</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/login">
+                        <span className="header__navItems">Login</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/admin">
+                        <span className="header__navItems">Login</span>
+                     </Link>
+                </nav>              
+                <div className="credit">Group 13 | all rights reserved</div>
                 
                 </section> 
             

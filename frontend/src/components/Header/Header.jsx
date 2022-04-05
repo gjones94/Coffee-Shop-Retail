@@ -1,6 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css'
 
 const NavBar = () => {
@@ -20,20 +19,6 @@ const NavBar = () => {
         navbar.classList.remove('active');
     }
 
-    window.onscroll = () =>{
-        let navbar = document.querySelector('.navbar');
-        let searchForm = document.querySelector('.search-form');
-
-        navbar.classList.remove('active');
-        searchForm.classList.remove('active');
-    }
-
-    let selector = useSelector(state => state.reducer1)
-    const navigate = useNavigate();
-   /* const login = () => {
-        navigate("./Login")
-    } */
-    console.log(selector);
 
     return (
         <>
@@ -41,25 +26,33 @@ const NavBar = () => {
             <div className="header">
 
                 {/* eslint-disable-next-line */}
-                <a href="/Home" className="logo">
+                <div className="logo">
                     <img src={'./images/logo.png'} alt="" /> 
 
-                </a>
+                </div>
 
                 <nav className="navbar">
-
-                    {
-                        selector[0].navliName.map((item, i) => {
-                            return(
-                                <>
-
-                                    <a href={`${item}`} key={i}>{item}</a>
-
-                                </>
-                            )
-                        })
-                    }
-
+                    <Link style={{textDecoration: 'none'}} to="/">
+                        <span className="header__navItems">Home</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/menu">
+                        <span className="header_navItems">Products</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/reviews">
+                        <span className="header__navItems">Reviews</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/about">
+                        <span className="header__navItems">About</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/contact">
+                        <span className="header_navItems">Contact</span>
+                     </Link>
+                    <Link style={{textDecoration: 'none'}} to="/login">
+                        <span className="header__navItems">Login</span>
+                     </Link>
+                     <Link style={{textDecoration: 'none'}} to="/admin">
+                        <span className="header__navItems">admin</span>
+                     </Link>
                 </nav>
                 <div className="icons">
                     <div className="fas fa-search" id="search-btn" onClick={handleSearchBox}></div>
