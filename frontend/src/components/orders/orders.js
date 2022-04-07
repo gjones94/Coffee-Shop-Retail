@@ -3,7 +3,7 @@ import Axios from 'axios'
 //import { useSelector } from 'react-redux'
 import './MenuSection.css'
 /*
-const MenuSection = () => {
+const Orders = () => {
 
     let tempInventory = [];
     const [constInventory, setConstInventory] = useState();
@@ -115,5 +115,5 @@ const MenuSection = () => {
     )
 }
 
-export default MenuSection
+export default Orders
 */
