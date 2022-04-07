@@ -6,7 +6,6 @@ import Footer from './components/Footer/Footer'
 import HomeSection from './components/HomeSection/HomeSection'
 import MenuSection from './components/MenuSection/MenuSection'
 import Header from './components/Header/Header'
-import AccessoriesSection from './components/AccessoriesSection/AccessoriesSection'
 import ReviewSection from './components/ReviewSection/ReviewSection'
 import Login from './components/Login/Login'
 import { fetchData } from './components/action/action'
@@ -46,13 +45,15 @@ function App() {
                 <Route path="/" element={<HomeSection/>} />
                 <Route path="/home" element={<HomeSection/>} />
                 <Route path="/menu" element={<MenuSection/>} />
-                <Route path="/accessories" element={<AccessoriesSection/>} />
                 <Route path="/reviews" element={<ReviewSection/>} />
                 <Route path="/about" element={<AboutUs/>} />
                 <Route path="/contact" element={<ContactSection/>} />
                 <Route path="/Login" element={<Login/>} />
                 <Route path ="/AdminUser" element ={<AdminUser/>}/>
                 <Route path = "/Register" element = {<Register/>}/>
+                <Route path="/login" element={<Login/>} />
+                <Route path ="/admin" element ={<AdminUser/>}/>
+                <Route path ="/orders" element ={<Orders/>}/>
                 
                 </Routes>
                 <Footer />
@@ -64,7 +65,7 @@ function App() {
             {!data && <div style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
                 <Loader
-                    type="Bars"
+                    type="Rings"
                     color="#6ac7ba"
                     height={80}
                     width={80}

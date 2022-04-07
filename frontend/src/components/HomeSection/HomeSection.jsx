@@ -1,21 +1,22 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import './HomeSection.css'
-
+import bgImage from './home-img.jpeg'
 const HomeSection = () => {
-
-    let selector = useSelector(state => state.reducer1)
-
+    const navigate = useNavigate();
+    const products = () => {
+	navigate("/menu");
+    }
     return (
         <>
 
-            <section className="home" id="Home" style={{backgroundImage: `url(${selector[1].headerBgImage})`}}>
+            <section className="home" id="Home" style={{backgroundImage: `url(${bgImage})`}}>
 
                 <div className="content">
-                    <h3>{selector[1].headerHeading}</h3>
-                    <p>{selector[1].headerParagraph}</p>
+                    <h3>Quality Infusions</h3>
+                    <p>coffee, tea, and everything in between.</p>
                         {/* eslint-disable-next-line */}
-                    <a href="/About" className="btn">{selector[1].headerBtn}</a>
+                <button className="btn" type="submit" onClick={products} >See Products</button>
                 </div>
 
             </section>

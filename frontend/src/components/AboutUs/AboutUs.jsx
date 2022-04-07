@@ -1,31 +1,33 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import './AboutUs.css'
+import aboutImg from './about-img.jpeg'
 
 const AboutUs = () => {
     
-    const selector = useSelector(state => state.reducer1)
 
     return (
         <>
 
             <section className="about" id="About">
 
-                <h1 className="heading"> <span>{selector[2].sectionName[0]}</span> {selector[2].sectionName[1]} </h1>
+                <h1 className="heading"> <span>About</span> Us</h1>
 
                 <div className="row">
 
                     <div className="image">
-                        <img src={selector[2].sectionImg} alt="" />
+                        <img src={aboutImg} alt="" />
                     </div>
 
                     <div className="content">
-                        <h3>{selector[2].sectionContentHeading}</h3>
-                        <p>{selector[2].sectionContentParagraph[0]}</p>
-                        <p>{selector[2].sectionContentParagraph[1]}</p>
-                        <p>{selector[2].sectionContentParagraph[2]}</p>
+                        <h3>why choose beans & leaves?</h3>
+                        <p>At Beans & Leaves we are dedicated to procuring the best in coffee, tea, and accesories.</p>
+                        <p>Our team is always on the search for what products are going to offer the best when it comes to infusions from around the world</p>
+                        <p>Have any questions? feel free to contact us!</p>
                         {/* eslint-disable-next-line */}
-                        <a href="/Contact" className="btn aboutBtn">{"Contact Us"}</a>
+                        <Link style={{textDecoration: 'none'}} to="/contact">
+                        <span className="btn">Contact Us</span>
+                     </Link>
                     </div>
 
                 </div>

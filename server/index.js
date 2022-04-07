@@ -78,6 +78,17 @@ app.get('/api/get/inventory', (req, res) => {
     })
 });
 
+/*
+app.get('/api/get/orders', (req, res) => {
+    console.log("fetch orders called") //debugging purposes
+    const sqlSelect = "SELECT * FROM orders"; //mysql command to get full list of users
+    db.query(sqlSelect,(err,result) =>{
+        console.log(result);
+	    res.send(result); //sends over the list of inventory
+    })
+});
+*/
+
 //TO-DO this still needs to be modified to fit with zakariah's front end
 app.post("/api/register/insert",(req,res) => {
     const user_id = null

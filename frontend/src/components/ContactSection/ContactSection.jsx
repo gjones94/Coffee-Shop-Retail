@@ -1,10 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import './ContactSection.css'
 
 const ContactSection = () => {
 
-    const selector = useSelector(state => state.reducer1)
 
     return (
         <>
