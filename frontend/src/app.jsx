@@ -16,7 +16,7 @@ import Loader from "react-loader-spinner";
 import { homeData } from './components/home/home'
 import { BrowserRouter as Router, Route, Routes, useNavigate, Switch} from 'react-router-dom';
 import AdminUser from './components/AdminUser/AdminUser'
-
+import Register from './components/Register/Register'
 function App() {
 
     const dispatch = useDispatch()
@@ -52,6 +52,7 @@ function App() {
                 <Route path="/contact" element={<ContactSection/>} />
                 <Route path="/Login" element={<Login/>} />
                 <Route path ="/AdminUser" element ={<AdminUser/>}/>
+                <Route path = "/Register" element = {<Register/>}/>
                 
                 </Routes>
                 <Footer />
