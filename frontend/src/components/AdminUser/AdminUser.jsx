@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from "react";
 import { useSelector } from 'react-redux'
 import Axios from 'axios';
+import { Navigate, useNavigate } from "react-router-dom";
 
 function AdminUser(){
 
@@ -17,13 +18,13 @@ function AdminUser(){
       </button>
 
       <button onClick ={() =>{
-        navigate("/Inventory");
+        navigate("/menu");
       }}>
         View/Edit Inventory
       </button>
 
       <button onClick ={() =>{
-        navigate("/orders");
+        //navigate("/orders");
       }}>
         View Orders
       </button>

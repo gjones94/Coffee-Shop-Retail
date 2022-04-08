@@ -53,7 +53,7 @@ function App() {
                 <Route path = "/Register" element = {<Register/>}/>
                 <Route path="/login" element={<Login/>} />
                 <Route path ="/admin" element ={<AdminUser/>}/>
-                <Route path ="/orders" element ={<Orders/>}/>
+                {/*<Route path ="/orders" element ={<Orders/>}/>*/}
                 
                 </Routes>
                 <Footer />
