@@ -2,23 +2,24 @@ import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
 //import { useSelector } from 'react-redux'
 import './MenuSection.css'
+import { Navigate, useNavigate, useParams} from "react-router-dom";
 
-const MenuSection = () => {
-
+//const MenuSection = () => {
+function MenuSection () {
     let tempInventory = [];
     const [constInventory, setConstInventory] = useState();
     const [displayInventory, setDisplayInventory] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
     const imageBase = './images/'
-
+    let {user} = useParams();
 
     useEffect(() => {
         fetchData();
     },[]);
 
     const fetchData = () =>{
-        Axios.get("api/get/inventory").then( //calls the backend server.js with this api command
+        Axios.get("/api/get/inventory").then( //calls the backend server.js with this api command
             (response) => {
                 let items = JSON.parse(JSON.stringify(response.data));
                 setDisplayInventory(items);
@@ -119,6 +120,18 @@ const MenuSection = () => {
         alert("Added to cart!");
     }
 
+    const deleteItem = () => {
+        alert("Item deleted");
+    }
+
+    const createItem = () => {
+        alert("Item created");
+    }
+
+    const modifyItem = () => {
+        alert("Item modified");
+    }
+
     const loading = () =>{
         setLoading(true);
     }
@@ -146,7 +159,7 @@ const MenuSection = () => {
                         type="search" 
                         id="search"
                     />
-                    <button className="btn" type="submit" onClick={search}>Search</button>
+                    <button className="btn" type="submit" onClick={search}>Submit</button>
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByName}>Sort By Name</button>
@@ -157,9 +170,15 @@ const MenuSection = () => {
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
                 </div>
+                {user == 1 &&
+                    <div class="box">
+                        <button className="btn" type="submit" onClick={createItem}>Create Item</button>
+                    </div> 
+                }
                 <div className="box-container">
                     {/*For every item in inventory_list, create a box and list details of item*/}
-                    
+                    {}    
+                    {console.log("Items loaded", constInventory)}
                     {displayInventory.map(item => 
                         {
                             console.log(item.item_name);
@@ -179,7 +198,10 @@ const MenuSection = () => {
                                         <div className="price">${price}<span>{crossout}</span></div>
                                         <div className="desc">{item.item_description}</div>
                                         {/*<div className="price">${item.item_description}</div>*/}
-                                        <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>
+                                        {/* if the user is admin, have option to modify and delete the item"*/}
+                                        { user == 1 ? <button className="btn" type="Modify" onClick={modifyItem} >Modify Item</button> :
+                                        <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>}
+                                        {user == 1 && <button className="btn" type="submit" onClick={deleteItem} >Delete Item</button>}
                                         {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
                                     </div>
                                 )

@@ -43,19 +43,18 @@ function App() {
                 <div className="app"> 
                 <Header />
                 <Routes>
-                <Route path="/" element={<HomeSection/>} />
-                <Route path="/home" element={<HomeSection/>} />
-                <Route path="/menu" element={<MenuSection/>} />
-                <Route path="/reviews" element={<ReviewSection/>} />
-                <Route path="/about" element={<AboutUs/>} />
-                <Route path="/contact" element={<ContactSection/>} />
-                <Route path="/Login" element={<Login/>} />
-                <Route path ="/AdminUser" element ={<AdminUser/>}/>
-                <Route path = "/Register" element = {<Register/>}/>
-                <Route path="/login" element={<Login/>} />
-                <Route path ="/admin" element ={<AdminUser/>}/>
-                
-                
+                    <Route path="/" element={<HomeSection/>} />
+                    <Route path="/home" element={<HomeSection/>} />
+                    <Route path="/menu:user" element={<MenuSection/>} />
+                    <Route path="/reviews" element={<ReviewSection/>} />
+                    <Route path="/about" element={<AboutUs/>} />
+                    <Route path="/contact" element={<ContactSection/>} />
+                    <Route path="/Login" element={<Login/>} />
+                    <Route path ="/AdminUser" element ={<AdminUser/>}/>
+                    <Route path = "/Register" element = {<Register/>}/>
+                    <Route path="/login" element={<Login/>} />
+                    <Route path ="/admin" element ={<AdminUser/>}/>
+                    {/*<Route path ="/orders" element ={<Orders/>}/>*/}
                 </Routes>
                 <Footer />
                 </div>
