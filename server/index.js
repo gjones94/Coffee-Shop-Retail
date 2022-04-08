@@ -91,7 +91,7 @@ app.get('/api/get/inventory', (req, res) => {
     })
 });
 
-/*
+/* Cooper Wineberg
 app.get('/api/get/orders', (req, res) => {
     console.log("fetch orders called") //debugging purposes
     const sqlSelect = "SELECT * FROM orders"; //mysql command to get full list of users
