@@ -18,7 +18,7 @@ function AdminUser(){
       </button>
 
       <button onClick ={() =>{
-        navigate("/menu/" + 1);
+        navigate("/menu1"); //This navigates to the page, passing the parameter for admin status (1)
       }}>
         View/Edit Inventory
       </button>

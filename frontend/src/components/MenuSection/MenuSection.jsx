@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
 //import { useSelector } from 'react-redux'
 import './MenuSection.css'
+import './CreateItem.jsx'
 import { Navigate, useNavigate, useParams} from "react-router-dom";
 
 //const MenuSection = () => {
@@ -13,6 +14,8 @@ function MenuSection () {
     const [searchValue, setSearch] = useState("");
     const imageBase = './images/'
     let {user} = useParams();
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         fetchData();
@@ -120,16 +123,17 @@ function MenuSection () {
         alert("Added to cart!");
     }
 
-    const deleteItem = () => {
-        alert("Item deleted");
+    const deleteItem = (itemName) => {
+        console.log("Item", itemName);
     }
 
-    const createItem = () => {
-        alert("Item created");
+    const createItem = (itemName) => {
+        console.log("Item", itemName);
+        navigate("/createItem");
     }
 
-    const modifyItem = () => {
-        alert("Item modified");
+    const modifyItem = (itemName) => {
+        console.log("Item", itemName);
     }
 
     const loading = () =>{
@@ -199,9 +203,9 @@ function MenuSection () {
                                         <div className="desc">{item.item_description}</div>
                                         {/*<div className="price">${item.item_description}</div>*/}
                                         {/* if the user is admin, have option to modify and delete the item"*/}
-                                        { user == 1 ? <button className="btn" type="Modify" onClick={modifyItem} >Modify Item</button> :
-                                        <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>}
-                                        {user == 1 && <button className="btn" type="submit" onClick={deleteItem} >Delete Item</button>}
+                                        { user == 1 ? <button className="btn" type="Modify" onClick={() => modifyItem(item.item_id)} >Modify Item</button> :
+                                            <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>}
+                                        {user == 1 && <button className="btn" type="submit" onClick={() => deleteItem(item.item_id)} >Delete Item</button>}
                                         {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
                                     </div>
                                 )

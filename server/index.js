@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const mysql = require("mysql");
+const multer = require("multer");
 const { application } = require("express");
 
 const build_directory = path.join(__dirname, '../build');
@@ -15,6 +16,17 @@ user: 'root',
 password: 'DB@dmin422!',
 database: 'store',
 });
+
+const store = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, 'public');
+    },
+    filename : (req, file, callback) => {
+        callback(null, file.originalname);
+    }
+});
+
+const uploadFile = multer({store}).single('file');
 
 //used to translate files between backend and frontend
 //bodyparser to get code from frontend to backend
@@ -106,6 +118,33 @@ app.post("/api/register/insert",(req,res) => {
     });
 
 })
+
+app.post("/api/upload/image", (req, res) => {
+
+    uploadFile(req, res, (err) => {
+        if(err){
+            return res.status(500).json(err);
+        }
+    });
+
+});
+
+app.post("/api/insert/item", (req, res) => {
+    const i_id = req.body.id
+    const i_name = req.body.name
+    const i_desc = req.body.description
+    const i_price = req.body.price
+    const i_stock = req.body.stock
+    const i_sale = req.body.sale
+    const i_sale_price = req.body.sale_price
+    
+
+    const sqlInsert="INSERT INTO item (item_id, item_type, item_name, item_description, item_price, item_stock, item_onsale, item_saleprice) VALUES (?,?,?,?,?,?,?,?);"
+    db.query(sqlInsert, [i_id, "Drinkware", i_name, i_desc, i_price, i_stock, i_sale, i_sale_price], (res, err) => {
+        console.log(res);
+    });
+});
+
 //api for insert 
 app.post("/api/insert",(req,res) => {
     //use body parser to get information from frontend, and stored
