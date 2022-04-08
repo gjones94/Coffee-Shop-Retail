@@ -117,11 +117,19 @@ function MenuSection () {
 
 
     const addToCart = () => {
-        alert("ID is", user);
-        alert("ID is", {user});
-        console.log(user);
-        console.log({user})
         alert("Added to cart!");
+    }
+
+    const deleteItem = () => {
+        alert("Item deleted");
+    }
+
+    const createItem = () => {
+        alert("Item created");
+    }
+
+    const modifyItem = () => {
+        alert("Item modified");
     }
 
     const loading = () =>{
@@ -151,7 +159,7 @@ function MenuSection () {
                         type="search" 
                         id="search"
                     />
-                    <button className="btn" type="submit" onClick={search}>{user}</button>
+                    <button className="btn" type="submit" onClick={search}>Submit</button>
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByName}>Sort By Name</button>
@@ -162,9 +170,14 @@ function MenuSection () {
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
                 </div>
+                {user == 1 &&
+                    <div class="box">
+                        <button className="btn" type="submit" onClick={createItem}>Create Item</button>
+                    </div> 
+                }
                 <div className="box-container">
                     {/*For every item in inventory_list, create a box and list details of item*/}
-                    
+                    {}    
                     {console.log("Items loaded", constInventory)}
                     {displayInventory.map(item => 
                         {
@@ -185,7 +198,10 @@ function MenuSection () {
                                         <div className="price">${price}<span>{crossout}</span></div>
                                         <div className="desc">{item.item_description}</div>
                                         {/*<div className="price">${item.item_description}</div>*/}
-                                        <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>
+                                        {/* if the user is admin, have option to modify and delete the item"*/}
+                                        { user == 1 ? <button className="btn" type="Modify" onClick={modifyItem} >Modify Item</button> :
+                                        <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>}
+                                        {user == 1 && <button className="btn" type="submit" onClick={deleteItem} >Delete Item</button>}
                                         {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
                                     </div>
                                 )
