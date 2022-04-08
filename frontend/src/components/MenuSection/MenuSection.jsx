@@ -2,23 +2,24 @@ import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
 //import { useSelector } from 'react-redux'
 import './MenuSection.css'
+import { Navigate, useNavigate, useParams} from "react-router-dom";
 
-const MenuSection = () => {
-
+//const MenuSection = () => {
+function MenuSection () {
     let tempInventory = [];
     const [constInventory, setConstInventory] = useState();
     const [displayInventory, setDisplayInventory] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
     const imageBase = './images/'
-
+    let {user} = useParams();
 
     useEffect(() => {
         fetchData();
     },[]);
 
     const fetchData = () =>{
-        Axios.get("api/get/inventory").then( //calls the backend server.js with this api command
+        Axios.get("/api/get/inventory").then( //calls the backend server.js with this api command
             (response) => {
                 let items = JSON.parse(JSON.stringify(response.data));
                 setDisplayInventory(items);
@@ -116,6 +117,10 @@ const MenuSection = () => {
 
 
     const addToCart = () => {
+        alert("ID is", user);
+        alert("ID is", {user});
+        console.log(user);
+        console.log({user})
         alert("Added to cart!");
     }
 
@@ -146,7 +151,7 @@ const MenuSection = () => {
                         type="search" 
                         id="search"
                     />
-                    <button className="btn" type="submit" onClick={search}>Search</button>
+                    <button className="btn" type="submit" onClick={search}>{user}</button>
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByName}>Sort By Name</button>
@@ -160,6 +165,7 @@ const MenuSection = () => {
                 <div className="box-container">
                     {/*For every item in inventory_list, create a box and list details of item*/}
                     
+                    {console.log("Items loaded", constInventory)}
                     {displayInventory.map(item => 
                         {
                             console.log(item.item_name);
