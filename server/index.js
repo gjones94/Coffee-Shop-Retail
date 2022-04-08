@@ -12,7 +12,8 @@ const build_directory = path.join(__dirname, '../build');
 const db = mysql.createConnection({
 host: 'localhost',
 user: 'root',
-password: 'DB@dmin422!',
+//password: 'DB@dmin422!',
+password: 'password',
 database: 'store',
 });
 
@@ -155,11 +156,11 @@ app.post("/api/admin/user/update",(req,res) => {
     const Address = req.body.address
     const Password = req.body.password
     const UserID = req.body.userID
-
+    console.log("got here")
     //sqlupdate command to update the user we stored earlier with whatever they wanted changed.
     //THIS MAY NEED TO BE DOUBLE CHECKED
-    sqlUpdate = "UPDATE users SET user_email = ?, user_first_name = ?, user_last_name = ?, user_phone =?, user_address = ?, password =? WHERE user_id = ?"
-    sql.query(sqlUpdate,[Email,FirstName,LastName,Phone,Address,Password,UserID])
+    //sqlUpdate = "UPDATE users SET user_email = ?, user_first_name = ?, user_last_name = ?, user_phone =?, user_address = ?, password =? WHERE user_id = ?"
+   // sql.query(sqlUpdate,[Email,FirstName,LastName,Phone,Address,Password,UserID])
 
 })
 

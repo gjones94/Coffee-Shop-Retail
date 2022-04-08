@@ -23,7 +23,7 @@ function Admin(){
       </button>
 
       <button onClick ={() =>{
-        navigate("/orders");
+        //navigate("/orders");
       }}>
         View Orders
       </button>

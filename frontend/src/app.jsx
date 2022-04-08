@@ -16,6 +16,7 @@ import { homeData } from './components/home/home'
 import { BrowserRouter as Router, Route, Routes, useNavigate, Switch} from 'react-router-dom';
 import AdminUser from './components/AdminUser/AdminUser'
 import Register from './components/Register/Register'
+import Admin from './components/Admin/Admin'
 //import Orders from './components/orders/orders'
 function App() {
 
@@ -53,7 +54,7 @@ function App() {
                     <Route path ="/AdminUser" element ={<AdminUser/>}/>
                     <Route path = "/Register" element = {<Register/>}/>
                     <Route path="/login" element={<Login/>} />
-                    <Route path ="/admin" element ={<AdminUser/>}/>
+                    <Route path ="/Admin" element ={<Admin/>}/>
                     {/*<Route path ="/orders" element ={<Orders/>}/>*/}
                 </Routes>
                 <Footer />
