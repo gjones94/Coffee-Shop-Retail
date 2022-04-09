@@ -17,7 +17,7 @@ function Admin(){
       </button>
 
       <button onClick ={() =>{
-        navigate("/Inventory");
+        navigate("/menu1");
       }}>
         View/Edit Inventory
       </button>

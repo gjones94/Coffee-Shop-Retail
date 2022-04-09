@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const mysql = require("mysql");
 const { application } = require("express");
+const { getMaxListeners } = require("process");
+const { resolve } = require("path");
 
 const build_directory = path.join(__dirname, '../build');
 
@@ -12,8 +14,8 @@ const build_directory = path.join(__dirname, '../build');
 const db = mysql.createConnection({
 host: 'localhost',
 user: 'root',
-//password: 'DB@dmin422!',
-password: 'password',
+password: 'DB@dmin422!',
+//password: 'password',
 database: 'store',
 });
 
@@ -117,34 +119,27 @@ app.post("/api/insert",(req,res) => {
     db.query(sqlInsert,[backname,backpassword])
 });
 
-//WIP needs a proper database search 
+
 app.post("/api/admin/user/find",(req,res) => {
     const Email = req.body.email
-    const Password = req.body.password
-
-    //WIP need to test in proper DB 
-   /* sqlFind = "SELECT user_email FROM users WHERE user_email = ?;" 
-    db.query(sqlFind,[tempname],(err,result) => {
+   
+    console.log("here")
+   sqlFind = "SELECT user_email FROM users WHERE user_email = ?;" 
+    db.query(sqlFind,[Email],(err,result) => {
         if ( result == ""){ //if the result is empty that means nothing was found
-            res.send("Not Found")
+            res.send(result)
         }else {
-            sqlFind = "SELECT password FROM users WHERE password = ?;" // checks through password after name
-            db.query(sqlFind,[tempPW],(err,result) => {
-                if (result == ""){
-                    console.log("User Not found")
-                    res.send("Not Found")
-                }else {
-                    console.log("USER FOUND")
-                        //only sends found if both name and password match
-                        //if the user is found we will send the row of that user to the frontend to display.
-                       
-                    }
-            })
-                
-        }
-    }) */
-    res.send("test");
+            sqlReturn = "SELECT * from users WHERE user_email =?;"
+            db.query(sqlReturn,[Email],(err,result) => {
+                res.send(result)
 
+            })
+          
+           
+            }
+                
+        
+    })
 });
 
 app.post("/api/admin/user/update",(req,res) => {
@@ -156,11 +151,19 @@ app.post("/api/admin/user/update",(req,res) => {
     const Address = req.body.address
     const Password = req.body.password
     const UserID = req.body.userID
-    console.log("got here")
-    //sqlupdate command to update the user we stored earlier with whatever they wanted changed.
-    //THIS MAY NEED TO BE DOUBLE CHECKED
-    //sqlUpdate = "UPDATE users SET user_email = ?, user_first_name = ?, user_last_name = ?, user_phone =?, user_address = ?, password =? WHERE user_id = ?"
-   // sql.query(sqlUpdate,[Email,FirstName,LastName,Phone,Address,Password,UserID])
+    console.log(UserID)
+    console.log(Email)
+    console.log(Phone)
+    console.log(FirstName)
+    console.log(LastName)
+    console.log(Address)
+    console.log(Password)
+
+  
+    sqlUpdate = "UPDATE users SET user_email = ?, user_first_name = ?, user_last_name = ?, user_phone =?, user_address = ?, password = ? WHERE user_id = ?"
+    db.query(sqlUpdate,[Email,FirstName,LastName,Phone,Address,Password,UserID],(err,res) =>{
+        console.log(res)
+    });
 
 })
 
@@ -170,8 +173,8 @@ app.listen(3001, () => {
 });
 
 //places this at the end to serve all other requests
-app.use('/*', (req, res) => {
+/*app.use('/*', (req, res) => {
 	console.log("Request",req);
 	console.log("Redirecting to build/index.html")
 	res.sendFile(path.join(__dirname, '../build', 'index.html'));
-});
+}); */

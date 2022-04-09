@@ -1,11 +1,11 @@
 import React, {useState,useEffect} from "react";
 import { useSelector } from 'react-redux'
 import Axios from 'axios';
+import './AdminUser.css';
 
 
 function AdminUser(){
     const [InEmail,setInEmail] = useState("")
-    const [InPassword,setInPassword]= useState("")
     const [Email,setEmail] = useState("")
     const [Password,setPassword]= useState("")
     const [FirstName,setFirstName] = useState("")
@@ -20,28 +20,41 @@ function AdminUser(){
     const [OldAddress,setOldAddress] = useState("")
     const [UserID,setUserID] = useState("")
     const [Response,setResponse] = useState("")
-    const findUser = () =>{
+
+    const [UserList, makeList] = useState([])
+
+    const findUser =() =>{
+   
         Axios.post("/api/admin/user/find",{
-            email: InEmail,
-            password: InPassword,
+
+            email: InEmail
+            
         }).then((response) => {
-            if (response.data != "Not Found"){ // occurs when backend returns the row of info for that user
-                setResponse("Not Found") // this will be moved to the else part of if later
-                //these will specfically show the info from the row out of the sql list
-                setOldEmail("placehold")
-                setOldFirstName("placehold")
-                setOldLastName("placehold")
-                setOldAddress("placehold")
-                setOldPhone("placehold")
-                setOldPassword("placehold")
-                setUserID("placehold")
 
+          if (response == ""){
+            setResponse("User was not found")
+             }else{ 
+                makeList(response.data)
+                console.log(response.data)
+                console.log("here")
+                UserList.map(val => {
+
+                  
+                  setUserID(val.user_id)
+                  setOldEmail(val.user_email)
+                  setOldFirstName(val.user_first_name)
+                  setOldLastName(val.user_last_name)
+                  setOldAddress(val.user_address)
+                  setOldPhone(val.phone)
+                  setOldPassword(val.password)
+                 
+                });
             }
-
-
         });
+   
     }
         const updateUser = () =>{
+          setUserID(UserID)
             if(Email == ""){
                 setEmail(OldEmail)
             }
@@ -76,6 +89,8 @@ function AdminUser(){
 
 
     return(
+
+      
         <div className = 'inputs'>
             <h1>email of user</h1>
             <input  
@@ -85,20 +100,30 @@ function AdminUser(){
                     setInEmail(e.target.value)
                 }}/>
 
-                <h1>password</h1>
-                <input
-                type = "password"
-                name = "InPassword"
-                onChange={(e)=> {
-                    setInPassword(e.target.value)
-                }}/>
-
 
 
             <button onClick ={findUser}>Find</button>
                 <label>{Response}</label>
+
+                {UserList.map((val,key)=> {
+      return (
+        <div className = "UserInfo" key = {key}>
+        <label style={{fontSize: '15px'}}>
+          Email: {val.user_email} 
+          <br/>
+          Name: {val.user_first_name} {val.user_last_name}
+          <br/>
+          Phone: {val.user_phone}
+          <br/>
+          Address: {val.user_address}
+          <br/>
+          Password: {val.password}
+          
+        </label>
+        </div>
+      );
+    })}
             <h1>Email</h1>
-            <label>{OldEmail}</label>
                 <input
                 type = "text"
                 name = "Email"
@@ -106,7 +131,6 @@ function AdminUser(){
                     setEmail(e.target.value)
                 }}/>
             <h1>First Name</h1>
-            <label>{OldFirstName}</label>
             <input
                 type = "text"
                 name = "Firstname"
@@ -114,7 +138,6 @@ function AdminUser(){
                     setFirstName(e.target.value)
                 }}/>
             <h1>Last Name</h1>
-            <label>{OldLastName}</label>
             <input
                 type = "text"
                 name = "Lastname"
@@ -122,7 +145,6 @@ function AdminUser(){
                     setLastName(e.target.value)
                 }}/>
             <h1>Phone</h1>
-            <label>{OldPhone}</label>
             <input
                 type = "text"
                 name = "Phone"
@@ -130,7 +152,6 @@ function AdminUser(){
                     setPhone(e.target.value)
                 }}/>
             <h1>Address</h1>
-            <label>{OldAddress}</label>
             <input
                 type = "text"
                 name = "Address"
@@ -138,7 +159,6 @@ function AdminUser(){
                     setAddress(e.target.value)
                 }}/>
             <h1>password</h1>
-            <label>{OldPassword}</label>
             <input
                 type = "text"
                 name = "Password"
@@ -147,7 +167,11 @@ function AdminUser(){
                 }}/>
 
                 <button onClick ={updateUser}>Update</button>
+
+         
         </div>        
+
+        
 
     );
 
