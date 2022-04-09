@@ -27,7 +27,18 @@ const MenuSection = () => {
             }
         );
     }
-
+    /* Cooper Wineberg
+    const fetchOrderData = () =>{
+        Axios.get("api/get/orders").then( //calls the backend server.js with this api command
+            (response) => {
+                let items = JSON.parse(JSON.stringify(response.data));
+                setDisplayOrders(items);
+                setConstOrders(items);
+                loaded();
+            }
+        );
+    }
+    */
     const search = () => {
         tempInventory = []; //reset list
         setDisplayInventory(constInventory);//reset display inventory
