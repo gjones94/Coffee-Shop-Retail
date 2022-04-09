@@ -46,6 +46,10 @@ function Login() {
   const goHome = () => {
 	  navigate("/home");
   }
+
+  const goRegister = () => {
+    navigate("/Register")
+  }
   
   const loginCheck = () =>{
     alert("Login check callled") //debugging purposes
@@ -98,7 +102,7 @@ function Login() {
           />
           <button className="btn" type="submit" onClick={loginCheck} >Log In</button>
           <span className="login__head2">Sign Up for emails to get special news and offers</span>
-          <button className="btn" type="submit" onClick={loginCheck} >Create your Account</button>
+          <button className="btn" type="submit" onClick={goRegister} >Create your Account</button>
           <span className="login__head3">By signing up, you agree to our <span className="underlineHead3">Privacy Policy</span> and <span className="underlineHead3">Terms of Use</span></span>
         </form>
       </div>

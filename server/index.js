@@ -70,6 +70,7 @@ app.get('/api/get', (req,res) => {
 });
 
 app.get('/api/get/inventory', (req, res) => {
+    console.log(req);
     console.log("fetch inventory called") //debugging purposes
     const sqlSelect = "SELECT * FROM item"; //mysql command to get full list of users
     db.query(sqlSelect,(err,result) =>{
@@ -169,6 +170,7 @@ app.listen(3001, () => {
 
 //places this at the end to serve all other requests
 app.use('/*', (req, res) => {
+	console.log("Request",req);
 	console.log("Redirecting to build/index.html")
 	res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
