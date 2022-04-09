@@ -5,6 +5,7 @@ import ContactSection from './components/ContactSection/ContactSection'
 import Footer from './components/Footer/Footer'
 import HomeSection from './components/HomeSection/HomeSection'
 import MenuSection from './components/MenuSection/MenuSection'
+import CreateItem from './components/MenuSection/CreateItem'
 import Header from './components/Header/Header'
 import ReviewSection from './components/ReviewSection/ReviewSection'
 import Login from './components/Login/Login'
@@ -54,7 +55,8 @@ function App() {
                     <Route path ="/AdminUser" element ={<AdminUser/>}/>
                     <Route path = "/Register" element = {<Register/>}/>
                     <Route path="/login" element={<Login/>} />
-                    <Route path ="/Admin" element ={<Admin/>}/>
+                    <Route path ="/admin" element ={<Admin/>}/>
+                    <Route path ="/createItem" element={<CreateItem/>}/>
                     {/*<Route path ="/orders" element ={<Orders/>}/>*/}
                 </Routes>
                 <Footer />

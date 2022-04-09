@@ -69,28 +69,29 @@ function Login() {
     });
   }
 
+  //this is just for debugging
   const handleSubmit = (event) =>{
-	event.preventDefault();	
-	alert(`The name you entered was : ${frontName}`);
+    event.preventDefault();	
+    alert(`The name you entered was : ${frontName}`);
   }
 
   return (
     <div className="login">
       <h1 className="heading"> Log <span> In </span></h1>
       <div className="login__page">
+
         <div className="logo">
           <img className="login__logo" src="./images/logo.png" alt="" />
         </div>
+
         <form onSubmit={handleSubmit}>
           <span className="login__email" >Email Address:</span>
           <input 
             value={frontName} 
             onChange={event => setName(event.target.value)}
             className="login__input" 
-	    //#type="email" 
-            //placeholder="Email" 
-            //required 
           />
+
           <span className="login__password">Password:</span>
           <input 
             value={frontPassword} 
@@ -100,13 +101,14 @@ function Login() {
             placeholder="Password" 
             required 
           />
+
           <button className="btn" type="submit" onClick={loginCheck} >Log In</button>
           <span className="login__head2">Sign Up for emails to get special news and offers</span>
           <button className="btn" type="submit" onClick={goRegister} >Create your Account</button>
           <span className="login__head3">By signing up, you agree to our <span className="underlineHead3">Privacy Policy</span> and <span className="underlineHead3">Terms of Use</span></span>
         </form>
+
       </div>
-      .
     </div>
   );
 }
