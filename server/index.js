@@ -4,10 +4,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const mysql = require("mysql");
-const multer = require("multer");
 const { application } = require("express");
-const { getMaxListeners } = require("process");
-const { resolve } = require("path");
+const { isBuffer } = require("util");
 
 const build_directory = path.join(__dirname, '../build');
 
@@ -20,16 +18,6 @@ password: 'DB@dmin422!',
 database: 'store',
 });
 
-const store = multer.diskStorage({
-    destination: (req, file, callback) => {
-        callback(null, 'public');
-    },
-    filename : (req, file, callback) => {
-        callback(null, file.originalname);
-    }
-});
-
-const uploadFile = multer({store}).single('file');
 
 //used to translate files between backend and frontend
 //bodyparser to get code from frontend to backend
@@ -39,6 +27,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(build_directory));
 
+
+/*-------------------------LOGIN/REGISTER APIS-----------------------------*/
 
 //post function to get login input from front
 app.post('/api/login/auth', (req,res) =>{
@@ -71,40 +61,6 @@ app.post('/api/login/auth', (req,res) =>{
   
 })
 
-
-//api to get user TO-DO MODIFY TO BE A GET FOR JUST USERS
-app.get('/api/get', (req,res) => {
-    console.log("basic get called") //debugging purposes
-    const sqlSelect = "SELECT * FROM users"; //mysql command to get full list of users
-    db.query(sqlSelect,(err,result) =>{
-        console.log(result);
-        //res.send("Test")
-	    //res.send(result); //sends over the list of users
-    })
-
-});
-
-app.get('/api/get/inventory', (req, res) => {
-    console.log(req);
-    console.log("fetch inventory called") //debugging purposes
-    const sqlSelect = "SELECT * FROM item"; //mysql command to get full list of users
-    db.query(sqlSelect,(err,result) =>{
-        console.log(result);
-	    res.send(result); //sends over the list of inventory
-    })
-});
-
-/* Cooper Wineberg
-app.get('/api/get/orders', (req, res) => {
-    console.log("fetch orders called") //debugging purposes
-    const sqlSelect = "SELECT * FROM orders"; //mysql command to get full list of users
-    db.query(sqlSelect,(err,result) =>{
-        console.log(result);
-	    res.send(result); //sends over the list of inventory
-    })
-});
-*/
-
 //TO-DO this still needs to be modified to fit with zakariah's front end
 app.post("/api/register/insert",(req,res) => {
     const user_id = null
@@ -122,11 +78,73 @@ app.post("/api/register/insert",(req,res) => {
 
 })
 
-app.post("/api/upload/image", (req, res) => {
 
-    uploadFile(req, res, (err) => {
+/*-------------------------INVENTORY APIS-----------------------------*/
+
+
+app.get('/api/get/inventory', (req, res) => {
+    console.log(req);
+    console.log("fetch inventory called") //debugging purposes
+    const sqlSelect = "SELECT * FROM item"; //mysql command to get full list of users
+    db.query(sqlSelect,(err,result) =>{
+        console.log(result);
+	    res.send(result); //sends over the list of inventory
+    })
+});
+
+
+
+
+app.post("/api/modifyItem", (req,res) => {
+    
+    const i_id = req.body.id
+    const i_type = req.body.type
+    const i_name = req.body.name
+    const i_desc = req.body.description
+    const i_price = req.body.price
+    const i_stock = req.body.stock
+    const i_sale = req.body.sale
+    const i_sale_price = req.body.sale_price
+
+    console.log("Updated Parameters");
+    console.log(i_id);
+    console.log(i_type);
+    console.log(i_name);
+    console.log(i_desc);
+    console.log(i_price);
+    console.log(i_stock);
+    console.log(i_sale);
+    console.log(i_sale_price);
+
+    
+    sqlUpdate = "UPDATE item SET (item_id = ?, item_type = ?, item_name = ?, item_description = ?, item_price = ?, item_stock = ?, item_onsale = ? item_saleprice = ?) WHERE item_id = ?;"
+
+    const query = 'UPDATE `item` '+
+                  'SET `item_id` = ?, `item_type` = ?, `item_name` = ?, `item_description` = ?, `item_price` = ?, `item_stock` = ?, `item_onsale` = ?, `item_saleprice` = ?' +
+                  'WHERE `item_id` = ?';
+
+    console.log("Query", query);
+    const values = [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_id];
+    db.query(query,values,(err,res) =>{
         if(err){
-            return res.status(500).json(err);
+            console.error(err.message);
+        }
+        console.log(res)
+    });
+
+})
+
+app.post("/api/upload/image", (req, res) => {
+    if(req.files.file == null){
+        return res.status(400);
+    }
+
+    const file = req.files.file;
+    console.log("File received", file);
+    file.mv(`${build_directory}/images/${file.name}`, err => {
+        if(err){
+            console.error(err);
+            res.status(500);
         }
     });
 
@@ -135,6 +153,7 @@ app.post("/api/upload/image", (req, res) => {
 app.post("/api/insert/item", (req, res) => {
     const i_id = req.body.id
     const i_name = req.body.name
+    const i_type = req.body.type
     const i_desc = req.body.description
     const i_price = req.body.price
     const i_stock = req.body.stock
@@ -143,10 +162,26 @@ app.post("/api/insert/item", (req, res) => {
     
 
     const sqlInsert="INSERT INTO item (item_id, item_type, item_name, item_description, item_price, item_stock, item_onsale, item_saleprice) VALUES (?,?,?,?,?,?,?,?);"
-    db.query(sqlInsert, [i_id, "Drinkware", i_name, i_desc, i_price, i_stock, i_sale, i_sale_price], (res, err) => {
+    db.query(sqlInsert, [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price], (res, err) => {
         console.log(res);
     });
 });
+
+
+/*-------------------------USER APIS-----------------------------*/
+
+//api to get user TO-DO MODIFY TO BE A GET FOR JUST USERS
+app.get('/api/get', (req,res) => {
+    console.log("basic get called") //debugging purposes
+    const sqlSelect = "SELECT * FROM users"; //mysql command to get full list of users
+    db.query(sqlSelect,(err,result) =>{
+        console.log(result);
+        //res.send("Test")
+	    //res.send(result); //sends over the list of users
+    })
+
+});
+
 
 //api for insert 
 app.post("/api/insert",(req,res) => {
@@ -157,6 +192,8 @@ app.post("/api/insert",(req,res) => {
     const sqlInsert = "INSERT INTO users (user_first_name,password) VALUES (?,?);" //mysql command to insert new elements 
     db.query(sqlInsert,[backname,backpassword])
 });
+
+
 
 
 app.post("/api/admin/user/find",(req,res) => {
@@ -206,14 +243,28 @@ app.post("/api/admin/user/update",(req,res) => {
 
 })
 
+
+/*-------------------------ORDER APIS-----------------------------*/
+
+/* Cooper Wineberg
+app.get('/api/get/orders', (req, res) => {
+    console.log("fetch orders called") //debugging purposes
+    const sqlSelect = "SELECT * FROM orders"; //mysql command to get full list of users
+    db.query(sqlSelect,(err,result) =>{
+        console.log(result);
+	    res.send(result); //sends over the list of inventory
+    })
+});
+*/
+
 app.listen(3001, () => {
-    console.log("build directory: ", build_directory);
+    //console.log("build directory: ", build_directory);
     console.log('running on port 3001')
 });
 
 //places this at the end to serve all other requests
-/*app.use('/*', (req, res) => {
+app.use('/*', (req, res) => {
 	console.log("Request",req);
 	console.log("Redirecting to build/index.html")
 	res.sendFile(path.join(__dirname, '../build', 'index.html'));
-}); */
+});

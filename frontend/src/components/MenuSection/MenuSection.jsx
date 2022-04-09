@@ -2,11 +2,12 @@ import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
 //import { useSelector } from 'react-redux'
 import './MenuSection.css'
-import './CreateItem.jsx'
+//import './CreateItem.jsx'
+//import './ModifyItem.jsx'
 import { Navigate, useNavigate, useParams} from "react-router-dom";
 
-//const MenuSection = () => {
 function MenuSection () {
+
     let tempInventory = [];
     const [constInventory, setConstInventory] = useState();
     const [displayInventory, setDisplayInventory] = useState();
@@ -31,6 +32,7 @@ function MenuSection () {
             }
         );
     }
+
     /* @Cooper, can I delete this? I'm not sure why it's in the menu section
     /* Cooper Wineberg
     const fetchOrderData = () =>{
@@ -135,17 +137,16 @@ function MenuSection () {
         alert("Added to cart!");
     }
 
-    const deleteItem = (itemName) => {
-        console.log("Item", itemName);
+    const deleteItem = (item_id) => {
+        console.log("Item", item_id);
     }
 
-    const createItem = (itemName) => {
-        console.log("Item", itemName);
+    const createItem = (item_id) => {
         navigate("/createItem");
     }
 
-    const modifyItem = (itemName) => {
-        console.log("Item", itemName);
+    const modifyItem = (item_id) => {
+        navigate("/modifyItem" + item_id);
     }
 
     const loading = () =>{
