@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import './CreateItem.css';
 import Axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
-import { handle } from "express/lib/application";
 import axios from "axios";
 
 
@@ -15,9 +14,10 @@ function CreateItem () {
     const [item_stock, set_stock] = useState("");
     const [item_sale, set_sale] = useState("");
     const [item_sale_price, set_sale_price] = useState("");
-    const [item_image, set_image] = useState("");
+    const [file, setFile] = useState("");
+    const [fileName, setFileName] = useState("");
 
-    let navigate =  useNavigate();
+    let navigate = useNavigate();
 
     const createItem = () => {
         alert("Item submitted");
@@ -34,21 +34,33 @@ function CreateItem () {
         });
 
     }
-    const uploadImage = () => {
-        console.log(item_image);
-
+    const uploadImage = async e => {
+        e.preventDefault();
         const data = new FormData();
-        data.append("ITMMG004", item_image);
-        axios.post("/api/upload/image", data);
+        console.log("File", file);
+
+        data.append('file',file); 
+        data.append('key', 'value');
+
+        for(var pair in data.entries()){
+            console.log(pair[0]+', '+pair[1]);
+        }
+
+        await axios.post("/api/upload/image", data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 
-    const handleUpload = event => {
-        console.log(event.target.files[0]);
+    const inputFileChange = e =>{
+        setFile(e.target.files[0]);
+        setFileName(e.target.files[0].name);
     }
 
     return (
         <div className="create_item">
-                <h1 className="heading"> Create <span>    Item     </span></h1>
+                <h1 className="heading"> Create <span>Item</span></h1>
                 <div className="create_page">
 
                     <div className="logo">
@@ -130,8 +142,7 @@ function CreateItem () {
 
                         <span className="input_label" >Item Image</span>
                         <input 
-                            value={item_image} 
-                            onChange={handleUpload}
+                            onChange={inputFileChange}
                             name="Upload File"
                             className="item_input" 
                             type="file"

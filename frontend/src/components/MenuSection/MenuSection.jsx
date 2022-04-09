@@ -31,6 +31,7 @@ function MenuSection () {
             }
         );
     }
+    /* @Cooper, can I delete this? I'm not sure why it's in the menu section
     /* Cooper Wineberg
     const fetchOrderData = () =>{
         Axios.get("api/get/orders").then( //calls the backend server.js with this api command
@@ -107,27 +108,27 @@ function MenuSection () {
         setDisplayInventory(tempInventory);
     }
 
-    //const fetchInventory = () => {
-        //DEBUGGING Function to understand how to pull in inventory from database
-        //alert("Fetch inventory called");
-        //Axios.get("api/get/inventory").then( //calls the backend api with this fetch command
-            //(response) => {
-                //inventory_list = JSON.parse(JSON.stringify(response.data)) //gets you the array of objects 
+    /*const fetchInventory = () => {
+        DEBUGGING Function to understand how to pull in inventory from database
+        alert("Fetch inventory called");
+        Axios.get("api/get/inventory").then( //calls the backend api with this fetch command
+            (response) => {
+                inventory_list = JSON.parse(JSON.stringify(response.data)) //gets you the array of objects 
                 
-                //Get the length of the array
-                //var length = Object.keys(inventory_list).length
+                Get the length of the array
+                var length = Object.keys(inventory_list).length
                 
-                //for (let i = 0; i < length; i++){
-                    //var id = String(inventory_list[i].item_id);
-                    //console.log(inventory_list[i].item_id);
-                //}
+                for (let i = 0; i < length; i++){
+                    var id = String(inventory_list[i].item_id);
+                    console.log(inventory_list[i].item_id);
+                }
 
-                //console.log(inventory_list) 
-                //console.log(inventory_list[0]) //gets you the 1st object
-                //console.log(inventory_list[0].item_id) //gets you the 1st objects item_id
-                //}
-        //);
-    //}
+                console.log(inventory_list) 
+                console.log(inventory_list[0]) //gets you the 1st object
+                console.log(inventory_list[0].item_id) //gets you the 1st objects item_id
+                }
+        );
+    }*/
 
 
     const addToCart = () => {
