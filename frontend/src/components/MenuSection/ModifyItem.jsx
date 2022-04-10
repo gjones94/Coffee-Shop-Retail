@@ -15,8 +15,9 @@ function ModifyItem () {
     const [item_stock, set_stock] = useState("");
     const [item_sale, set_sale] = useState("");
     const [item_sale_price, set_sale_price] = useState("");
-    const [file, setFile] = useState("");
-    const [fileName, setFileName] = useState("");
+    const [image_file, setImageFile] = useState("");
+    const [image_name, setImageName] = useState("");
+
     const [isLoading, setLoading] = useState(true);
 
     let navigate = useNavigate();
@@ -43,6 +44,7 @@ function ModifyItem () {
                         set_stock(item.item_stock);
                         set_sale(item.item_onsale);
                         set_sale_price(item.item_saleprice)
+                        setImageName(item.item_image);
                     }
                     
                 });
@@ -53,18 +55,7 @@ function ModifyItem () {
     }
 
     const modifyItem = () => {
-        console.log("Param_id is", id);
-        console.log("Item id is", item_id);
-        
-        console.log("Updated Parameters");
-        console.log(item_id);
-        console.log(item_type);
-        console.log(item_name);
-        console.log(item_description);
-        console.log(item_price);
-        console.log(item_stock);
-        console.log(item_sale);
-        console.log(item_sale_price);
+        uploadImage();
 
         Axios.post("api/modifyItem", {
             id : item_id,
@@ -75,10 +66,33 @@ function ModifyItem () {
             stock : item_stock,
             sale : item_sale,
             sale_price : item_sale_price,
-            //image : item_image
+            image : image_name
         });
 
     }
+
+    const uploadImage = event => {
+        const data = new FormData();
+
+        data.append('name', image_name);
+        data.append('image', image_file); 
+
+        /* debug purposes
+        Axios.post("https://httpbin.org/anything", data, {
+            
+        }).then(res => console.log(res)).catch(err => console.log(err));
+        */
+
+        Axios.post("/api/upload/image", 
+            data, 
+            {
+                headers: {
+                    "Content-type": "multipart/form-data"
+                },
+            }
+        ).then(res => console.log(res)).catch(err => console.log(err));
+    }
+
 
     const loading = () =>{
         setLoading(true);
@@ -88,30 +102,6 @@ function ModifyItem () {
         setLoading(false);
     }
 
-
-    const uploadImage = async e => {
-        e.preventDefault();
-        const data = new FormData();
-        console.log("File", file);
-
-        data.append('file',file); 
-        data.append('key', 'value');
-
-        for(var pair in data.entries()){
-            console.log(pair[0]+', '+pair[1]);
-        }
-
-        await axios.post("/api/upload/image", data, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-    }
-
-    const inputFileChange = e =>{
-        setFile(e.target.files[0]);
-        setFileName(e.target.files[0].name);
-    }
 
     if (isLoading){
         //returns only this until data is done loading
@@ -211,7 +201,12 @@ function ModifyItem () {
 
                         <span className="input_label" >Item Image</span>
                         <input 
-                            onChange={inputFileChange}
+                            onChange={event => {
+                                const file = event.target.files[0];
+                                const name = file.name;
+                                setImageFile(file);
+                                setImageName(name);
+                            }}
                             name="Upload File"
                             className="item_input" 
                             type="file"

@@ -7,21 +7,15 @@ const mysql = require("mysql");
 const multer = require("multer");
 const { application } = require("express");
 
-//fs used for file system saves
-const fs = require("fs");
-const {promisify} = require("util");
-const pipeline = promisify(require("stream").pipeline);
-
-
 const build_directory = path.join(__dirname, '../build');
 
 //save storage space
 const this_storage = multer.diskStorage({
     destination: (req, file, cb) =>{
-        cb(null, "/var/www/html/site/server/images");
+        cb(null, build_directory + "/images/" );
     },
+
     filename: (req, file, cb) => {
-        console.log(file)
         cb(null, file.originalname)
     }
 })
@@ -103,11 +97,12 @@ app.post("/api/register/insert",(req,res) => {
 
 
 app.get('/api/get/inventory', (req, res) => {
-    console.log(req);
     console.log("fetch inventory called") //debugging purposes
     const sqlSelect = "SELECT * FROM item"; //mysql command to get full list of users
     db.query(sqlSelect,(err,result) =>{
-        console.log(result);
+        if(err){
+            console.log(err.message);
+        }
 	    res.send(result); //sends over the list of inventory
     })
 });
@@ -125,26 +120,16 @@ app.post("/api/modifyItem", (req,res) => {
     const i_stock = req.body.stock
     const i_sale = req.body.sale
     const i_sale_price = req.body.sale_price
-
-    console.log("Updated Parameters");
-    console.log(i_id);
-    console.log(i_type);
-    console.log(i_name);
-    console.log(i_desc);
-    console.log(i_price);
-    console.log(i_stock);
-    console.log(i_sale);
-    console.log(i_sale_price);
+    const i_image_name = req.body.image
 
     
-    sqlUpdate = "UPDATE item SET (item_id = ?, item_type = ?, item_name = ?, item_description = ?, item_price = ?, item_stock = ?, item_onsale = ? item_saleprice = ?) WHERE item_id = ?;"
+    console.log("New image name is", i_image_name);
 
     const query = 'UPDATE `item` '+
-                  'SET `item_id` = ?, `item_type` = ?, `item_name` = ?, `item_description` = ?, `item_price` = ?, `item_stock` = ?, `item_onsale` = ?, `item_saleprice` = ?' +
+                  'SET `item_id` = ?, `item_type` = ?, `item_name` = ?, `item_description` = ?, `item_price` = ?, `item_stock` = ?, `item_onsale` = ?, `item_saleprice` = ?, `item_image` = ?' +
                   'WHERE `item_id` = ?';
 
-    console.log("Query", query);
-    const values = [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_id];
+    const values = [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_image_name, i_id];
     db.query(query,values,(err,res) =>{
         if(err){
             console.error(err.message);
@@ -154,28 +139,9 @@ app.post("/api/modifyItem", (req,res) => {
 
 })
 
+//posts an image to the server images folder 
 app.post("/api/upload/image", upload.single("image"));
 
-/*
-app.post("/api/upload/image", upload.single("image"), async function(req, res, next){
-
-    //const file = req.file
-
-    const {
-        file,
-        body: {name}
-    } = req;
-
-    console.log(name);
-    await pipeline (
-        file.stream, 
-        fs.createWriteStream(`${__dirname}/${name}`)
-        //fs.createWriteStream(`${__dirname}/../build/images/${name}`)
-    );
-    res.send("File uploaded as " + name);
-
-});
-*/
 
 app.post("/api/insert/item", (req, res) => {
     const i_id = req.body.id
@@ -186,10 +152,11 @@ app.post("/api/insert/item", (req, res) => {
     const i_stock = req.body.stock
     const i_sale = req.body.sale
     const i_sale_price = req.body.sale_price
+    const i_image_name = req.body.image
     
 
-    const sqlInsert="INSERT INTO item (item_id, item_type, item_name, item_description, item_price, item_stock, item_onsale, item_saleprice) VALUES (?,?,?,?,?,?,?,?);"
-    db.query(sqlInsert, [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price], (res, err) => {
+    const sqlInsert="INSERT INTO item (item_id, item_type, item_name, item_description, item_price, item_stock, item_onsale, item_saleprice, item_image) VALUES (?,?,?,?,?,?,?,?,?);"
+    db.query(sqlInsert, [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_image_name], (res, err) => {
         console.log(res);
     });
 });
@@ -239,7 +206,7 @@ app.post("/api/admin/user/find",(req,res) => {
             })
           
            
-            }
+        }
                 
         
     })

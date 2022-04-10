@@ -14,13 +14,13 @@ function CreateItem () {
     const [item_stock, set_stock] = useState("");
     const [item_sale, set_sale] = useState("");
     const [item_sale_price, set_sale_price] = useState("");
-    const [file, setFile] = useState("");
-    const [fileName, setFileName] = useState("");
+    const [image_file, setImageFile] = useState("");
+    const [image_name, setImageName] = useState("");
 
     let navigate = useNavigate();
 
     const createItem = () => {
-        alert("Item submitted");
+        uploadImage();
 
         Axios.post("api/insert/item", {
             id : item_id,
@@ -31,20 +31,21 @@ function CreateItem () {
             stock : item_stock,
             sale : item_sale,
             sale_price : item_sale_price,
-            //image : item_image
+            image : image_name
         });
 
     }
     const uploadImage = event => {
         const data = new FormData();
 
-        data.append('name', fileName);
-        data.append('image', file); 
+        data.append('name', image_name);
+        data.append('image', image_file); 
 
+        /* debug purposes
         Axios.post("https://httpbin.org/anything", data, {
             
         }).then(res => console.log(res)).catch(err => console.log(err));
-
+        */
 
         Axios.post("/api/upload/image", 
             data, 
@@ -149,14 +150,12 @@ function CreateItem () {
                         />
 
                         <span className="input_label" >Item Image</span>
-                        <input 
+                        <input
                             onChange={event => {
                                 const file = event.target.files[0];
                                 const name = file.name;
-                                console.log(file);
-                                console.log(name);
-                                setFile(file);
-                                setFileName(name);
+                                setImageFile(file);
+                                setImageName(name);
                             }}
                             name="Upload File"
                             className="item_input" 
@@ -164,7 +163,6 @@ function CreateItem () {
                             required
                         />
 
-                        <button className="btn" type="submit" onClick={uploadImage} >Upload Image</button>
                         <button className="btn" type="submit" onClick={createItem} >Create Item</button>
                     {/*</form>*/}
 
