@@ -4,18 +4,37 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const mysql = require("mysql");
+const multer = require("multer");
 const { application } = require("express");
-const { isBuffer } = require("util");
+
+//fs used for file system saves
+const fs = require("fs");
+const {promisify} = require("util");
+const pipeline = promisify(require("stream").pipeline);
+
 
 const build_directory = path.join(__dirname, '../build');
 
+//save storage space
+const this_storage = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        cb(null, "/var/www/html/site/server/images");
+    },
+    filename: (req, file, cb) => {
+        console.log(file)
+        cb(null, file.originalname)
+    }
+})
+
+//used to store data with the above storage space
+const upload = multer({storage : this_storage});
+
 
 const db = mysql.createConnection({
-host: 'localhost',
-user: 'root',
-password: 'DB@dmin422!',
-//password: 'password',
-database: 'store',
+    host: 'localhost',
+    user: 'root',
+    password: 'DB@dmin422!',
+    database: 'store',
 });
 
 
@@ -26,6 +45,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(build_directory));
+
 
 
 /*-------------------------LOGIN/REGISTER APIS-----------------------------*/
@@ -134,21 +154,28 @@ app.post("/api/modifyItem", (req,res) => {
 
 })
 
-app.post("/api/upload/image", (req, res) => {
-    if(req.files.file == null){
-        return res.status(400);
-    }
+app.post("/api/upload/image", upload.single("image"));
 
-    const file = req.files.file;
-    console.log("File received", file);
-    file.mv(`${build_directory}/images/${file.name}`, err => {
-        if(err){
-            console.error(err);
-            res.status(500);
-        }
-    });
+/*
+app.post("/api/upload/image", upload.single("image"), async function(req, res, next){
+
+    //const file = req.file
+
+    const {
+        file,
+        body: {name}
+    } = req;
+
+    console.log(name);
+    await pipeline (
+        file.stream, 
+        fs.createWriteStream(`${__dirname}/${name}`)
+        //fs.createWriteStream(`${__dirname}/../build/images/${name}`)
+    );
+    res.send("File uploaded as " + name);
 
 });
+*/
 
 app.post("/api/insert/item", (req, res) => {
     const i_id = req.body.id

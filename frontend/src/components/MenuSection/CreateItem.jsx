@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import './CreateItem.css';
 import Axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 
 function CreateItem () {
@@ -36,29 +35,27 @@ function CreateItem () {
         });
 
     }
-    const uploadImage = async e => {
-        e.preventDefault();
+    const uploadImage = event => {
         const data = new FormData();
-        console.log("File", file);
 
-        data.append('file',file); 
-        data.append('key', 'value');
+        data.append('name', fileName);
+        data.append('image', file); 
 
-        for(var pair in data.entries()){
-            console.log(pair[0]+', '+pair[1]);
-        }
-        //REMOVE THE FIRST SLASH
-        await axios.post("/api/upload/image", data, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+        Axios.post("https://httpbin.org/anything", data, {
+            
+        }).then(res => console.log(res)).catch(err => console.log(err));
+
+
+        Axios.post("/api/upload/image", 
+            data, 
+            {
+                headers: {
+                    "Content-type": "multipart/form-data"
+                },
             }
-        });
+        ).then(res => console.log(res)).catch(err => console.log(err));
     }
 
-    const inputFileChange = e =>{
-        setFile(e.target.files[0]);
-        setFileName(e.target.files[0].name);
-    }
 
     return (
         <div className="create_item">
@@ -153,13 +150,21 @@ function CreateItem () {
 
                         <span className="input_label" >Item Image</span>
                         <input 
-                            onChange={inputFileChange}
+                            onChange={event => {
+                                const file = event.target.files[0];
+                                const name = file.name;
+                                console.log(file);
+                                console.log(name);
+                                setFile(file);
+                                setFileName(name);
+                            }}
                             name="Upload File"
                             className="item_input" 
                             type="file"
                             required
                         />
 
+                        <button className="btn" type="submit" onClick={uploadImage} >Upload Image</button>
                         <button className="btn" type="submit" onClick={createItem} >Create Item</button>
                     {/*</form>*/}
 
