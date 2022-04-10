@@ -52,13 +52,13 @@ function MenuSection () {
         loading();
         var searchInput = searchValue;
 
-        //check for whitespace
+        //check for whitespace only
         if (/^\s*$/.test(searchInput)){
             loaded();
             return;
         }else{
             constInventory.map(item => {
-                if(item.item_name.toLowerCase().includes(searchInput.toLowerCase())){
+                if(item.item_name.toLowerCase().includes(searchInput.toLowerCase()) || item.item_description.toLowerCase().includes(searchInput.toLowerCase())){
                     console.log("Pushing item", item.item_name);
                     tempInventory.push(item);
                 }else{
