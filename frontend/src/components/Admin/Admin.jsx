@@ -13,7 +13,7 @@ function Admin(){
     navigate("/orders")
   }
     const Items = () => {
-    navigate("/menu:user")
+    navigate("/menu:1")
   }
     return (
     <div>
