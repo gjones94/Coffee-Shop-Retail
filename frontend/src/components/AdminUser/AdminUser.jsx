@@ -1,4 +1,7 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import React, {useState,useEffect} from "react";
+import { useSelector } from 'react-redux'
+import Axios from 'axios';
+import './AdminUser.css';
 
 
 function AdminUser(){
@@ -44,6 +47,7 @@ function AdminUser(){
                   setOldAddress(val.user_address)
                   setOldPhone(val.phone)
                   setOldPassword(val.password)
+                  
                  
                 });
             }
@@ -97,23 +101,84 @@ function AdminUser(){
                     setInEmail(e.target.value)
                 }}/>
 
-  let navigate = useNavigate();
-    const Orders = () => {
-    navigate("/orders")
-  }
-    const Items = () => {
-    navigate("/menu:1")
-  }
 
-  //<<button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
- 
-  return (
-    <div>
-      <h1>Admin Page</h1>
-      <button className="btn" type="submit" onClick={Orders} >See Orders</button>
-      <button className="btn" type="submit" onClick={Items} >See Items</button>
-    </div>
-  );
+
+            <button onClick ={findUser}>Find</button>
+                <label>{Response}</label>
+
+                {UserList.map((val,key)=> {
+      return (
+        <div className = "UserInfo" key = {key}>
+        <label style={{fontSize: '15px'}}>
+          Email: {val.user_email} 
+          <br/>
+          Name: {val.user_first_name} {val.user_last_name}
+          <br/>
+          Phone: {val.user_phone}
+          <br/>
+          Address: {val.user_address}
+          <br/>
+          Password: {val.password}
+          
+        </label>
+        </div>
+      );
+    })}
+            <h1>Email</h1>
+                <input
+                type = "text"
+                name = "Email"
+                onChange={(e)=>{
+                    setEmail(e.target.value)
+                }}/>
+            <h1>First Name</h1>
+            <input
+                type = "text"
+                name = "Firstname"
+                onChange={(e)=>{
+                    setFirstName(e.target.value)
+                }}/>
+            <h1>Last Name</h1>
+            <input
+                type = "text"
+                name = "Lastname"
+                onChange={(e)=>{
+                    setLastName(e.target.value)
+                }}/>
+            <h1>Phone</h1>
+            <input
+                type = "text"
+                name = "Phone"
+                onChange={(e)=>{
+                    setPhone(e.target.value)
+                }}/>
+            <h1>Address</h1>
+            <input
+                type = "text"
+                name = "Address"
+                onChange={(e)=>{
+                    setAddress(e.target.value)
+                }}/>
+            <h1>password</h1>
+            <input
+                type = "text"
+                name = "Password"
+                onChange={(e)=>{
+                    setPassword(e.target.value)
+                }}/>
+
+                <button onClick ={updateUser}>Update</button>
+
+         
+        </div>        
+
+        
+
+    );
+
+
+      
+
 };
 
 
