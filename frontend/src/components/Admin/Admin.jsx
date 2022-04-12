@@ -17,13 +17,13 @@ function Admin(){
       </button>
 
       <button onClick ={() =>{
-        navigate("/Inventory");
+        navigate("/menu1");
       }}>
         View/Edit Inventory
       </button>
 
       <button onClick ={() =>{
-        navigate("/orders");
+        //navigate("/orders");
       }}>
         View Orders
       </button>

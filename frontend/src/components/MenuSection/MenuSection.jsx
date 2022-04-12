@@ -2,19 +2,21 @@ import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
 //import { useSelector } from 'react-redux'
 import './MenuSection.css'
+//import './CreateItem.jsx'
+//import './ModifyItem.jsx'
 import { Navigate, useNavigate, useParams} from "react-router-dom";
 
-//const MenuSection = () => {
 function MenuSection () {
+
     let tempInventory = [];
     const [constInventory, setConstInventory] = useState();
     const [displayInventory, setDisplayInventory] = useState();
-    const [constOrders, setConstOrders] = useState();
-    const [displayOrders, setDisplayOrders] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
     const imageBase = './images/'
     let {user} = useParams();
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         fetchData();
@@ -31,30 +33,32 @@ function MenuSection () {
         );
     }
 
+    /* @Cooper, can I delete this? I'm not sure why it's in the menu section
+    /* Cooper Wineberg
     const fetchOrderData = () =>{
         Axios.get("api/get/orders").then( //calls the backend server.js with this api command
             (response) => {
-                let orders = JSON.parse(JSON.stringify(response.data));
-                setDisplayOrders(orders);
-                setConstOrders(orders);
+                let items = JSON.parse(JSON.stringify(response.data));
+                setDisplayOrders(items);
+                setConstOrders(items);
                 loaded();
             }
         );
     }
-
+    */
     const search = () => {
         tempInventory = []; //reset list
         setDisplayInventory(constInventory);//reset display inventory
         loading();
         var searchInput = searchValue;
 
-        //check for whitespace
+        //check for whitespace only
         if (/^\s*$/.test(searchInput)){
             loaded();
             return;
         }else{
             constInventory.map(item => {
-                if(item.item_name.toLowerCase().includes(searchInput.toLowerCase())){
+                if(item.item_name.toLowerCase().includes(searchInput.toLowerCase()) || item.item_description.toLowerCase().includes(searchInput.toLowerCase())){
                     console.log("Pushing item", item.item_name);
                     tempInventory.push(item);
                 }else{
@@ -106,43 +110,43 @@ function MenuSection () {
         setDisplayInventory(tempInventory);
     }
 
-    //const fetchInventory = () => {
-        //DEBUGGING Function to understand how to pull in inventory from database
-        //alert("Fetch inventory called");
-        //Axios.get("api/get/inventory").then( //calls the backend api with this fetch command
-            //(response) => {
-                //inventory_list = JSON.parse(JSON.stringify(response.data)) //gets you the array of objects 
+    /*const fetchInventory = () => {
+        DEBUGGING Function to understand how to pull in inventory from database
+        alert("Fetch inventory called");
+        Axios.get("api/get/inventory").then( //calls the backend api with this fetch command
+            (response) => {
+                inventory_list = JSON.parse(JSON.stringify(response.data)) //gets you the array of objects 
                 
-                //Get the length of the array
-                //var length = Object.keys(inventory_list).length
+                Get the length of the array
+                var length = Object.keys(inventory_list).length
                 
-                //for (let i = 0; i < length; i++){
-                    //var id = String(inventory_list[i].item_id);
-                    //console.log(inventory_list[i].item_id);
-                //}
+                for (let i = 0; i < length; i++){
+                    var id = String(inventory_list[i].item_id);
+                    console.log(inventory_list[i].item_id);
+                }
 
-                //console.log(inventory_list) 
-                //console.log(inventory_list[0]) //gets you the 1st object
-                //console.log(inventory_list[0].item_id) //gets you the 1st objects item_id
-                //}
-        //);
-    //}
+                console.log(inventory_list) 
+                console.log(inventory_list[0]) //gets you the 1st object
+                console.log(inventory_list[0].item_id) //gets you the 1st objects item_id
+                }
+        );
+    }*/
 
 
     const addToCart = () => {
         alert("Added to cart!");
     }
 
-    const deleteItem = () => {
-        alert("Item deleted");
+    const deleteItem = (item_id) => {
+        console.log("Item", item_id);
     }
 
-    const createItem = () => {
-        alert("Item created");
+    const createItem = (item_id) => {
+        navigate("/createItem");
     }
 
-    const modifyItem = () => {
-        alert("Item modified");
+    const modifyItem = (item_id) => {
+        navigate("/modifyItem" + item_id);
     }
 
     const loading = () =>{
@@ -212,9 +216,9 @@ function MenuSection () {
                                         <div className="desc">{item.item_description}</div>
                                         {/*<div className="price">${item.item_description}</div>*/}
                                         {/* if the user is admin, have option to modify and delete the item"*/}
-                                        { user == 1 ? <button className="btn" type="Modify" onClick={modifyItem} >Modify Item</button> :
-                                        <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>}
-                                        {user == 1 && <button className="btn" type="submit" onClick={deleteItem} >Delete Item</button>}
+                                        { user == 1 ? <button className="btn" type="Modify" onClick={() => modifyItem(item.item_id)} >Modify Item</button> :
+                                            <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>}
+                                        {user == 1 && <button className="btn" type="submit" onClick={() => deleteItem(item.item_id)} >Delete Item</button>}
                                         {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
                                     </div>
                                 )
