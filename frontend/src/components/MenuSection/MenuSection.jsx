@@ -34,30 +34,70 @@ function MenuSection () {
             }
         );
     }
-    
-    /*const fetchInventory = () => {
-        DEBUGGING Function to understand how to pull in inventory from database
-        alert("Fetch inventory called");
-        Axios.get("api/get/inventory").then( //calls the backend api with this fetch command
-            (response) => {
-                inventory_list = JSON.parse(JSON.stringify(response.data)) //gets you the array of objects 
-                
-                Get the length of the array
-                var length = Object.keys(inventory_list).length
-                
-                for (let i = 0; i < length; i++){
-                    var id = String(inventory_list[i].item_id);
-                    console.log(inventory_list[i].item_id);
+    const search = () => {
+        tempInventory = []; //reset list
+        setDisplayInventory(constInventory);//reset display inventory
+        loading();
+        var searchInput = searchValue;
+
+        //check for whitespace only
+        if (/^\s*$/.test(searchInput)){
+            loaded();
+            return;
+        }else{
+            constInventory.map(item => {
+                if(item.item_name.toLowerCase().includes(searchInput.toLowerCase()) || item.item_description.toLowerCase().includes(searchInput.toLowerCase())){
+                    console.log("Pushing item", item.item_name);
+                    tempInventory.push(item);
+                }else{
+                    console.log(item.item_name.toLowerCase(), "Does not include", searchInput.toLowerCase());
                 }
+            });
+        }
+        //set display to the filtered list
+        setDisplayInventory(tempInventory);
+        console.log("Here is the display inventory after update\n", displayInventory);
+        loaded();
+    };
 
-                console.log(inventory_list) 
-                console.log(inventory_list[0]) //gets you the 1st object
-                console.log(inventory_list[0].item_id) //gets you the 1st objects item_id
-                }
-        );
-    }*/
+    const sortByName = () => {
+        //reset the temp inventory list
+        tempInventory = [];
+        //add all current items to list
+        displayInventory.map(item => {
+            tempInventory.push(item);
+        });
+
+        tempInventory.sort((a,b) => (a.item_name > b.item_name) ? 1 : -1);
+        setDisplayInventory(tempInventory);
+    }
 
 
+    const sortByPrice = () => {
+        //reset the temp inventory list
+        tempInventory = [];
+        //add all current items to list
+        displayInventory.map(item => {
+            tempInventory.push(item);
+        });
+
+        tempInventory.sort((a,b) => (a.item_price > b.item_price) ? 1 : -1);
+        setDisplayInventory(tempInventory);
+    }
+
+
+    const sortByAvailability = () => {
+        //reset the temp inventory list
+        tempInventory = [];
+        //add all current items to list
+        displayInventory.map(item => {
+            tempInventory.push(item);
+        });
+
+        tempInventory.sort((a,b) => (a.item_stock > b.item_stock) ? 1 : -1);
+        setDisplayInventory(tempInventory);
+    }
+   
     const addToCart = () => {
         alert("Added to cart!");
     }
