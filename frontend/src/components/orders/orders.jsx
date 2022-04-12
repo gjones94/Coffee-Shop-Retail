@@ -9,7 +9,7 @@ const Orders = () => {
     navigate("/admin")
   }
     const Items = () => {
-    navigate("/menu:admin")
+    navigate("/menu:1")
   }
  
   return (

@@ -102,7 +102,7 @@ function AdminUser(){
     navigate("/orders")
   }
     const Items = () => {
-    navigate("/menu:admin")
+    navigate("/menu:1")
   }
 
   //<<button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
