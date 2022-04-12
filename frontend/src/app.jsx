@@ -5,6 +5,8 @@ import ContactSection from './components/ContactSection/ContactSection'
 import Footer from './components/Footer/Footer'
 import HomeSection from './components/HomeSection/HomeSection'
 import MenuSection from './components/MenuSection/MenuSection'
+import CreateItem from './components/MenuSection/CreateItem'
+import ModifyItem from './components/MenuSection/ModifyItem'
 import Header from './components/Header/Header'
 import ReviewSection from './components/ReviewSection/ReviewSection'
 import Login from './components/Login/Login'
@@ -16,6 +18,11 @@ import { homeData } from './components/home/home'
 import { BrowserRouter as Router, Route, Routes, useNavigate, Switch} from 'react-router-dom';
 import AdminUser from './components/AdminUser/AdminUser'
 import Register from './components/Register/Register'
+import Admin from './components/Admin/Admin'
+//import Orders from './components/orders/orders'
+
+
+
 function App() {
 
     const dispatch = useDispatch()
@@ -52,6 +59,9 @@ function App() {
                     <Route path ="/AdminUser" element ={<AdminUser/>}/>
                     <Route path = "/Register" element = {<Register/>}/>
                     <Route path="/login" element={<Login/>} />
+                    <Route path ="/admin" element ={<Admin/>}/>
+                    <Route path ="/createItem" element={<CreateItem/>}/>
+                    <Route path ="/modifyItem:id" element={<ModifyItem/>}/>
                     <Route path ="/admin" element ={<AdminUser/>}/>
                     <Route path ="/orders" element ={<orders/>}/>
                 </Routes>
