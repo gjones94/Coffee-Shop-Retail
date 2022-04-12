@@ -1,33 +1,22 @@
-import React, {useState,useEffect} from "react";
-import { useSelector } from 'react-redux'
-import Axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
 
 function AdminUser(){
 
   let navigate = useNavigate();
+    const Orders = () => {
+    navigate("/orders")
+  }
+    const Items = () => {
+    navigate("/menu:admin")
+  }
 
-
+  //<<button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
+ 
   return (
     <div>
       <h1>Admin Page</h1>
-      <button onClick ={() =>{
-        navigate("/AdminUser");
-      }}>
-        Admin Page
-      </button>
-
-      <button onClick ={() =>{
-        navigate("/menu/" + 1);
-      }}>
-        View/Edit Inventory
-      </button>
-
-      <button onClick ={() =>{
-        //navigate("/orders");
-      }}>
-        View Orders
-      </button>
+      <button className="btn" type="submit" onClick={Orders} >See Orders</button>
+      <button className="btn" type="submit" onClick={Items} >See Items</button>
     </div>
   );
 };

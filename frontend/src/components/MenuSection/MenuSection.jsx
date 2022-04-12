@@ -9,6 +9,8 @@ function MenuSection () {
     let tempInventory = [];
     const [constInventory, setConstInventory] = useState();
     const [displayInventory, setDisplayInventory] = useState();
+    const [constOrders, setConstOrders] = useState();
+    const [displayOrders, setDisplayOrders] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
     const imageBase = './images/'
@@ -28,18 +30,18 @@ function MenuSection () {
             }
         );
     }
-    /* Cooper Wineberg
+
     const fetchOrderData = () =>{
         Axios.get("api/get/orders").then( //calls the backend server.js with this api command
             (response) => {
-                let items = JSON.parse(JSON.stringify(response.data));
-                setDisplayOrders(items);
-                setConstOrders(items);
+                let orders = JSON.parse(JSON.stringify(response.data));
+                setDisplayOrders(orders);
+                setConstOrders(orders);
                 loaded();
             }
         );
     }
-    */
+
     const search = () => {
         tempInventory = []; //reset list
         setDisplayInventory(constInventory);//reset display inventory
