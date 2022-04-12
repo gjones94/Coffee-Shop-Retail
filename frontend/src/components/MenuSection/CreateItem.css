@@ -1,0 +1,146 @@
+.create_item {
+    background-color: (--var);
+    height: 100%;
+    color: #fff;
+    filter: brightness(95%);
+}
+  
+.create_page {
+background-color: black;
+width: 401px;
+height: 1000px;
+margin-left: auto;
+margin-right: auto;
+margin-top: 2rem;
+margin-bottom: 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+  
+.create_logo {
+background-color: black;
+margin-top: 10px;
+height: 100px;
+}
+
+.create_head1 {
+width: 100%;
+text-align: center;
+text-transform: uppercase;
+font-size: 17px;
+font-weight: 500;
+margin-top: 13px;
+margin-bottom: 9px;
+}
+
+.create_page > form {
+width: 100%;
+margin-top: 14px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.input_label {
+font-size: 16px;
+font-weight: 500;
+margin-bottom: 6px;
+}
+
+.item_input {
+margin-bottom: 15px;
+width: 250px;
+height: 30px;
+outline: none;
+border: none;
+font-size: 15px;
+border-radius: 18px;
+text-align: center;
+background-color: #3d3d3d;
+color: #fff;
+}
+
+
+.item_description{
+margin-bottom: 15px;
+margin-left: auto;
+margin-right: auto;
+resize:none;
+width: 250px;
+height: 100px;
+outline: none;
+border: none;
+font-size: 15px;
+border-radius: 18px;
+text-align:justify;
+background-color: #3d3d3d;
+color: #fff;
+}
+
+
+.create_head2 {
+padding: 2rem;
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+font-size: 13px;
+font-weight: 400;
+color: rgb(216, 214, 214);
+}
+
+.create_head3 {
+padding: 3rem;
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+font-size: 13px;
+font-weight: 400;
+color: rgb(216, 214, 214);
+}
+
+.underlineHead3 {
+text-decoration: underline;
+cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+.create_item {
+    background-color: var(--black);
+}
+
+.create_page {
+    width: 240px;
+    height: 480px;
+    margin-top: 0;
+    margin-top: 5px;
+}
+
+.create_logo {
+    width: 70px;
+    height: 70px;
+}
+
+.create_head1 {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 7px;
+}
+
+.input_label  {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.item_input {
+    margin-bottom: 11px;
+    width: 220px;
+    height: 25px;
+    font-size: 13px;
+    border-radius: 14px;
+}
+
+
+}
