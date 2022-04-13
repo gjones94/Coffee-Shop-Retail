@@ -100,7 +100,7 @@ function ModifyUser(){
             }
             //api call to update users
             //sends all the information to backend for db
-            Axios.post("http://localhost:3001/api/admin/user/update",{
+            Axios.post("/api/admin/user/update",{
                 email:Email,
                 firstname:FirstName,
                 lastname:LastName,
