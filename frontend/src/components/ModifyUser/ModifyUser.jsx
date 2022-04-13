@@ -1,10 +1,11 @@
 import React, {useState,useEffect} from "react";
 import { useSelector } from 'react-redux'
 import Axios from 'axios';
-import './AdminUser.css';
+import './ModifyUser.css';
 
 
-function AdminUser(){
+function ModifyUser(){
+    //setting all the needed states for intitial variables.
     const [InEmail,setInEmail] = useState("")
     const [Email,setEmail] = useState("")
     const [Password,setPassword]= useState("")
@@ -21,41 +22,64 @@ function AdminUser(){
     const [UserID,setUserID] = useState("")
     const [Response,setResponse] = useState("")
 
+
     const [UserList, makeList] = useState([])
 
-    const findUser =() =>{
-   
-        Axios.post("/api/admin/user/find",{
+    //populates the user info list whenever a user is found.
+    useEffect(() => {
 
+        if(Response == "User Found"){
+        UserList.map(val => {
+
+                  
+            setUserID(val.user_id)
+            setOldEmail(val.user_email)
+            setOldFirstName(val.user_first_name)
+            setOldLastName(val.user_last_name)
+            setOldAddress(val.user_address)
+            setOldPhone(val.phone)
+            setOldPassword(val.password)
+            
+           
+          });
+        }
+        
+    });
+
+    //finduser function, activated from the find button on the page
+    const findUser =() =>{
+
+        //api call to admin user find location in backend
+        Axios.post("/api/admin/user/find",{
+            //sends over the email to search from db in backend
             email: InEmail
             
-        }).then((response) => {
 
-          if (response == ""){
-            setResponse("User was not found")
+        }).then((response) => { //reading the information sent back from backend 
+
+          if (response.data == ""){ //conditional statement using the sent back information
+
+              makeList(response.data)
+                setResponse("User was not found") //tells the page that a user was not found
              }else{ 
-                makeList(response.data)
-                console.log(response.data)
-                console.log("here")
-                UserList.map(val => {
-
-                  
-                  setUserID(val.user_id)
-                  setOldEmail(val.user_email)
-                  setOldFirstName(val.user_first_name)
-                  setOldLastName(val.user_last_name)
-                  setOldAddress(val.user_address)
-                  setOldPhone(val.phone)
-                  setOldPassword(val.password)
-                  
-                 
-                });
+                makeList(response.data) //makes the list for the user that stores all the information received from backend
+                setResponse("User Found") //tells the page that a user was found
             }
         });
-   
     }
+
+        //update user function
         const updateUser = () =>{
+
+            if(Response == ""){
+                setResponse("Please find a user first")
+                return
+            }
+            //setting userID
           setUserID(UserID)
+       
+            //case functions for if they do not want anything changed
+            //if spots are left blank it will be assumed they are keeping the old information.
             if(Email == ""){
                 setEmail(OldEmail)
             }
@@ -74,8 +98,9 @@ function AdminUser(){
             if(Password == ""){
                 setPassword(OldPassword)
             }
-
-            Axios.post("/api/admin/user/update",{
+            //api call to update users
+            //sends all the information to backend for db
+            Axios.post("http://localhost:3001/api/admin/user/update",{
                 email:Email,
                 firstname:FirstName,
                 lastname:LastName,
@@ -183,4 +208,4 @@ function AdminUser(){
 
 
 
-export default AdminUser
+export default ModifyUser

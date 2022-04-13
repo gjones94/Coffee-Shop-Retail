@@ -16,9 +16,9 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import { homeData } from './components/home/home'
 import { BrowserRouter as Router, Route, Routes, useNavigate, Switch} from 'react-router-dom';
-import AdminUser from './components/AdminUser/AdminUser'
 import Register from './components/Register/Register'
 import Admin from './components/Admin/Admin'
+import ModifyUser from './components/ModifyUser/ModifyUser'
 //import Orders from './components/orders/orders'
 
 
@@ -56,13 +56,12 @@ function App() {
                     <Route path="/about" element={<AboutUs/>} />
                     <Route path="/contact" element={<ContactSection/>} />
                     <Route path="/Login" element={<Login/>} />
-                    <Route path ="/AdminUser" element ={<AdminUser/>}/>
+                    <Route path ="/ModifyUser" element ={<ModifyUser/>}/>
                     <Route path = "/Register" element = {<Register/>}/>
                     <Route path="/login" element={<Login/>} />
                     <Route path ="/admin" element ={<Admin/>}/>
                     <Route path ="/createItem" element={<CreateItem/>}/>
                     <Route path ="/modifyItem:id" element={<ModifyItem/>}/>
-                    <Route path ="/admin" element ={<AdminUser/>}/>
                     <Route path ="/orders" element ={<orders/>}/>
                 </Routes>
                 <Footer />

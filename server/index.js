@@ -27,7 +27,8 @@ const upload = multer({storage : this_storage});
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'DB@dmin422!',
+    //password: 'DB@dmin422!',
+    password: 'password',
     database: 'store',
 });
 
@@ -188,20 +189,21 @@ app.post("/api/insert",(req,res) => {
 });
 
 
-
-
+/*--------------ADMIN API TO MODIFY USERS------------*/
+//Kevin Chan
+//api call to look for a user from db
 app.post("/api/admin/user/find",(req,res) => {
+    //store info recieved from frontend
     const Email = req.body.email
-   
-    console.log("here")
+   //SQL command to look for a specifc user from a specific table
    sqlFind = "SELECT user_email FROM users WHERE user_email = ?;" 
-    db.query(sqlFind,[Email],(err,result) => {
+    db.query(sqlFind,[Email],(err,result) => { //query the info and place the variable into the "?"
         if ( result == ""){ //if the result is empty that means nothing was found
-            res.send(result)
+            res.send(result)//sends an empty array if nothing is found
         }else {
-            sqlReturn = "SELECT * from users WHERE user_email =?;"
+            sqlReturn = "SELECT * from users WHERE user_email =?;" //sql command to return the entire row of info
             db.query(sqlReturn,[Email],(err,result) => {
-                res.send(result)
+                res.send(result) // sends the whole row of info of that user.
 
             })
           
@@ -212,8 +214,10 @@ app.post("/api/admin/user/find",(req,res) => {
     })
 });
 
+//Kevin Chan
+//api to update a user from the admin page
 app.post("/api/admin/user/update",(req,res) => {
-    
+    //storing info recievied from frontend
     const Email = req.body.email
     const FirstName = req.body.firstname
     const LastName = req.body.lastname
@@ -221,18 +225,11 @@ app.post("/api/admin/user/update",(req,res) => {
     const Address = req.body.address
     const Password = req.body.password
     const UserID = req.body.userID
-    console.log(UserID)
-    console.log(Email)
-    console.log(Phone)
-    console.log(FirstName)
-    console.log(LastName)
-    console.log(Address)
-    console.log(Password)
 
-  
+    //SQL command to update all the info from the user.
     sqlUpdate = "UPDATE users SET user_email = ?, user_first_name = ?, user_last_name = ?, user_phone =?, user_address = ?, password = ? WHERE user_id = ?"
     db.query(sqlUpdate,[Email,FirstName,LastName,Phone,Address,Password,UserID],(err,res) =>{
-        console.log(res)
+
     });
 
 })
