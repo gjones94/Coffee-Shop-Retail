@@ -21,6 +21,7 @@ function ModifyUser(){
     const [OldAddress,setOldAddress] = useState("")
     const [UserID,setUserID] = useState("")
     const [Response,setResponse] = useState("")
+    const [Test,setTest] = useState("")
 
 
     const [UserList, makeList] = useState([])
@@ -43,6 +44,28 @@ function ModifyUser(){
            
           });
         }
+        
+       
+        if (Response != "User Updated"){
+        if(Email == ""){
+            setEmail(OldEmail)
+        }
+        if(FirstName == ""){
+            setFirstName(OldFirstName)
+        }
+        if(LastName == ""){
+            setLastName(OldLastName)
+        }
+        if(Phone == ""){
+            setPhone(OldPhone)
+        }
+        if(Address == ""){
+            setAddress(OldAddress)
+        }
+        if(Password == ""){
+            setPassword(OldPassword)
+        }
+    }
         
     });
 
@@ -71,36 +94,21 @@ function ModifyUser(){
         //update user function
         const updateUser = () =>{
 
-            if(Response == ""){
+            if(Response == "" || Response == "User updated"){
                 setResponse("Please find a user first")
                 return
             }
             //setting userID
           setUserID(UserID)
-       
-            //case functions for if they do not want anything changed
-            //if spots are left blank it will be assumed they are keeping the old information.
-            if(Email == ""){
-                setEmail(OldEmail)
-            }
-            if(FirstName == ""){
-                setFirstName(OldFirstName)
-            }
-            if(LastName == ""){
-                setLastName(OldLastName)
-            }
-            if(Phone == ""){
-                setPhone(OldPhone)
-            }
-            if(Address == ""){
-                setAddress(OldAddress)
-            }
-            if(Password == ""){
-                setPassword(OldPassword)
-            }
+      
+    
+            
+            
+        
             //api call to update users
             //sends all the information to backend for db
             Axios.post("/api/admin/user/update",{
+
                 email:Email,
                 firstname:FirstName,
                 lastname:LastName,
@@ -110,7 +118,7 @@ function ModifyUser(){
                 userID:UserID
 
             })
-
+                setResponse("User Updated")
         }
 
 

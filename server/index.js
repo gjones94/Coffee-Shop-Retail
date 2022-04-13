@@ -225,6 +225,9 @@ app.post("/api/admin/user/update",(req,res) => {
     const Address = req.body.address
     const Password = req.body.password
     const UserID = req.body.userID
+    console.log(Email)
+    console.log(FirstName)
+
 
     //SQL command to update all the info from the user.
     sqlUpdate = "UPDATE users SET user_email = ?, user_first_name = ?, user_last_name = ?, user_phone =?, user_address = ?, password = ? WHERE user_id = ?"
