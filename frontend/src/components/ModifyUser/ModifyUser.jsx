@@ -29,6 +29,7 @@ function ModifyUser(){
     //populates the user info list whenever a user is found.
     useEffect(() => {
 
+
         if(Response == "User Found"){
         UserList.map(val => {
 
@@ -71,6 +72,16 @@ function ModifyUser(){
 
     //finduser function, activated from the find button on the page
     const findUser =() =>{
+
+        const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}\b/
+
+        
+        if(!emailRegex.test(InEmail)){
+            alert("Please enter a valid email address")
+            return;
+            
+        }
+       
 
         //api call to admin user find location in backend
         Axios.post("/api/admin/user/find",{
