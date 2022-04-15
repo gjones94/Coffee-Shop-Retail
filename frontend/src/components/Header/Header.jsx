@@ -34,7 +34,7 @@ const NavBar = () => {
                     <Link style={{textDecoration: 'none'}} to="/">
                         <span className="header__navItems">Home</span>
                      </Link>
-                    <Link style={{textDecoration: 'none'}} to="/menu0">
+                    <Link style={{textDecoration: 'none'}} to="/menu">
                         <span className="header_navItems">Products</span>
                      </Link>
                     <Link style={{textDecoration: 'none'}} to="/reviews">

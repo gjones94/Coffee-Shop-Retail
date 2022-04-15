@@ -7,7 +7,7 @@ import Axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
 import Register from '../Register/Register';
 
-const Login = ({onLogin}) => {
+const Login = ({uid, admin, onLogin}) => {
 
   let navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const Login = ({onLogin}) => {
 
 
   const test = () =>{
-    onLogin(10, 11);
+    console.log(uid, admin);
   }
 
   const goRegister = () => {
@@ -34,9 +34,11 @@ const Login = ({onLogin}) => {
       }else if (response.data === "PASSERR"){
         alert("Incorrect combination of username and password");
       }else{
+          console.log("HERE");
           let users = JSON.parse(JSON.stringify(response.data));
           console.log(users);
-          onLogin(users.user_id, users.user_admin);
+          console.log(users[0].user_id, users[0].user_admin)
+          onLogin(users[0].user_id, users[0].user_admin);
           navigate("/home");
       }
     });
@@ -77,7 +79,7 @@ const Login = ({onLogin}) => {
 
           <button className="btn" type="submit" onClick={loginCheck} >Log In</button>
           <button className="btn" type="submit" onClick={goRegister} >Register</button>
-          <button className="btn" type="submit" onClick={test} >Send (1,2)</button>
+          <button className="btn" type="submit" onClick={test} >Test</button>
           <span className="login__head2">Sign Up for emails to get special news and offers</span>
           <span className="login__head3">By signing up, you agree to our <span className="underlineHead3">Privacy Policy</span> and <span className="underlineHead3">Terms of Use</span></span>
         </form>
