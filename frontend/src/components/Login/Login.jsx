@@ -38,7 +38,7 @@ const Login = ({uid, admin, onLogin}) => {
           let users = JSON.parse(JSON.stringify(response.data));
           console.log(users);
           console.log(users[0].user_id, users[0].user_admin)
-          onLogin(users[0].user_id, users[0].user_admin);
+          onLogin(users[0].user_first_name, users[0].user_id, users[0].user_admin);
           navigate("/home");
       }
     });

@@ -30,6 +30,7 @@ function App() {
     const [data, setData] = useState(null)
     const [loginID, set_uid] = useState(null)
     const [adminID, set_aid] = useState(null)
+    const [name, set_name] = useState(null)
     
     useLayoutEffect(() => {
         try {
@@ -43,9 +44,16 @@ function App() {
         }
     })
 
-    const handleLogin = (id, admin) => {
+    const handleLogin = (name, id, admin) => {
+        set_name(name);
         set_uid(id);
         set_aid(admin);
+    }
+
+    const handleSignout = () => {
+        set_name(null);
+        set_uid(null);
+        set_aid(null);
     }
 
 
@@ -55,7 +63,7 @@ function App() {
             {data && <>
               <Router>
                 <div className="app"> 
-                <Header />
+                <Header u_name={name} uid={loginID} signOut={handleSignout}/>
                 {/*<Login parent_cb={cbUserInfo}/>*/}
                 <Routes>
                     <Route path="/" element={<HomeSection/>} />
