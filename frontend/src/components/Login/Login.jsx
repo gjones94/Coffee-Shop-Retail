@@ -5,48 +5,19 @@ import {useState,useEffect} from "react";
 import './Login.css';
 import Axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
+import Register from '../Register/Register';
 
-const Login = (props) => {
+const Login = ({onLogin}) => {
 
   let navigate = useNavigate();
 
   const [frontName, setName] = useState("");
   const [frontPassword, setPassword] = useState("");
-  const [UserList, makeList] = useState([])
-  const [responseText,setresponseText] = useState("")
 
-  useEffect(() => {
-      Axios.get("/api/get").then((response) => {
-      	makeList(response.data)
-      });
-    
-  },[]);
 
   const test = () =>{
-    console.log(props.idd);
+    onLogin(10, 11);
   }
-
-  const submitInfo = () => {
-    let PwStrength = 0;
-    while (PwStrength == 0){
-        if (/\d/.test(frontPassword)){
-            if(/[a-z]/.test(frontPassword)){
-                if(/[A-Z]/.test(frontPassword)){
-            PwStrength = 1;
-            setresponseText([frontName] +" Has been registered \n Welcome to Beans & Leaves!")
-                }}
-        }else {
-            setresponseText("Password is too weak")
-            submitInfo()}
-    }
-    Axios.post("/api/insert",{
-
-      PassName : frontName,
-      PassPW : frontPassword,
-    });
-  
-    makeList([...UserList, {Name: frontName , Password : frontPassword},]);
-  };
 
   const goRegister = () => {
     navigate("/Register")
@@ -58,17 +29,18 @@ const Login = (props) => {
       PassName : frontName,
       PassPW : frontPassword,
     }).then((response) => {
-     
-      if (response.data === "SUCCESS"){
-        navigate("/home");
-      }else if (response.data === "USERERR"){
-	      navigate("/Register")
+      if (response.data === "USERERR"){
+        alert("User not found, please register with us!")
       }else if (response.data === "PASSERR"){
         alert("Incorrect combination of username and password");
+      }else{
+          let users = JSON.parse(JSON.stringify(response.data));
+          console.log(users);
+          onLogin(users.user_id, users.user_admin);
+          navigate("/home");
       }
-
     });
-    
+
   }
 
   //this is just for debugging
@@ -104,8 +76,9 @@ const Login = (props) => {
           />
 
           <button className="btn" type="submit" onClick={loginCheck} >Log In</button>
+          <button className="btn" type="submit" onClick={goRegister} >Register</button>
+          <button className="btn" type="submit" onClick={test} >Send (1,2)</button>
           <span className="login__head2">Sign Up for emails to get special news and offers</span>
-          <button className="btn" type="submit" onClick={test}>test</button>
           <span className="login__head3">By signing up, you agree to our <span className="underlineHead3">Privacy Policy</span> and <span className="underlineHead3">Terms of Use</span></span>
         </form>
 
