@@ -48,32 +48,28 @@ app.use(express.static(build_directory));
 //post function to get login input from front
 app.post('/api/login/auth', (req,res) =>{
     console.log("Post called") 
-    const tempname = req.body.PassName
-    const tempPW = req.body.PassPW
+    const email = req.body.PassName
+    const password = req.body.PassPW
     sqlFind = "SELECT user_email FROM users WHERE user_email = ?;" //command to mysql to find user name from user table
-    console.log("Querying database for:")
-    console.log(tempname)
-    db.query(sqlFind,[tempname],(err,result) => {
+    db.query(sqlFind,[email],(err,result) => {
         if ( result == ""){ //if the result is empty that means nothing was found
-            res.send("Not Found")
+            res.send("USERERR")
         }else {
-            sqlFind = "SELECT password FROM users WHERE password = ?;" // checks through password after name
-            db.query(sqlFind,[tempPW],(err,result) => {
+            sqlFind = "SELECT user_email, password FROM users WHERE user_email = ? and password = ?;" // checks through password after name
+            db.query(sqlFind,[email, password],(err,result) => {
                 if (result == ""){
-                    console.log("User Not found")
-                    res.send("Not Found")
+                    console.log("Incorrect password");
+                    res.send("PASSERR")
                 }else {
-                    console.log("USER FOUND")
+                    console.log("Authenticated")
                         //only sends found if both name and password match
-                        res.send("Found") 
+                        res.send("SUCCESS") 
                         //initial issue with connection was that this was not matching what the front end was looking for
                         //this was sending "User Found", and frontend was expecting "Found"
                     }
             })
-                
         }
     })
-  
 })
 
 //TO-DO this still needs to be modified to fit with zakariah's front end

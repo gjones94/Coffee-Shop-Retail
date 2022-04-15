@@ -59,16 +59,16 @@ const Login = (props) => {
       PassPW : frontPassword,
     }).then((response) => {
      
-      if (response.data == "Found"){
-        navigate("/home")
-      }else{
-	      alert("NOT FOUND"); 
+      if (response.data === "SUCCESS"){
+        navigate("/home");
+      }else if (response.data === "USERERR"){
 	      navigate("/Register")
+      }else if (response.data === "PASSERR"){
+        alert("Incorrect combination of username and password");
       }
 
     });
     
-    //{parent_cb("1","0")};
   }
 
   //this is just for debugging
