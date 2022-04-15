@@ -28,6 +28,20 @@ function App() {
     const dispatch = useDispatch()
 
     const [data, setData] = useState(null)
+    const [userId, set_uid] = useState(null)
+    const [adminId, set_aid] = useState(null)
+    
+    const cbUserInfo = (u_id, a_id) =>{
+        console.log("test before set => userID: ", u_id);
+        set_uid(u_id)
+        set_aid(a_id)
+    }
+
+    const users = [
+        { id: '1', fullName: 'Robin Wieruch' },
+        { id: '2', fullName: 'Sarah Finnley' },
+    ];
+    const id = 1
 
     useLayoutEffect(() => {
         try {
@@ -41,6 +55,11 @@ function App() {
         }
     })
 
+    const test = () => {
+        console.log("User ID", userId);
+        alert(userId);
+    }
+
     return (
         <>
 
@@ -48,6 +67,7 @@ function App() {
               <Router>
                 <div className="app"> 
                 <Header />
+                {/*<Login parent_cb={cbUserInfo}/>*/}
                 <Routes>
                     <Route path="/" element={<HomeSection/>} />
                     <Route path="/home" element={<HomeSection/>} />
@@ -58,7 +78,7 @@ function App() {
                     <Route path="/Login" element={<Login/>} />
                     <Route path ="/ModifyUser" element ={<ModifyUser/>}/>
                     <Route path = "/Register" element = {<Register/>}/>
-                    <Route path="/login" element={<Login/>} />
+                    <Route path="/login" element={<Login idd={id} />} />
                     <Route path ="/admin" element ={<Admin/>}/>
                     <Route path ="/createItem" element={<CreateItem/>}/>
                     <Route path ="/modifyItem:id" element={<ModifyItem/>}/>
@@ -66,8 +86,10 @@ function App() {
                 </Routes>
                 <Footer />
                 </div>
+                <div>
+                    <button className="btn" type="submit" onClick={test}>test</button>
+                </div>
               </Router>
-
             </>}
 
             {!data} {/* Delay for data to load */}

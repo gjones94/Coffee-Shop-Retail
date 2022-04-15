@@ -78,16 +78,16 @@ app.post('/api/login/auth', (req,res) =>{
 
 //TO-DO this still needs to be modified to fit with zakariah's front end
 app.post("/api/register/insert",(req,res) => {
-    const user_id = null
-    const backName = req.body.PassName
-    const backLast = req.body.PassLast
-    const backEmail = req.body.PassEmail
-    const backAddress = req.body.PassAddress
-    const backNumber = req.body.PassNumber
-    const backPw = req.body.PassPw
+    const id = null
+    const first = req.body.first
+    const last = req.body.last
+    const email = req.body.email
+    const addr = req.body.address
+    const number = req.body.number
+    const pw = req.body.password
 
     const sqlInsert="INSERT INTO users (user_id, user_email, user_first_name, user_last_name, user_phone,user_address,password) VALUES (?,?,?,?,?,?,?);"
-    db.query(sqlInsert,[user_id,backEmail,backName,backLast,backNumber,backAddress,backPw],(res,err) => {
+    db.query(sqlInsert,[id,email,first,last,number,addr,pw],(res,err) => {
         console.log(res)
     });
 

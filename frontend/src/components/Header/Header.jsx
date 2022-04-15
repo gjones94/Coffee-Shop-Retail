@@ -28,7 +28,6 @@ const NavBar = () => {
                 {/* eslint-disable-next-line */}
                 <div className="logo">
                     <img src={'./images/logo.png'} alt="" /> 
-
                 </div>
 
                 <nav className="navbar">

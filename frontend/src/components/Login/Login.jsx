@@ -1,10 +1,12 @@
 
-import React, {useState,useEffect} from "react";
+
+import * as React from 'react';
+import {useState,useEffect} from "react";
 import './Login.css';
 import Axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
 
-function Login() {
+const Login = (props) => {
 
   let navigate = useNavigate();
 
@@ -19,6 +21,10 @@ function Login() {
       });
     
   },[]);
+
+  const test = () =>{
+    console.log(props.idd);
+  }
 
   const submitInfo = () => {
     let PwStrength = 0;
@@ -42,11 +48,6 @@ function Login() {
     makeList([...UserList, {Name: frontName , Password : frontPassword},]);
   };
 
-  //DELETE this, it was a test
-  const goHome = () => {
-	  navigate("/home");
-  }
-
   const goRegister = () => {
     navigate("/Register")
   }
@@ -59,14 +60,15 @@ function Login() {
     }).then((response) => {
      
       if (response.data == "Found"){
-        alert("FOUND"); 
         navigate("/home")
       }else{
 	      alert("NOT FOUND"); 
-	      navigate("/about")
+	      navigate("/Register")
       }
 
     });
+    
+    //{parent_cb("1","0")};
   }
 
   //this is just for debugging
@@ -83,7 +85,6 @@ function Login() {
         <div className="logo">
           <img className="login__logo" src="./images/logo.png" alt="" />
         </div>
-
         <form onSubmit={handleSubmit}>
           <span className="login__email" >Email Address:</span>
           <input 
@@ -104,7 +105,7 @@ function Login() {
 
           <button className="btn" type="submit" onClick={loginCheck} >Log In</button>
           <span className="login__head2">Sign Up for emails to get special news and offers</span>
-          <button className="btn" type="submit" onClick={goRegister} >Create your Account</button>
+          <button className="btn" type="submit" onClick={test}>test</button>
           <span className="login__head3">By signing up, you agree to our <span className="underlineHead3">Privacy Policy</span> and <span className="underlineHead3">Terms of Use</span></span>
         </form>
 

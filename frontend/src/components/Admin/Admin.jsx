@@ -11,7 +11,7 @@ function Admin(){
     <div>
       <h1>Admin Page</h1>
       <button onClick ={() =>{
-        navigate("/Admin");
+        navigate("/modifyUser");
       }}>
         Admin Page
       </button>

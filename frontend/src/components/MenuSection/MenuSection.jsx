@@ -1,9 +1,7 @@
 import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
-//import { useSelector } from 'react-redux'
+import Header from '../Header/Header'
 import './MenuSection.css'
-//import './CreateItem.jsx'
-//import './ModifyItem.jsx'
 import { Navigate, useNavigate, useParams} from "react-router-dom";
 
 function MenuSection () {
