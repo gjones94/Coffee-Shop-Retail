@@ -50,6 +50,17 @@
 .menu .box-container .box:hover > *{
     color:var(--black);
 }
+.menu .search {
+    width: fit-content;
+    height: fit-content;
+    background-color:#3d3d3d;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
 .menu .search_input {
     width: 250px;
     height: 30px;
