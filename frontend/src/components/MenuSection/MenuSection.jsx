@@ -130,17 +130,18 @@ function MenuSection () {
         <>
             <section className="menu" id="Menu">
                 {/* OLD ONE <h1 className="heading"> {selector[3].sectionName[0]} <span>{selector[3].sectionName[1]}</span> </h1>*/}
-                <h1 className="heading"> OUR <span> MENU </span> </h1>
-                <div class="search-wrapper">
-                    <label className="desc" for="search"> Search Inventory </label>
+                <h1 className="heading"> OUR <span> PRODUCTS </span> </h1>
+                <div class="search">
+                    <div className="search_head" for="search"> Search Inventory </div>
                     <input 
                         value={searchValue} 
                         onChange={event => setSearch(event.target.value)}
+                        className="search_input"
                         type="search" 
                         id="search"
                     />
                     <button className="btn" type="submit" onClick={search}>Submit</button>
-                </div>
+                
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByName}>Sort By Name</button>
                 </div>
@@ -149,6 +150,7 @@ function MenuSection () {
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
+                </div>
                 </div>
                 {user == 1 &&
                     <div class="box">

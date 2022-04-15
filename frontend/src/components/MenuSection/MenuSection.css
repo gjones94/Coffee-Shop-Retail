@@ -50,3 +50,25 @@
 .menu .box-container .box:hover > *{
     color:var(--black);
 }
+.menu .search_input {
+    width: 250px;
+    height: 30px;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    border-radius: 18px;
+    text-align: center;
+    text-transform: none;
+    background-color: #fff;
+    color: black;
+  }
+  .menu .search_head{
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: 13px;
+    margin-bottom: 9px;
+    color: #fff;
+  }
