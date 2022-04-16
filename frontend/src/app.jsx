@@ -19,6 +19,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate, Switch} from 'reac
 import Register from './components/Register/Register'
 import Admin from './components/Admin/Admin'
 import ModifyUser from './components/ModifyUser/ModifyUser'
+import Discounts from './components/Discounts/Discounts'
 //import Orders from './components/orders/orders'
 
 
@@ -68,6 +69,7 @@ function App() {
                     <Route path="/contact" element={<ContactSection/>} />
                     <Route path="/Login" element={<Login onLogin={handleLogin}/>} />
                     <Route path ="/ModifyUser" element ={<ModifyUser/>}/>
+                    <Route path ="/Discounts" element = {<Discounts/>}/>
                     <Route path = "/Register" element = {<Register/>}/>
                     <Route path ="/admin" element ={<Admin/>}/>
                     <Route path ="/createItem" element={<CreateItem/>}/>

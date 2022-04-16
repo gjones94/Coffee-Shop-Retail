@@ -13,19 +13,29 @@ function Admin(){
       <button onClick ={() =>{
         navigate("/modifyUser");
       }}>
-        Admin Page
+        Modify Users   
+        
+      </button>
+
+      <button onClick ={() =>{
+        navigate("/Discounts");
+      }}>
+        Discounts   
+        
       </button>
 
       <button onClick ={() =>{
         navigate("/menu1");
       }}>
         View/Edit Inventory
+        
       </button>
 
       <button onClick ={() =>{
         //navigate("/orders");
       }}>
         View Orders
+        
       </button>
     </div>
   );

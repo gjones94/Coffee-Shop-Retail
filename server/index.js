@@ -6,6 +6,7 @@ const cors = require("cors");
 const mysql = require("mysql");
 const multer = require("multer");
 const { application } = require("express");
+const { send } = require("process");
 
 const build_directory = path.join(__dirname, '../build');
 
@@ -231,6 +232,26 @@ app.post("/api/admin/user/update",(req,res) => {
 
     });
 
+})
+
+/*---------------------------DISCOUNTS----------------------*/
+
+app.post("/api/admin/discount/get",(req,res) => {
+
+    const sqlGet = "SELECT * from discounts"
+    db.query(sqlGet,(err,result) => {
+        res.send(result)
+    });
+});
+
+app.post("/api/admin/discount/insert",(req,res) =>{
+
+    const Code = req.body.code
+    const Percent = req.body.percent
+    console.log(Code)
+    console.log(Percent)
+    const sqlInsert = "INSERT INTO discounts (discount_code,discount_percent) VALUES (?,?);"
+    db.query(sqlInsert,[Code,Percent])
 })
 
 
