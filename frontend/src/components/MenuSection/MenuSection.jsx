@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 import './MenuSection.css'
 import { Navigate, useNavigate, useParams} from "react-router-dom";
 
-function MenuSection () {
+function MenuSection ({uid, admin}) {
 
     let tempInventory = [];
     const [constInventory, setConstInventory] = useState();
@@ -14,7 +14,6 @@ function MenuSection () {
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
     const imageBase = './images/'
-    let {user} = useParams();
 
     let navigate = useNavigate();
 
@@ -104,7 +103,7 @@ function MenuSection () {
         console.log("Item", item_id);
     }
 
-    const createItem = (item_id) => {
+    const createItem = () => {
         navigate("/createItem");
     }
 
@@ -152,7 +151,7 @@ function MenuSection () {
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
                 </div>
                 </div>
-                {user == 1 &&
+                {admin == 1 &&
                     <div class="box">
                         <button className="btn" type="submit" onClick={createItem}>Create Item</button>
                     </div> 
@@ -181,9 +180,9 @@ function MenuSection () {
                                         <div className="desc">{item.item_description}</div>
                                         {/*<div className="price">${item.item_description}</div>*/}
                                         {/* if the user is admin, have option to modify and delete the item"*/}
-                                        { user == 1 ? <button className="btn" type="Modify" onClick={() => modifyItem(item.item_id)} >Modify Item</button> :
+                                        { admin == 1 ? <button className="btn" type="Modify" onClick={() => modifyItem(item.item_id)} >Modify Item</button> :
                                             <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>}
-                                        {user == 1 && <button className="btn" type="submit" onClick={() => deleteItem(item.item_id)} >Delete Item</button>}
+                                        { admin == 1 && <button className="btn" type="submit" onClick={() => deleteItem(item.item_id)} >Delete Item</button>}
                                         {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
                                     </div>
                                 )

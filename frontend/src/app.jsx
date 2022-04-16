@@ -29,8 +29,9 @@ function App() {
     const dispatch = useDispatch()
 
     const [data, setData] = useState(null)
-    const [userID, set_uid] = useState(null)
+    const [loginID, set_uid] = useState(null)
     const [adminID, set_aid] = useState(null)
+    const [name, set_name] = useState(null)
     
     useLayoutEffect(() => {
         try {
@@ -44,11 +45,16 @@ function App() {
         }
     })
 
-    const handleLogin = (id, admin) => {
-        console.log("Setting user data");
-        console.log("UID", id, "ADMIN", admin);
+    const handleLogin = (name, id, admin) => {
+        set_name(name);
         set_uid(id);
         set_aid(admin);
+    }
+
+    const handleSignout = () => {
+        set_name(null);
+        set_uid(null);
+        set_aid(null);
     }
 
 
@@ -58,22 +64,22 @@ function App() {
             {data && <>
               <Router>
                 <div className="app"> 
-                <Header />
+                <Header u_name={name} uid={loginID} signOut={handleSignout}/>
                 {/*<Login parent_cb={cbUserInfo}/>*/}
                 <Routes>
                     <Route path="/" element={<HomeSection/>} />
                     <Route path="/home" element={<HomeSection/>} />
-                    <Route path="/menu:user" element={<MenuSection/>} />
+                    <Route path="/menu" element={<MenuSection uid={loginID} admin={adminID}/>} />
                     <Route path="/reviews" element={<ReviewSection/>} />
                     <Route path="/about" element={<AboutUs/>} />
                     <Route path="/contact" element={<ContactSection/>} />
-                    <Route path="/Login" element={<Login onLogin={handleLogin}/>} />
+                    <Route path="/Login" element={<Login uid={loginID} admin={adminID} onLogin={handleLogin}/>} />
                     <Route path ="/ModifyUser" element ={<ModifyUser/>}/>
                     <Route path ="/Discounts" element = {<Discounts/>}/>
                     <Route path = "/Register" element = {<Register/>}/>
                     <Route path ="/admin" element ={<Admin/>}/>
                     <Route path ="/createItem" element={<CreateItem/>}/>
-                    <Route path ="/modifyItem:id" element={<ModifyItem/>}/>
+                    <Route path ="/modifyItem:id" element={<ModifyItem uid={loginID} admin={adminID}/>}/>
                     <Route path ="/orders" element ={<orders/>}/>
                 </Routes>
                 <Footer />

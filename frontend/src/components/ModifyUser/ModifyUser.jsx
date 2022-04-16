@@ -29,8 +29,7 @@ function ModifyUser(){
     //populates the user info list whenever a user is found.
     useEffect(() => {
 
-
-        if(Response == "User Found"){
+        if(Response === "User Found"){
         UserList.map(val => {
 
                   
@@ -47,23 +46,23 @@ function ModifyUser(){
         }
         
        
-        if (Response != "User Updated"){
+        if (Response !== "User Updated"){
         if(Email == ""){
             setEmail(OldEmail)
         }
-        if(FirstName == ""){
+        if(FirstName === ""){
             setFirstName(OldFirstName)
         }
-        if(LastName == ""){
+        if(LastName === ""){
             setLastName(OldLastName)
         }
-        if(Phone == ""){
+        if(Phone === ""){
             setPhone(OldPhone)
         }
-        if(Address == ""){
+        if(Address === ""){
             setAddress(OldAddress)
         }
-        if(Password == ""){
+        if(Password === ""){
             setPassword(OldPassword)
         }
     }
@@ -71,7 +70,7 @@ function ModifyUser(){
     });
 
     //finduser function, activated from the find button on the page
-    const findUser =() =>{
+    const findUser = () =>{
 
         const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}\b/
 
@@ -90,47 +89,42 @@ function ModifyUser(){
             
 
         }).then((response) => { //reading the information sent back from backend 
-
-          if (response.data == ""){ //conditional statement using the sent back information
-
-              makeList(response.data)
+            if(response.data == ""){ //conditional statement using the sent back information
+                makeList(response.data)
                 setResponse("User was not found") //tells the page that a user was not found
-             }else{ 
+            }else{ 
                 makeList(response.data) //makes the list for the user that stores all the information received from backend
                 setResponse("User Found") //tells the page that a user was found
             }
         });
     }
 
-        //update user function
-        const updateUser = () =>{
+    //update user function
+    const updateUser = () =>{
 
-            if(Response == "" || Response == "User updated"){
-                setResponse("Please find a user first")
-                return
-            }
-            //setting userID
-          setUserID(UserID)
-      
-    
-            
-            
-        
-            //api call to update users
-            //sends all the information to backend for db
-            Axios.post("/api/admin/user/update",{
-
-                email:Email,
-                firstname:FirstName,
-                lastname:LastName,
-                phone:Phone,
-                address:Address,
-                password:Password,
-                userID:UserID
-
-            })
-                setResponse("User Updated")
+        if(Response === "" || Response === "User updated"){
+            setResponse("Please find a user first")
+            return
         }
+        //setting userID
+        setUserID(UserID)
+    
+        //api call to update users
+        //sends all the information to backend for db
+        Axios.post("/api/admin/user/update",{
+
+            email:Email,
+            firstname:FirstName,
+            lastname:LastName,
+            phone:Phone,
+            address:Address,
+            password:Password,
+            userID:UserID
+
+        })
+        
+        setResponse("User Updated")
+    }
 
 
     return(

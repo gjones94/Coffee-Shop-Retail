@@ -63,6 +63,7 @@ section{
     margin-top: 1rem;
     display: inline-block;
     padding:.9rem 3rem;
+    border-radius: 18px;
     font-size: 1.7rem;
     color:#fff;
     background: var(--main-color);
@@ -124,4 +125,3 @@ section{
     }
 
 }
-

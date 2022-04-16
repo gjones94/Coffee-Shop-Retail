@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './Header.css'
 
-const NavBar = () => {
+const NavBar = ({u_name ,uid, signOut}) => {
     const handleMenuBtn = () => {
     let navbar = document.querySelector('.navbar');
     let searchForm = document.querySelector('.search-form');
@@ -19,12 +19,15 @@ const NavBar = () => {
         navbar.classList.remove('active');
     }
 
+    const id = () =>{
+        console.log(uid);
+        console.log(u_name);
+    }
+
 
     return (
         <>
-
             <div className="header">
-
                 {/* eslint-disable-next-line */}
                 <div className="logo">
                     <img src={'./images/logo.png'} alt="" /> 
@@ -34,7 +37,7 @@ const NavBar = () => {
                     <Link style={{textDecoration: 'none'}} to="/">
                         <span className="header__navItems">Home</span>
                      </Link>
-                    <Link style={{textDecoration: 'none'}} to="/menu0">
+                    <Link style={{textDecoration: 'none'}} to="/menu">
                         <span className="header_navItems">Products</span>
                      </Link>
                     <Link style={{textDecoration: 'none'}} to="/reviews">
@@ -46,12 +49,20 @@ const NavBar = () => {
                     <Link style={{textDecoration: 'none'}} to="/contact">
                         <span className="header_navItems">Contact</span>
                      </Link>
-                    <Link style={{textDecoration: 'none'}} to="/login">
-                        <span className="header__navItems">Login</span>
-                     </Link>
                      <Link style={{textDecoration: 'none'}} to="/admin">
                         <span className="header__navItems">admin</span>
                      </Link>
+                    
+                    {uid != null ?  
+                        <span className="header__navItems">{u_name}</span>
+                        : 
+                        <Link style={{textDecoration: 'none'}} to="/login">
+                            <span className="header__navItems">Login</span>
+                        </Link>
+                    }
+                    <button className="btn" type="submit" onClick={signOut}>Sign Out</button>
+                    <button className="btn" type="submit" onClick={id}>whats my id</button>
+                     
                 </nav>
                 <div className="icons">
                     <div className="fas fa-search" id="search-btn" onClick={handleSearchBox}></div>
