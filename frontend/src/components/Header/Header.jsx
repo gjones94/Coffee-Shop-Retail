@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './Header.css'
 
-const NavBar = ({u_name ,uid, signOut}) => {
+const NavBar = ({u_name ,uid, admin, signOut}) => {
     const handleMenuBtn = () => {
     let navbar = document.querySelector('.navbar');
     let searchForm = document.querySelector('.search-form');
@@ -18,12 +18,6 @@ const NavBar = ({u_name ,uid, signOut}) => {
         searchForm.classList.toggle('active');
         navbar.classList.remove('active');
     }
-
-    const id = () =>{
-        console.log(uid);
-        console.log(u_name);
-    }
-
 
     return (
         <>
@@ -49,21 +43,30 @@ const NavBar = ({u_name ,uid, signOut}) => {
                     <Link style={{textDecoration: 'none'}} to="/contact">
                         <span className="header_navItems">Contact</span>
                      </Link>
-                     <Link style={{textDecoration: 'none'}} to="/admin">
-                        <span className="header__navItems">admin</span>
-                     </Link>
-                    
-                    {uid != null ?  
-                        <span className="header__navItems">{u_name}</span>
-                        : 
+                    {/* User Not Signed In */}
+                    {uid == null &&
                         <Link style={{textDecoration: 'none'}} to="/login">
-                            <span className="header__navItems">Login</span>
+                        <span className="header__navItems">Log In</span>
                         </Link>
                     }
-                    <button className="btn" type="submit" onClick={signOut}>Sign Out</button>
-                    <button className="btn" type="submit" onClick={id}>whats my id</button>
-                     
+                    {/* User is an admin */}
+                    {admin == 1 &&
+                        <Link style={{textDecoration: 'none'}} to="/admin">
+                            <span className="header__navItems">Admin</span>
+                        </Link>
+                    }
                 </nav>
+                {/* User Signed In */}
+                {uid != null &&
+                    <div>
+                        <h1 className="heading"> Welcome {u_name} </h1>
+                    </div>
+                }
+                {uid != null &&
+                    <div>
+                        <button className="btn" type="submit" onClick={signOut}>Sign Out</button>
+                    </div> 
+                }
                 <div className="icons">
                     <div className="fas fa-search" id="search-btn" onClick={handleSearchBox}></div>
                     <div className="fas fa-shopping-cart" id="cart-btn"></div>

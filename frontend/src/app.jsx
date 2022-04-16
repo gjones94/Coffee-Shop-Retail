@@ -64,7 +64,7 @@ function App() {
             {data && <>
               <Router>
                 <div className="app"> 
-                <Header u_name={name} uid={loginID} signOut={handleSignout}/>
+                <Header u_name={name} admin={adminID} uid={loginID} signOut={handleSignout}/>
                 {/*<Login parent_cb={cbUserInfo}/>*/}
                 <Routes>
                     <Route path="/" element={<HomeSection/>} />

@@ -51,23 +51,25 @@ app.post('/api/login/auth', (req,res) =>{
     console.log("Post called") 
     const email = req.body.PassName
     const password = req.body.PassPW
-    sqlFind = "SELECT user_email FROM users WHERE user_email = ?;" //command to mysql to find user name from user table
+    sqlFind = "SELECT * FROM users WHERE user_email = ?;" //command to mysql to find user name from user table
     db.query(sqlFind,[email],(err,result) => {
-        if ( result == ""){ //if the result is empty that means nothing was found
-            res.send("USERERR")
+        if(err){
+            console.log(err.message);
+        }
+        if (result == ""){ //if the result is empty that means nothing was found
+            res.send("USERERR");
         }else {
-            sqlFind = "SELECT user_email, password FROM users WHERE user_email = ? and password = ?;" // checks through password after name
+            sqlFind = "SELECT user_id, user_admin, user_first_name FROM users WHERE user_email = ? and password = ?;" // checks through password after name
             db.query(sqlFind,[email, password],(err,result) => {
                 if (result == ""){
                     console.log("Incorrect password");
                     res.send("PASSERR")
                 }else {
                     console.log("Authenticated")
-                        //only sends found if both name and password match
-                        res.send("SUCCESS") 
-                        //initial issue with connection was that this was not matching what the front end was looking for
-                        //this was sending "User Found", and frontend was expecting "Found"
-                    }
+                    console.log(result)
+                        //only sends data if both name and password match
+                        res.send(result);
+                }
             })
         }
     })
@@ -161,18 +163,6 @@ app.post("/api/insert/item", (req, res) => {
 
 
 /*-------------------------USER APIS-----------------------------*/
-
-//api to get user TO-DO MODIFY TO BE A GET FOR JUST USERS
-app.get('/api/get', (req,res) => {
-    console.log("basic get called") //debugging purposes
-    const sqlSelect = "SELECT * FROM users"; //mysql command to get full list of users
-    db.query(sqlSelect,(err,result) =>{
-        console.log(result);
-        //res.send("Test")
-	    //res.send(result); //sends over the list of users
-    })
-
-});
 
 
 //api for insert 

@@ -14,17 +14,11 @@ const Login = ({uid, admin, onLogin}) => {
   const [frontName, setName] = useState("");
   const [frontPassword, setPassword] = useState("");
 
-
-  const test = () =>{
-    console.log(uid, admin);
-  }
-
   const goRegister = () => {
     navigate("/Register")
   }
   
   const loginCheck = () =>{
-    alert("Login check callled") //debugging purposes
     Axios.post("/api/login/auth",{
       PassName : frontName,
       PassPW : frontPassword,
@@ -48,7 +42,6 @@ const Login = ({uid, admin, onLogin}) => {
   //this is just for debugging
   const handleSubmit = (event) =>{
     event.preventDefault();	
-    alert(`The name you entered was : ${frontName}`);
   }
 
   return (
@@ -79,7 +72,6 @@ const Login = ({uid, admin, onLogin}) => {
 
           <button className="btn" type="submit" onClick={loginCheck} >Log In</button>
           <button className="btn" type="submit" onClick={goRegister} >Register</button>
-          <button className="btn" type="submit" onClick={test} >Test</button>
           <span className="login__head2">Sign Up for emails to get special news and offers</span>
           <span className="login__head3">By signing up, you agree to our <span className="underlineHead3">Privacy Policy</span> and <span className="underlineHead3">Terms of Use</span></span>
         </form>
