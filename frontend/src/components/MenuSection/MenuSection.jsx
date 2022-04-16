@@ -1,16 +1,13 @@
 import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
-import Header from '../Header/Header'
 import './MenuSection.css'
-import { Navigate, useNavigate, useParams} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 function MenuSection ({uid, admin}) {
 
     let tempInventory = [];
     const [constInventory, setConstInventory] = useState();
     const [displayInventory, setDisplayInventory] = useState();
-    const [constOrders, setConstOrders] = useState();
-    const [displayOrders, setDisplayOrders] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
     const imageBase = './images/'
@@ -44,16 +41,13 @@ function MenuSection ({uid, admin}) {
         }else{
             constInventory.map(item => {
                 if(item.item_name.toLowerCase().includes(searchInput.toLowerCase()) || item.item_description.toLowerCase().includes(searchInput.toLowerCase())){
-                    console.log("Pushing item", item.item_name);
                     tempInventory.push(item);
                 }else{
-                    console.log(item.item_name.toLowerCase(), "Does not include", searchInput.toLowerCase());
                 }
             });
         }
         //set display to the filtered list
         setDisplayInventory(tempInventory);
-        console.log("Here is the display inventory after update\n", displayInventory);
         loaded();
     };
 
@@ -150,19 +144,15 @@ function MenuSection ({uid, admin}) {
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
                 </div>
-                </div>
                 {admin == 1 &&
                     <div class="box">
                         <button className="btn" type="submit" onClick={createItem}>Create Item</button>
                     </div> 
                 }
+                </div>
                 <div className="box-container">
-                    {/*For every item in inventory_list, create a box and list details of item*/}
-                    {}    
-                    {console.log("Items loaded", constInventory)}
                     {displayInventory.map(item => 
                         {
-                            console.log(item.item_name);
                             var crossout = "";
                             var price;
                             if(item.item_onsale){
@@ -204,107 +194,8 @@ function MenuSection ({uid, admin}) {
                     )}
                 </div>
             </section>
-            
         </>
     )
-
-    /* ZAKARIAH'S ORIGINAL  and input this above every ahref= {/* eslint-disable-next-line /}
-    return (
-        <>
-
-            <section className="menu" id="Menu">
-
-                <h1 className="heading"> {selector[3].sectionName[0]} <span>{selector[3].sectionName[1]}</span> </h1>
-
-                <div className="box-container">
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[0]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-                    <div className="box">
-                        <img src={selector[3].menuImages[1]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-                    <div className="box">
-                        {inventory_list.map(item => 
-                            {
-                                return( 
-                                    <div> {item.item_id} </div> 
-                                )
-                            }
-                        )}
-                    </div>
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[2]} alt="" />
-                        <button className="btn" type="submit" onClick={fetchInventory} >Fetch Inventory</button>
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[3]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[4]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[5]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[4]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[0]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[1]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-
-                    <div className="box">
-                        <img src={selector[3].menuImages[2]} alt="" />
-                        <h3>{selector[3].menuHeading}</h3>
-                        <div className="price">${selector[3].menuPrice} <span>{selector[3].menuDiscountPrice}</span></div>
-                        <a href="#" className="btn">{selector[3].menuBtn}</a>
-                    </div>
-
-                </div>
-
-            </section>
-            
-        </>
-    )
-
-    */
 }
 
 export default MenuSection

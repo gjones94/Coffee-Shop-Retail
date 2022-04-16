@@ -13,9 +13,8 @@ import Login from './components/Login/Login'
 import { fetchData } from './components/action/action'
 import { useDispatch } from 'react-redux'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-//import Loader from "react-loader-spinner";
 import { homeData } from './components/home/home'
-import { BrowserRouter as Router, Route, Routes, useNavigate, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Register from './components/Register/Register'
 import Admin from './components/Admin/Admin'
 import ModifyUser from './components/ModifyUser/ModifyUser'
@@ -65,7 +64,6 @@ function App() {
               <Router>
                 <div className="app"> 
                 <Header u_name={name} admin={adminID} uid={loginID} signOut={handleSignout}/>
-                {/*<Login parent_cb={cbUserInfo}/>*/}
                 <Routes>
                     <Route path="/" element={<HomeSection/>} />
                     <Route path="/home" element={<HomeSection/>} />
@@ -75,9 +73,9 @@ function App() {
                     <Route path="/contact" element={<ContactSection/>} />
                     <Route path="/Login" element={<Login uid={loginID} admin={adminID} onLogin={handleLogin}/>} />
                     <Route path ="/ModifyUser" element ={<ModifyUser/>}/>
-                    <Route path ="/Discounts" element = {<Discounts/>}/>
+                    <Route path ="/Discounts" element = {<Discounts admin={adminID}/>}/>
                     <Route path = "/Register" element = {<Register/>}/>
-                    <Route path ="/admin" element ={<Admin/>}/>
+                    <Route path ="/admin" element ={<Admin admin={adminID}/>}/>
                     <Route path ="/createItem" element={<CreateItem/>}/>
                     <Route path ="/modifyItem:id" element={<ModifyItem uid={loginID} admin={adminID}/>}/>
                     <Route path ="/orders" element ={<orders/>}/>

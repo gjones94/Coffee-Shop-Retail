@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import './CreateItem.css';
 import Axios from 'axios';
-import { Navigate, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 
 function CreateItem () {
@@ -33,19 +33,14 @@ function CreateItem () {
             sale_price : item_sale_price,
             image : image_name
         });
-
+        alert("Item Created")
+        navigate("/MenuSection")
     }
-    const uploadImage = event => {
+    const uploadImage = () => {
         const data = new FormData();
 
         data.append('name', image_name);
         data.append('image', image_file); 
-
-        /* debug purposes
-        Axios.post("https://httpbin.org/anything", data, {
-            
-        }).then(res => console.log(res)).catch(err => console.log(err));
-        */
 
         Axios.post("/api/upload/image", 
             data, 

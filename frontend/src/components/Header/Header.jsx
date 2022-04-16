@@ -50,28 +50,31 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
                         </Link>
                     }
                     {/* User is an admin */}
-                    {admin == 1 &&
+                    {admin === 1 &&
                         <Link style={{textDecoration: 'none'}} to="/admin">
                             <span className="header__navItems">Admin</span>
                         </Link>
                     }
                 </nav>
-                {/* User Signed In */}
-                {uid != null &&
+                {/*
                     <div>
                         <h1 className="heading"> Welcome {u_name} </h1>
                     </div>
                 }
+                */}
                 {uid != null &&
                     <div>
                         <button className="btn" type="submit" onClick={signOut}>Sign Out</button>
                     </div> 
                 }
                 <div className="icons">
+                    {uid != null &&
+                        <h1 className="heading"> {u_name} </h1>
+                    }
+                    {/* 
                     <div className="fas fa-search" id="search-btn" onClick={handleSearchBox}></div>
                     <div className="fas fa-shopping-cart" id="cart-btn"></div>
                     <div className="fas fa-bars" id="menu-btn" onClick={handleMenuBtn}></div>
-                    {/* 
                     <div className="fas fa-user" id ="user-btn"></div>
                     */}
                 </div>
