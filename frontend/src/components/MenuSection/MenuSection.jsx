@@ -10,6 +10,7 @@ function MenuSection ({uid, admin}) {
     const [displayInventory, setDisplayInventory] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
+    const [cart, setCart] = useState();
     const imageBase = './images/'
 
     let navigate = useNavigate();
@@ -27,7 +28,18 @@ function MenuSection ({uid, admin}) {
                 loaded();
             }
         );
+        if(uid != null){
+            Axios.post("api/getcart", {
+                id : uid
+            }).then((response) => 
+                {
+                    let tempcart = JSON.parse(JSON.stringify(response.data));
+                    setCart(tempcart);
+                }
+            );
+        }
     }
+
     const search = () => {
         tempInventory = []; //reset list
         setDisplayInventory(constInventory);//reset display inventory
@@ -89,8 +101,76 @@ function MenuSection ({uid, admin}) {
         setDisplayInventory(tempInventory);
     }
    
-    const addToCart = () => {
-        alert("Added to cart!");
+    const increment = (id) => {
+        cart.map(item => {
+            if(item.item_id == id){
+                item.item_quantity += 1;   
+            }
+        })
+    }
+   
+    const addToCart = (item) => {
+        let temp_cart = [];
+
+        if(uid == null){
+            alert("You must login to add to your cart");
+        }else{
+            let actual_price = 0
+            if(item.item_onsale == 1){
+                actual_price = item.item_sale_price;
+            }else{
+                actual_price = item.item_price;
+            }
+
+            //set default cart states
+            let empty = true 
+            let item_exists = false
+
+            //put everything into a temp cart to modify
+            cart.map(cart_item => {
+                empty = false; //cart was not empty
+                temp_cart.push(cart_item);
+            });
+
+            
+            //create the new item
+            let new_item = {
+                "user_id" : uid,
+                "item_id" : item.item_id,
+                "item_qty" : 1
+            }
+
+            temp_cart.map(temp => {
+                if(temp.item_id === item.item_id){
+                   item_exists = true  //item already existed
+                   temp.item_qty += 1
+                   Axios.post("api/updateCartQty", {
+                        id : item.id,
+                      item_id : item.item_id,
+                      qty : temp.item_qty
+                   });
+                }
+            })
+
+            if(!item_exists || empty){
+                Axios.post("api/addToCart",{
+                    uid : uid,
+                    id : item.item_id,
+                    qty : 1
+                });
+                temp_cart.push(new_item) //do this to save local state
+            }
+            
+            setCart(temp_cart)
+            /*
+            Axios.post("api/addtocart", {
+                user : uid,
+                id : item_id,
+                price : actual_price
+            });
+            */
+            alert("Added to cart!");
+        }
     }
 
     const deleteItem = (item_id) => {
@@ -167,11 +247,12 @@ function MenuSection ({uid, admin}) {
                                         <img src={imageBase + item.item_image} alt="" />
                                         <h3>{item.item_name}</h3>
                                         <div className="price">${price}<span>{crossout}</span></div>
+                                        <div className="price">Available: {item.item_stock} </div>
                                         <div className="desc">{item.item_description}</div>
                                         {/*<div className="price">${item.item_description}</div>*/}
                                         {/* if the user is admin, have option to modify and delete the item"*/}
                                         { admin == 1 ? <button className="btn" type="Modify" onClick={() => modifyItem(item.item_id)} >Modify Item</button> :
-                                            <button className="btn" type="submit" onClick={addToCart} >Add to Cart</button>}
+                                            <button className="btn" type="submit" onClick={() => addToCart(item)} >Add to Cart</button>}
                                         { admin == 1 && <button className="btn" type="submit" onClick={() => deleteItem(item.item_id)} >Delete Item</button>}
                                         {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
                                     </div>
@@ -182,6 +263,7 @@ function MenuSection ({uid, admin}) {
                                         <img src={imageBase + item.item_image} alt="" />
                                         <h3>{item.item_name}</h3>
                                         <div className="price">${item.item_price}<span> ${item.item_saleprice}</span></div>
+                                        <div className="price">Available: {item.item_stock} </div>
                                         <div className="desc">{item.item_description}</div>
                                         <div className="text">Out of stock!</div>
                                         <button className="btnDisabled" type="submit">Add to Cart</button>
