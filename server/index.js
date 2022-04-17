@@ -237,6 +237,18 @@ app.post("/api/admin/discount/get",(req,res) => {
     });
 });
 
+app.post("/api/get/discount", (req, res) => {
+    const code = req.body.code
+    const sql = "SELECT * from discounts WHERE discount_code = ?"
+    db.query(sql, code, (err, result) => {
+        if(err){
+            console.log(err.message);
+        }
+        console.log(result);
+        res.send(result);
+    })
+})
+
 app.post("/api/admin/discount/insert",(req,res) =>{
 
     const Code = req.body.code
