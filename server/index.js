@@ -260,20 +260,6 @@ app.post("/api/admin/discount/insert",(req,res) =>{
 })
 
 /*-------------------------CART APIS-----------------------------*/
-app.post('/api/getcart', (req,res) =>{
-    const id = req.body.id
-    sqlFind = "SELECT * FROM cart WHERE user_id = ?;" //command to mysql to find user name from user table
-    db.query(sqlFind,[id],(err,result) => {
-        if(err){
-            //console.log(err.message);
-        }
-        if (result == ""){ //if the result is empty that means nothing was found
-            res.send("User has no items");
-        }else {
-            res.send(result);
-        }
-    })
-})
 
 app.post('/api/addToCart', (req, res) => {
     const uid = req.body.uid;
