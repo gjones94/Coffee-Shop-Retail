@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useState } from 'react'
 import './app.css'
 import AboutUs from './components/AboutUs/AboutUs'
 import ContactSection from './components/ContactSection/ContactSection'
+import Cart from './components/Cart/Cart'
 import Footer from './components/Footer/Footer'
 import HomeSection from './components/HomeSection/HomeSection'
 import MenuSection from './components/MenuSection/MenuSection'
@@ -71,6 +72,7 @@ function App() {
                     <Route path="/reviews" element={<ReviewSection/>} />
                     <Route path="/about" element={<AboutUs/>} />
                     <Route path="/contact" element={<ContactSection/>} />
+                    <Route path="/cart" element={<Cart uid={loginID} uname={name}/>} />
                     <Route path="/Login" element={<Login uid={loginID} admin={adminID} onLogin={handleLogin}/>} />
                     <Route path ="/ModifyUser" element ={<ModifyUser/>}/>
                     <Route path ="/Discounts" element = {<Discounts admin={adminID}/>}/>

@@ -1,0 +1,164 @@
+.cart_item {
+    background-color: (--var);
+    height: 100%;
+    color: #fff;
+    filter: brightness(95%);
+}
+  
+.cart_page {
+background-color: black;
+width: 50%;
+height: auto;
+margin-left: auto;
+margin-right: auto;
+margin-top: 2rem;
+margin-bottom: 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+  
+.cart_logo {
+background-color: black;
+margin-top: 10px;
+height: 100px;
+}
+
+.cart_head1 {
+width: 100%;
+text-align: center;
+text-transform: uppercase;
+font-size: 17px;
+font-weight: 500;
+margin-top: 13px;
+margin-bottom: 9px;
+}
+
+.cart_page > form {
+width: 100%;
+margin-top: 14px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.cart_label {
+font-size: 16px;
+font-weight: 500;
+margin-bottom: 6px;
+}
+
+.cart_input {
+margin-bottom: 15px;
+width: 250px;
+height: 30px;
+outline: none;
+border: none;
+font-size: 15px;
+border-radius: 18px;
+text-align: center;
+background-color: #3d3d3d;
+color: #fff;
+}
+
+
+.cart_description{
+margin-bottom: 15px;
+margin-left: auto;
+margin-right: auto;
+resize:none;
+width: 250px;
+height: 100px;
+outline: none;
+border: none;
+font-size: 15px;
+border-radius: 18px;
+text-align:justify;
+background-color: #3d3d3d;
+color: #fff;
+}
+
+
+.cart_head2 {
+padding: 2rem;
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+font-size: 13px;
+font-weight: 400;
+color: rgb(216, 214, 214);
+}
+
+.cart_head3 {
+padding: 3rem;
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+font-size: 13px;
+font-weight: 400;
+color: rgb(216, 214, 214);
+}
+
+.underlineHead3 {
+text-decoration: underline;
+cursor: pointer;
+}
+
+.container {
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:1.0rem 7%;
+    border-bottom: var(--border);
+    position: relative;
+    top:0; left: 0; right: 0;
+    z-index: 1000;
+}
+
+.container .row a{
+    margin:0 1.5rem;
+    font-size: 2.5rem;
+    color:#fff;
+}
+
+@media screen and (max-width: 500px) {
+.cart_item {
+    background-color: var(--black);
+}
+
+.cart_page {
+    width: 240px;
+    height: 480px;
+    margin-top: 0;
+    margin-top: 5px;
+}
+
+.cart_logo {
+    width: 70px;
+    height: 70px;
+}
+
+.cart_head1 {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 7px;
+}
+
+.cart_label  {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.cart_input {
+    margin-bottom: 11px;
+    width: 220px;
+    height: 25px;
+    font-size: 13px;
+    border-radius: 14px;
+}
+
+
+}

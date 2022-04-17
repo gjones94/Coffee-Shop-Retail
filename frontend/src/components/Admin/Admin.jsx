@@ -20,7 +20,7 @@ function Admin({admin}){
       //alert("Not ready yet");
       navigate("/Orders")
   }
-  admin = 1;
+  admin = 1; //DELETE THIS LATER
   if(admin !== 1){
       return(
         <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>

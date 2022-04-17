@@ -264,7 +264,6 @@ app.post('/api/getcart', (req,res) =>{
 })
 
 app.post('/api/addToCart', (req, res) => {
-    console.log("Add to Cart called");
     const uid = req.body.uid;
     const id = req.body.id;
     const qty = req.body.qty;
@@ -278,22 +277,11 @@ app.post('/api/addToCart', (req, res) => {
 })
 
 app.post('/api/updateCartQty', (req, res) => {
-    console.log("Update called");
-    const i_id = req.body.id;
     const i_item_id = req.body.item_id
     const qty = req.body.qty;
 
-    /*
-    sqlUpdate = "UPDATE cart SET item_qty = ?, WHERE item_id = ?"
-    db.query(sqlUpdate,[qty, id],(err,res) =>{
-        if(err){
-            console.log(err.message);
-        }else{
-            console.log(res);
-        }
-    });
-    */
-    sqlUpdate = "UPDATE cart SET item_qty = ?, item_id = ? WHERE id = ?"
+    //sqlUpdate = "UPDATE cart SET item_qty = ?, item_id = ? WHERE id = ?"
+    sqlUpdate = "UPDATE cart SET item_qty = ? WHERE item_id = ?"
     const values = [qty, i_item_id, i_id];
 
     db.query(sqlUpdate,values,(err,res) => {
@@ -301,24 +289,21 @@ app.post('/api/updateCartQty', (req, res) => {
         if(err){
             console.error(err.message);
         }
-        console.log(res)
     });
 
-    /*
-    const query = 'UPDATE `item` '+
-    'SET `item_id` = ?, `item_type` = ?, `item_name` = ?, `item_description` = ?, `item_price` = ?, `item_stock` = ?, `item_onsale` = ?, `item_saleprice` = ?, `item_image` = ?' +
-    'WHERE `item_id` = ?';
+})
 
-    const values = [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_image_name, i_id];
-    db.query(query,values,(err,res) =>{
-    if(err){
-    //console.error(err.message);
-    }
-    //console.log(res)
-    });
-    */
-
-
+//Get this user's cart
+app.post('/api/get/cart', (req, res) => {
+    const id = req.body.id; //get this users cart
+    query = "SELECT * from cart WHERE user_id = ?";
+    db.query(query, id, (err, result) => {
+        if(err){
+            console.error(err.message);
+        }
+        console.log(result);
+        res.send(result);
+    })
 })
 
 /*

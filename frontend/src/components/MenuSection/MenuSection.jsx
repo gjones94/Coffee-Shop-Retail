@@ -101,13 +101,6 @@ function MenuSection ({uid, admin}) {
         setDisplayInventory(tempInventory);
     }
    
-    const increment = (id) => {
-        cart.map(item => {
-            if(item.item_id == id){
-                item.item_quantity += 1;   
-            }
-        })
-    }
    
     const addToCart = (item) => {
         let temp_cart = [];
@@ -145,7 +138,6 @@ function MenuSection ({uid, admin}) {
                    item_exists = true  //item already existed
                    temp.item_qty += 1
                    Axios.post("api/updateCartQty", {
-                        id : item.id,
                       item_id : item.item_id,
                       qty : temp.item_qty
                    });

@@ -6,7 +6,6 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
     const handleMenuBtn = () => {
     let navbar = document.querySelector('.navbar');
     let searchForm = document.querySelector('.search-form');
-
     navbar.classList.toggle('active');
     searchForm.classList.remove('active');
     }
@@ -18,6 +17,7 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
         searchForm.classList.toggle('active');
         navbar.classList.remove('active');
     }
+
 
     return (
         <>
@@ -55,6 +55,10 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
                             <span className="header__navItems">Admin</span>
                         </Link>
                     }
+                    {uid != null && 
+                        <Link className="fas fa-shopping-cart" style={{textDecoration: 'none'}} to="/cart"></Link>
+                    }
+
                 </nav>
                 {/*
                     <div>
@@ -73,9 +77,9 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
                     }
                     {/* 
                     <div className="fas fa-search" id="search-btn" onClick={handleSearchBox}></div>
-                    <div className="fas fa-shopping-cart" id="cart-btn"></div>
                     <div className="fas fa-bars" id="menu-btn" onClick={handleMenuBtn}></div>
                     <div className="fas fa-user" id ="user-btn"></div>
+                    <div className="fas fa-shopping-cart" id="cart-btn" onClick={handleCart}></div>
                     */}
                 </div>
 
