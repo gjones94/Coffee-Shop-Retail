@@ -8,7 +8,7 @@
 .create_page {
 background-color: black;
 width: 401px;
-height: 330px;
+height: auto;
 margin-left: auto;
 margin-right: auto;
 margin-top: 2rem;
