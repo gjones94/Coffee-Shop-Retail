@@ -48,13 +48,13 @@ app.use(express.static(build_directory));
 
 //post function to get login input from front
 app.post('/api/login/auth', (req,res) =>{
-    console.log("Post called") 
+    //console.log("Post called") 
     const email = req.body.PassName
     const password = req.body.PassPW
     sqlFind = "SELECT * FROM users WHERE user_email = ?;" //command to mysql to find user name from user table
     db.query(sqlFind,[email],(err,result) => {
         if(err){
-            console.log(err.message);
+            //console.log(err.message);
         }
         if (result == ""){ //if the result is empty that means nothing was found
             res.send("USERERR");
@@ -62,13 +62,13 @@ app.post('/api/login/auth', (req,res) =>{
             sqlFind = "SELECT user_id, user_admin, user_first_name FROM users WHERE user_email = ? and password = ?;" // checks through password after name
             db.query(sqlFind,[email, password],(err,result) => {
                 if (result == ""){
-                    console.log("Incorrect password");
+                    //console.log("Incorrect password");
                     res.send("PASSERR")
                 }else {
-                    console.log("Authenticated")
-                    console.log(result)
+                    //console.log("Authenticated")
+                    //console.log(result)
                         //only sends data if both name and password match
-                        res.send(result);
+                    res.send(result);
                 }
             })
         }
@@ -87,7 +87,7 @@ app.post("/api/register/insert",(req,res) => {
 
     const sqlInsert="INSERT INTO users (user_id, user_email, user_first_name, user_last_name, user_phone,user_address,password) VALUES (?,?,?,?,?,?,?);"
     db.query(sqlInsert,[id,email,first,last,number,addr,pw],(res,err) => {
-        console.log(res)
+        //console.log(res)
     });
 
 })
@@ -97,11 +97,11 @@ app.post("/api/register/insert",(req,res) => {
 
 
 app.get('/api/get/inventory', (req, res) => {
-    console.log("fetch inventory called") //debugging purposes
+    //console.log("fetch inventory called") //debugging purposes
     const sqlSelect = "SELECT * FROM item"; //mysql command to get full list of users
     db.query(sqlSelect,(err,result) =>{
         if(err){
-            console.log(err.message);
+            //console.log(err.message);
         }
 	    res.send(result); //sends over the list of inventory
     })
@@ -122,8 +122,8 @@ app.post("/api/modifyItem", (req,res) => {
     const i_sale_price = req.body.sale_price
     const i_image_name = req.body.image
 
-    
-    console.log("New image name is", i_image_name);
+    console.log(i_id) 
+    //console.log("New image name is", i_image_name);
 
     const query = 'UPDATE `item` '+
                   'SET `item_id` = ?, `item_type` = ?, `item_name` = ?, `item_description` = ?, `item_price` = ?, `item_stock` = ?, `item_onsale` = ?, `item_saleprice` = ?, `item_image` = ?' +
@@ -132,9 +132,9 @@ app.post("/api/modifyItem", (req,res) => {
     const values = [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_image_name, i_id];
     db.query(query,values,(err,res) =>{
         if(err){
-            console.error(err.message);
+            //console.error(err.message);
         }
-        console.log(res)
+        //console.log(res)
     });
 
 })
@@ -157,7 +157,7 @@ app.post("/api/insert/item", (req, res) => {
 
     const sqlInsert="INSERT INTO item (item_id, item_type, item_name, item_description, item_price, item_stock, item_onsale, item_saleprice, item_image) VALUES (?,?,?,?,?,?,?,?,?);"
     db.query(sqlInsert, [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_image_name], (res, err) => {
-        console.log(res);
+        //console.log(res);
     });
 });
 
@@ -212,8 +212,8 @@ app.post("/api/admin/user/update",(req,res) => {
     const Address = req.body.address
     const Password = req.body.password
     const UserID = req.body.userID
-    console.log(Email)
-    console.log(FirstName)
+    //console.log(Email)
+    //console.log(FirstName)
 
 
     //SQL command to update all the info from the user.
@@ -223,6 +223,9 @@ app.post("/api/admin/user/update",(req,res) => {
     });
 
 })
+
+
+
 
 /*---------------------------DISCOUNTS----------------------*/
 
@@ -238,11 +241,87 @@ app.post("/api/admin/discount/insert",(req,res) =>{
 
     const Code = req.body.code
     const Percent = req.body.percent
-    console.log(Code)
-    console.log(Percent)
+    //console.log(Code)
+    //console.log(Percent)
     const sqlInsert = "INSERT INTO discounts (discount_code,discount_percent) VALUES (?,?);"
     db.query(sqlInsert,[Code,Percent])
 })
+
+/*-------------------------CART APIS-----------------------------*/
+app.post('/api/getcart', (req,res) =>{
+    const id = req.body.id
+    sqlFind = "SELECT * FROM cart WHERE user_id = ?;" //command to mysql to find user name from user table
+    db.query(sqlFind,[id],(err,result) => {
+        if(err){
+            //console.log(err.message);
+        }
+        if (result == ""){ //if the result is empty that means nothing was found
+            res.send("User has no items");
+        }else {
+            res.send(result);
+        }
+    })
+})
+
+app.post('/api/addToCart', (req, res) => {
+    console.log("Add to Cart called");
+    const uid = req.body.uid;
+    const id = req.body.id;
+    const qty = req.body.qty;
+
+    const sqlInsert = "INSERT INTO cart (user_id, item_id, item_qty) VALUES (?,?,?);"
+    db.query(sqlInsert,[uid, id, qty], (err, res) =>{
+        if(err){
+            //console.log(err.message);
+        }
+    });
+})
+
+app.post('/api/updateCartQty', (req, res) => {
+    console.log("Update called");
+    const i_id = req.body.id;
+    const i_item_id = req.body.item_id
+    const qty = req.body.qty;
+
+    /*
+    sqlUpdate = "UPDATE cart SET item_qty = ?, WHERE item_id = ?"
+    db.query(sqlUpdate,[qty, id],(err,res) =>{
+        if(err){
+            console.log(err.message);
+        }else{
+            console.log(res);
+        }
+    });
+    */
+    sqlUpdate = "UPDATE cart SET item_qty = ?, item_id = ? WHERE id = ?"
+    const values = [qty, i_item_id, i_id];
+
+    db.query(sqlUpdate,values,(err,res) => {
+
+        if(err){
+            console.error(err.message);
+        }
+        console.log(res)
+    });
+
+    /*
+    const query = 'UPDATE `item` '+
+    'SET `item_id` = ?, `item_type` = ?, `item_name` = ?, `item_description` = ?, `item_price` = ?, `item_stock` = ?, `item_onsale` = ?, `item_saleprice` = ?, `item_image` = ?' +
+    'WHERE `item_id` = ?';
+
+    const values = [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_image_name, i_id];
+    db.query(query,values,(err,res) =>{
+    if(err){
+    //console.error(err.message);
+    }
+    //console.log(res)
+    });
+    */
+
+
+})
+
+/*
 
 
 /*-------------------------ORDER APIS-----------------------------*/
@@ -260,12 +339,12 @@ app.get('/api/get/orders', (req, res) => {
 
 app.listen(3001, () => {
     //console.log("build directory: ", build_directory);
-    console.log('running on port 3001')
+    //console.log('running on port 3001')
 });
 
 //places this at the end to serve all other requests
 app.use('/*', (req, res) => {
-	console.log("Request",req);
-	console.log("Redirecting to build/index.html")
+	//console.log("Request",req);
+	//console.log("Redirecting to build/index.html")
 	res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
