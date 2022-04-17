@@ -1,24 +1,48 @@
 import React, {useState, useEffect } from 'react'
+import {useNavigate } from "react-router-dom";
 import Axios from 'axios'
 //import { useSelector } from 'react-redux'
-import './MenuSection.css'
-const Orders = () => {
-    
-  let navigate = useNavigate();
-    const Admin = () => {
-    navigate("/admin")
-  }
-    const Items = () => {
-    navigate("/menu:1")
-  }
- 
-  return (
-    <div>
-      <h1>Admin Order Page</h1>
-      <button className="btn" type="submit" onClick={Admin} >Return to Admin Page</button>
-      <button className="btn" type="submit" onClick={Items} >See Items</button>
-    </div>
-  );
-}
+import './Orders.css'
 
-export default orders
+function Orders({admin}){
+
+  let navigate = useNavigate();
+
+  const users = () => {
+      navigate("/ModifyUser");
+  }
+  const discounts = () => {
+      navigate("/Discounts")
+  }
+  const inventory = () => {
+      navigate("/Menu")
+  }
+  admin = 1;
+  if(admin !== 1){
+      return(
+        <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
+      )
+  }
+
+
+  return(
+    <>
+     <div className="Orders">
+                <h1 className="heading"> Admin Order <span>Portal</span></h1>
+                <div className="create_page">
+                    <div className="logo">
+                        <img className="create_logo" src="./images/logo.png" alt="" />
+                    </div>
+                        <span className="input_label" >Users</span>
+                        <button className="btn" type="submit" onClick={users} >Users</button>
+                        <span className="input_label">Discounts</span>
+                        <button className="btn" type="submit" onClick={discounts} >Discounts</button>
+                        <span className="input_label">Inventory</span>
+                        <button className="btn" type="submit" onClick={inventory} >Inventory</button>
+                </div>
+        </div>
+    </>
+  )
+}
+  
+export default Orders;

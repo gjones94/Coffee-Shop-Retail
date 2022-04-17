@@ -19,7 +19,7 @@ import Register from './components/Register/Register'
 import Admin from './components/Admin/Admin'
 import ModifyUser from './components/ModifyUser/ModifyUser'
 import Discounts from './components/Discounts/Discounts'
-//import Orders from './components/orders/orders'
+import Orders from './components/Orders/Orders'
 
 
 
@@ -78,7 +78,7 @@ function App() {
                     <Route path ="/admin" element ={<Admin admin={adminID}/>}/>
                     <Route path ="/createItem" element={<CreateItem/>}/>
                     <Route path ="/modifyItem:id" element={<ModifyItem uid={loginID} admin={adminID}/>}/>
-                    <Route path ="/orders" element ={<orders/>}/>
+                    <Route path ="/orders" element ={<Orders admin={adminID}/>}/>
                 </Routes>
                 <Footer />
                 </div>

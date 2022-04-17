@@ -17,11 +17,11 @@ function Admin({admin}){
       navigate("/Menu")
   }
   const orders = () => {
-      alert("Not ready yet");
-      //navigate("/Order")
+      //alert("Not ready yet");
+      navigate("/Orders")
   }
-
-  if(admin != 1){
+  admin = 1;
+  if(admin !== 1){
       return(
         <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
       )
@@ -48,20 +48,6 @@ function Admin({admin}){
         </div>
     </>
   )
- 
-
-
-
-/*return (
-  <div>
-    <h1>Orders</h1>
-    <button className="btn" type="submit" onClick={Orders} >See Orders</button>
-  </div>
-  <div>
-    <h1>Items</h1>
-    <button className="btn" type="submit" onClick={Items} >See Items</button>
-  </div>
-);*/
 }
   
 export default Admin;

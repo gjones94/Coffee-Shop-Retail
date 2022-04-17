@@ -28,7 +28,7 @@ const Footer = () => {
                         <span className="header__navItems">Login</span>
                      </Link>
                     <Link style={{textDecoration: 'none'}} to="/admin">
-                        <span className="header__navItems">Login</span>
+                        <span className="header__navItems">Admin</span> 
                      </Link>
                 </nav>              
                 <div className="credit">Group 13 | all rights reserved</div>
@@ -36,7 +36,7 @@ const Footer = () => {
                 </section> 
             
         </>
-    )
+    ) // changed line 31 to "Admin", before there were two footer buttons
 }
 
 
