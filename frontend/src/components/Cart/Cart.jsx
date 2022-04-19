@@ -56,10 +56,9 @@ const Cart = ({uid, uname}) =>{
                 })
                 setDetails(cart_item_details);
                 setTotal(total)
-
-                loaded();
             }
         );
+        loaded();
     }
 
     const loaded = () => {
@@ -104,12 +103,14 @@ const Cart = ({uid, uname}) =>{
 
     if(isLoading){
         return <h1 className="heading"> FETCHING<span>DATA</span></h1>
-    }else if(uid == null){
-        return(
-            <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
-        )
-    }else{
-        return (
+    }
+    if(!cartDetails){
+        return <h1 className="heading"> FETCHING<span>CART</span></h1>
+    }
+    if(uid == null){
+        return <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
+    }
+    return (
             <div className="cart_item">
                     <h1 className="heading"> {uname}'s <span> CART </span></h1>
                     <div className="cart_page">
@@ -176,8 +177,8 @@ const Cart = ({uid, uname}) =>{
                         {/*</form>*/}
                     </div>
             </div>
-        );  
-    }
+    );  
+    
 }
 
 export default Cart;
