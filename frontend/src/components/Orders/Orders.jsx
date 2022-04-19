@@ -17,7 +17,7 @@ function Orders({admin}){
   const inventory = () => {
       navigate("/Menu")
   }
-  admin = 1;
+  admin = 1; // REMOVE LATER
   if(admin !== 1){
       return(
         <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
