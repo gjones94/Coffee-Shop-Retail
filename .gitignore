@@ -55,3 +55,4 @@ Mkfile.old
 dkms.conf
 node_modules
 node_modules
+/frontend/build/static/js/main.a45cbe5b.chunk.js
