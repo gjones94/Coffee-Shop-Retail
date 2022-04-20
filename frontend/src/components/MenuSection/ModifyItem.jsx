@@ -5,7 +5,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 
-function ModifyItem () {
+function ModifyItem ({uid, admin}) {
 
     const [item_id, set_id] = useState("");
     const [item_type, set_type] = useState("");
@@ -106,6 +106,19 @@ function ModifyItem () {
     if (isLoading){
         //returns only this until data is done loading
         return <div className="App">Fetching Data...</div>;
+    }
+
+
+    //Redirect people who logged out back to home
+    if(admin == null){
+        navigate('/home');
+    }
+
+    //Logged in, but not an admin
+    if(admin == 0){
+        return(
+            <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
+        )
     }
 
     return (

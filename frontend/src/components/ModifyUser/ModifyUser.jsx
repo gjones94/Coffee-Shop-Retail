@@ -2,9 +2,10 @@ import React, {useState,useEffect} from "react";
 import { useSelector } from 'react-redux'
 import Axios from 'axios';
 import './ModifyUser.css';
+import { useNavigate } from "react-router-dom";
 
 
-function ModifyUser(){
+function ModifyUser({admin}){
     //setting all the needed states for intitial variables.
     const [InEmail,setInEmail] = useState("")
     const [Email,setEmail] = useState("")
@@ -25,7 +26,7 @@ function ModifyUser(){
 
     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}\b/
     const passwordRegex = /(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/
-
+    let navigate = useNavigate();
 
     const [UserList, makeList] = useState([])
 
@@ -143,6 +144,10 @@ function ModifyUser(){
         })
         
         setResponse("User Updated")
+    }
+
+    if(admin == null){
+        navigate('/home');
     }
 
     return(

@@ -6,17 +6,25 @@ import './Orders.css'
 
 function Orders({admin}){
 
-  let navigate = useNavigate();
+    let navigate = useNavigate();
 
-  const users = () => {
-      navigate("/ModifyUser");
-  }
-  const discounts = () => {
-      navigate("/Discounts")
-  }
-  const inventory = () => {
-      navigate("/Menu")
-  }
+    const users = () => {
+        navigate("/ModifyUser");
+    }
+    const discounts = () => {
+        navigate("/Discounts")
+    }
+    const inventory = () => {
+        navigate("/Menu")
+    }
+  
+
+
+    //redirect people who logout back to home
+    if(admin == null){
+        navigate('/home');
+    }
+
   admin = 1; // REMOVE LATER
   if(admin !== 1){
       return(
