@@ -78,6 +78,18 @@ function Orders ({admin}) {
         setDisplayOrders(tempOrders);
     }
 
+/*    const sortByName = () => {
+        //reset the temp inventory list
+        tempOrders = [];
+        //add all current items to list
+        displayOrders.map(order => {
+            tempOrders.push(order);
+        });
+
+        tempOrders.sort((a,b) => (a.orders_total > b.orders_total) ? 1 : -1);
+        setDisplayOrders(tempOrders);
+    } */
+
     const loading = () =>{
         setLoading(true);
     }
@@ -113,6 +125,9 @@ function Orders ({admin}) {
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
+                </div>
+                <div class="box">
+                    <button className="btn" type="submit" onClick={sortByName}>Sort By Price</button>
                 </div>
                 </div>
             </section>
