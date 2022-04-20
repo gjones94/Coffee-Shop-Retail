@@ -78,7 +78,8 @@ function Orders ({admin}) {
         setDisplayOrders(tempOrders);
     }
 
-/*    const sortByName = () => {
+    const sortByName = () => {
+        /*
         //reset the temp inventory list
         tempOrders = [];
         //add all current items to list
@@ -87,8 +88,8 @@ function Orders ({admin}) {
         });
 
         tempOrders.sort((a,b) => (a.orders_total > b.orders_total) ? 1 : -1);
-        setDisplayOrders(tempOrders);
-    } */
+        setDisplayOrders(tempOrders); */
+    }
 
     const loading = () =>{
         setLoading(true);
