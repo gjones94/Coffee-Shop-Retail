@@ -1,0 +1,19 @@
+
+
+Discounts
+
+This is where admins are redirected to when the want to create or modify a discount.
+
+Similar to the menu page, it populates all the discounts from the database.
+
+The admin can create a discount by filling out the fields on the form and clicking create.
+
+Each discount is displayed in a container box, and each box has a modify and delete button as well. 
+
+When clicked, the button will populate the create/modify box with the discount's data to be modified 
+and set the update boolean on the so that the correct call to update is made.
+
+The functions fetchData, loaded, loading, addDiscount, modifyDiscount are all very similar in nature
+to those described in the menuSection. Please refer to that section for further detail
+
+
