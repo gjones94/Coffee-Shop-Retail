@@ -42,7 +42,7 @@ function Orders ({admin}) {
             return;
         }else{
             constOrders.map(order => {
-                if(order.orders_id.toLowerCase().includes(searchInput.toLowerCase()) || order.orders_user.toLowerCase().includes(searchInput.toLowerCase())){
+                if(order.orders_id.includes(searchInput) || order.orders_user.includes(searchInput)){
                     tempOrders.push(order);
                 }else{
                 }
