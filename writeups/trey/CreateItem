@@ -1,0 +1,6 @@
+
+
+CreateItem:
+
+This page is where an admin is redirected when they wish to create an item. This is nearly identical to the modifyItem page
+except that the data is not repopulated with an item to begin with. Please refer to ModifyItem for how this page works.

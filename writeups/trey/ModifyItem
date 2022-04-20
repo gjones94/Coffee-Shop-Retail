@@ -1,0 +1,37 @@
+
+ModifyItem:
+This Page is where an is redirected when they click the modify item button.
+
+The page loads and it parses the url for a parameter attached to the ModifyItem url: i.e. modifyItemCBD0001, where
+CB0001 is the item Id of the product that needs to populate the fields in the modify item page. 
+
+From there, the admin can modify any field in the table, and those fields will then be update when the admin clicks the update button.
+upon update, it will redirect the admin back to the MenuSection page to view their change.
+
+Function fetchData():
+- Fetches the item from the database based on the url parameter passed in via API call to axios which hits the index.js backend
+
+Function modifyItem():
+1) Uploads any image that might be in the field 
+2) passes all the fields in the inputs to the backend to run update query
+3) name of image is stored in the database for late retrieval
+
+Function uploadImage():
+1) Creates a form data variable where we add the image name and the image file that's in the input field
+2) Calls uploadImage API which again hits the index.js backend to save the image in the application directory on the server
+
+Functions Loading and Loaded (see the MenuSection Page)
+
+if the admin field passed into the page from app.jsx is null, it redirects back to the home page to make the page unaccessible
+to users.
+
+This page has a bunch of input fields that upon change, set the state variables that are passed to the update query when the 
+user clicks update
+
+
+
+ 
+
+
+
+

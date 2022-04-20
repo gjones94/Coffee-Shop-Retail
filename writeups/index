@@ -1,0 +1,21 @@
+
+Index.js: (This file was a collective effort by several individuals (Kevin, Trey, Cooper)
+
+Trey's Sections:
+This file is the backend server file that runs on a separate process on the server via port 3001.
+It runs on a cron job I created to schedule this process every minute each day to ensure the backend is always running. 
+
+It receives all the API calls from the frontend, fetches data from the db connection to the mysql server created by me on the server
+
+I am also responsible for the Inventory API calls, which take the request from the front end and fetch it through the database
+and sends it back to the front end process that called it.
+
+
+Kevin's Sections:
+
+
+
+Cooper' Sections
+
+
+
