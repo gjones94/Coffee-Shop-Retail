@@ -5,5 +5,29 @@
   
   }
 
+  .create_item {
+    background-color: (--var);
+    height: 100%;
+    color: #fff;
+    filter: brightness(95%);
+}
 
+  .create_page {
+    background-color: black;
+    width: 401px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+  
+    .input_label {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      }
 

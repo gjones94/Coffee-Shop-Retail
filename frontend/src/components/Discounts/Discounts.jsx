@@ -1,23 +1,29 @@
 import React, {useState,useEffect} from "react";
 import "./Discounts.css";
 import axios from "axios";
-
+import { useNavigate} from "react-router-dom";
 
 function Discount ({admin}){
     const[Code,setCode] = useState("")
     const[Percent,setPercent] = useState("")
     const [discountList, setDiscountList] = useState();
     const [isLoading, setLoading] = useState(true)
+    const [loggedIn, setLoggedIn] = useState(true)
 
+    let navigate = useNavigate();
+    
     useEffect(() => {
+        fetchData();
+    },[]);
+
+    const fetchData = () =>{
         axios.post("/api/admin/discount/get").then((response) =>
         {
             let items = JSON.parse(JSON.stringify(response.data));
             setDiscountList(items);
             loaded();
         })
-    },[]);
-
+    }
     const loaded = () =>{
         setLoading(false)
     }
@@ -30,6 +36,8 @@ function Discount ({admin}){
             code:Code,
             percent:Percent
         })
+        loading();
+        fetchData();
     }
 
     const modifyDiscount = (id) => {
@@ -44,7 +52,11 @@ function Discount ({admin}){
         return <>Loading..</>
     }
 
-    if(admin != 1){
+    //Redirect people who logged out back to home
+    if(admin == null){
+            navigate('/home');
+    }
+    if(admin == 0){
         return(
             <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
         )

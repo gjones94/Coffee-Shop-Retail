@@ -5,9 +5,10 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 
-function ModifyItem () {
+function ModifyItem ({uid, admin}) {
 
     const [item_id, set_id] = useState("");
+    const [item_id_update, set_updated_id] = useState("");
     const [item_type, set_type] = useState("");
     const [item_name, set_name ] = useState("");
     const [item_description, set_description] = useState("");
@@ -37,6 +38,7 @@ function ModifyItem () {
                 items.map(item => {
                     if(item.item_id === id){
                         set_id(item.item_id);
+                        set_updated_id(item.item_id);
                         set_type(item.item_type);
                         set_name(item.item_name);
                         set_description(item.item_description);
@@ -59,6 +61,7 @@ function ModifyItem () {
 
         Axios.post("api/modifyItem", {
             id : item_id,
+            updated_id : item_id_update,
             name : item_name,
             type : item_type,
             description : item_description,
@@ -68,7 +71,8 @@ function ModifyItem () {
             sale_price : item_sale_price,
             image : image_name
         });
-
+        //navigate back to main menu
+        navigate("/menu");
     }
 
     const uploadImage = event => {
@@ -108,6 +112,19 @@ function ModifyItem () {
         return <div className="App">Fetching Data...</div>;
     }
 
+
+    //Redirect people who logged out back to home
+    if(admin == null){
+        navigate('/home');
+    }
+
+    //Logged in, but not an admin
+    if(admin == 0){
+        return(
+            <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
+        )
+    }
+
     return (
         <div className="create_item">
                 <h1 className="heading"> Modify <span>Item</span></h1>
@@ -121,11 +138,11 @@ function ModifyItem () {
 
                         <span className="input_label" >Item ID:</span>
                         <input 
-                            value={item_id} 
-                            onChange={event => set_id(event.target.value)}
+                            value={item_id_update}
+                            onChange={event => set_updated_id(event.target.value)}
                             className="item_input" 
                             type="text"
-                            placeholder={item_id}
+                            placeholder={item_id_update}
                             required
                         />
 

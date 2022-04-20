@@ -113,6 +113,7 @@ app.get('/api/get/inventory', (req, res) => {
 app.post("/api/modifyItem", (req,res) => {
     
     const i_id = req.body.id
+    const i_id_update = req.body.updated_id
     const i_type = req.body.type
     const i_name = req.body.name
     const i_desc = req.body.description
@@ -129,7 +130,7 @@ app.post("/api/modifyItem", (req,res) => {
                   'SET `item_id` = ?, `item_type` = ?, `item_name` = ?, `item_description` = ?, `item_price` = ?, `item_stock` = ?, `item_onsale` = ?, `item_saleprice` = ?, `item_image` = ?' +
                   'WHERE `item_id` = ?';
 
-    const values = [i_id, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_image_name, i_id];
+    const values = [i_id_update, i_type, i_name, i_desc, i_price, i_stock, i_sale, i_sale_price, i_image_name, i_id];
     db.query(query,values,(err,res) =>{
         if(err){
             //console.error(err.message);
