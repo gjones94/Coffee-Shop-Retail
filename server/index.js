@@ -308,7 +308,7 @@ app.post('/api/get/cart', (req, res) => {
 
 /*-------------------------ORDER APIS-----------------------------*/
 
-/* Cooper Wineberg
+/*Cooper Wineberg*/
 app.get('/api/get/orders', (req, res) => {
     console.log("fetch orders called") //debugging purposes
     const sqlSelect = "SELECT * FROM orders"; //mysql command to get full list of users
@@ -317,7 +317,6 @@ app.get('/api/get/orders', (req, res) => {
 	    res.send(result); //sends over the list of inventory
     })
 });
-*/
 
 app.listen(3001, () => {
     //console.log("build directory: ", build_directory);

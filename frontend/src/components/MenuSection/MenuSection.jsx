@@ -141,7 +141,6 @@ function MenuSection ({uid, admin}) {
         This sorts the inventory by the item stock
         It uses temp list to populate all the currently displayed inventory and then sorts it, and sets it as the new display inventory
     */
-    */
     const sortByAvailability = () => {
         //reset the temp inventory list
         tempInventory = [];

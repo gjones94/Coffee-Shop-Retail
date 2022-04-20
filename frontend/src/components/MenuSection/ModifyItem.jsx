@@ -81,12 +81,6 @@ function ModifyItem ({uid, admin}) {
         data.append('name', image_name);
         data.append('image', image_file); 
 
-        /* debug purposes
-        Axios.post("https://httpbin.org/anything", data, {
-            
-        }).then(res => console.log(res)).catch(err => console.log(err));
-        */
-
         Axios.post("/api/upload/image", 
             data, 
             {
@@ -133,8 +127,6 @@ function ModifyItem ({uid, admin}) {
                     <div className="logo">
                         <img className="create_logo" src="./images/logo.png" alt="" />
                     </div>
-
-                    {/*<form>*/}
 
                         <span className="input_label" >Item ID:</span>
                         <input 
@@ -231,7 +223,6 @@ function ModifyItem ({uid, admin}) {
                         />
 
                         <button className="btn" type="submit" onClick={modifyItem} >Update Item</button>
-                    {/*</form>*/}
 
                 </div>
         </div>

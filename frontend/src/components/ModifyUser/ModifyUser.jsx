@@ -5,6 +5,8 @@ import './ModifyUser.css';
 import { useNavigate } from "react-router-dom";
 
 
+
+
 function ModifyUser({admin}){
     //setting all the needed states for intitial variables.
     const [InEmail,setInEmail] = useState("")
