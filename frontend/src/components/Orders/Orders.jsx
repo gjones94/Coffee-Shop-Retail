@@ -131,48 +131,17 @@ function Orders ({admin}) {
                     <button className="btn" type="submit" onClick={sortByName}>Sort By Price</button>
                 </div>
                 </div>
+
                 <div className="box-container">
-                    {displayInventory.map(item => 
+                    {displayOrders.map(item => 
                         {
-                            var crossout = "";
-                            var price;
-                            if(item.item_onsale){
-                                price = item.item_saleprice.toFixed(2);
-                                crossout = item.item_price.toFixed(2);
-                            }else{
-                                price = item.item_price.toFixed(2);
-                            }
-                            if(item.item_stock > 0){
-                                return( 
-                                    <div className="box">
-                                        <img src={imageBase + item.item_image} alt="" />
-                                        <h3>{item.item_name}</h3>
-                                        <div className="price">${price}<span>{crossout}</span></div>
-                                        <div className="price">Available: {item.item_stock} </div>
-                                        <div className="desc">{item.item_description}</div>
-                                        {/*<div className="price">${item.item_description}</div>*/}
-                                        {/* if the user is admin, have option to modify and delete the item"*/}
-                                        { admin == 1 ? <button className="btn" type="Modify" onClick={() => modifyItem(item.item_id)} >Modify Item</button> :
-                                            <button className="btn" type="submit" onClick={() => addToCart(item)} >Add to Cart</button>}
-                                        { admin == 1 && <button className="btn" type="submit" onClick={() => deleteItem(item.item_id)} >Delete Item</button>}
-                                        {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
-                                    </div>
-                                )
-                            }else{
-                                return( 
-                                    <div className="box">
-                                        <img src={imageBase + item.item_image} alt="" />
-                                        <h3>{item.item_name}</h3>
-                                        <div className="price">${item.item_price}<span> ${item.item_saleprice}</span></div>
-                                        <div className="price">Available: {item.item_stock} </div>
-                                        <div className="desc">{item.item_description}</div>
-                                        <div className="text">Out of stock!</div>
-                                        <button className="btnDisabled" type="submit">Add to Cart</button>
-                                        {/*<div className="price">${item.item_description}</div>*/}
-                                        {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
-                                    </div>
-                                )
-                            }
+                            console.log(item)
+                            return( 
+                                <div className="box">
+                                    <div className="price">ID: {item.orders_id} </div>
+                                    <div className="price">Date: {item.orders_date} </div>
+                                </div>
+                            )
                         }
                     )}
                 </div>
