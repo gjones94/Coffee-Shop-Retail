@@ -41,9 +41,9 @@ function Orders ({admin}) {
             loaded();
             return;
         }else{
-            constOrders.map(item => {
-                if(orders.orders_id.toLowerCase().includes(searchInput.toLowerCase()) || orders.user.toLowerCase().includes(searchInput.toLowerCase())){
-                    tempOrders.push(item);
+            constOrders.map(order => {
+                if(order.orders_id.toLowerCase().includes(searchInput.toLowerCase()) || order.orders_user.toLowerCase().includes(searchInput.toLowerCase())){
+                    tempOrders.push(order);
                 }else{
                 }
             });
@@ -53,15 +53,15 @@ function Orders ({admin}) {
         loaded();
     };
 
-    const sortByName = () => {
+    const sortByID = () => {
         //reset the temp inventory list
         tempOrders = [];
         //add all current items to list
-        displayOrders.map(item => {
-            tempOrders.push(item);
+        displayOrders.map(order => {
+            tempOrders.push(order);
         });
 
-        tempOrders.sort((a,b) => (a.item_name > b.item_name) ? 1 : -1);
+        tempOrders.sort((a,b) => (a.orders_id > b.orders_id) ? 1 : -1);
         setDisplayOrders(tempOrders);
     }
 
@@ -70,24 +70,11 @@ function Orders ({admin}) {
         //reset the temp inventory list
         tempOrders = [];
         //add all current items to list
-        displayOrders.map(item => {
-            tempOrders.push(item);
+        displayOrders.map(order => {
+            tempOrders.push(order);
         });
 
-        tempOrders.sort((a,b) => (a.item_price > b.item_price) ? 1 : -1);
-        setDisplayOrders(tempOrders);
-    }
-
-
-    const sortByAvailability = () => {
-        //reset the temp inventory list
-        tempOrders = [];
-        //add all current items to list
-        displayOrders.map(item => {
-            tempOrders.push(item);
-        });
-
-        tempOrders.sort((a,b) => (a.item_stock > b.item_stock) ? 1 : -1);
+        tempOrders.sort((a,b) => (a.orders_total > b.orders_total) ? 1 : -1);
         setDisplayOrders(tempOrders);
     }
 
@@ -122,7 +109,7 @@ function Orders ({admin}) {
                     <button className="btn" type="submit" onClick={search}>Submit</button>
                 
                 <div class="box">
-                    <button className="btn" type="submit" onClick={sortByName}>Sort By ID</button>
+                    <button className="btn" type="submit" onClick={sortByID}>Sort By ID</button>
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
