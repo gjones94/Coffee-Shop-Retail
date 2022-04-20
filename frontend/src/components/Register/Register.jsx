@@ -16,8 +16,24 @@ function Register(){
     const [frontNumber, setNumber] = useState("")
 
     let navigate = useNavigate();
-
+    const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}\b/
+    const passwordRegex = /(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/
+    const numberRegex = /^[0-9]+$/
     const submitInfo = () =>{
+
+        if(!emailRegex.test(frontEmail)){
+            alert("Please enter a valid email address")
+            return;
+        }
+        if(!passwordRegex.test(frontPW)){
+            alert("Please enter a valid password.\nPasswords must contain 8 characters,1 upper case,1 lower case, 1 number, and 1 special character(!,@,#,$,%,etc)")
+            return;
+        }
+        if(!numberRegex.test(frontNumber)){
+            alert("Please enter a valid number.\nNo dashes, hyphens, or characters please.")
+            return;
+        }
+
         if(frontConfirm === frontPW){
             Axios.post("/api/register/insert",{
             first: frontFirst,
