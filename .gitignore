@@ -3,6 +3,7 @@ node_modules
 
 # Prerequisites
 *.d
+*.pem
 
 # Object files
 *.o
