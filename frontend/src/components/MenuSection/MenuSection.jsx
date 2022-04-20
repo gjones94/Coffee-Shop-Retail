@@ -3,10 +3,25 @@ import Axios from 'axios'
 import './MenuSection.css'
 import { useNavigate} from "react-router-dom";
 
+
+/*
+    Author: Trey Jones
+
+    Overview:
+    Menu section is the product page that shows all the stores' inventory. 
+    It is where users go to add to cart, and where admins go to modify and create items.
+
+    Users can also search for inventory by name and by description.
+    They can also sort inventory by name, price, and availability
+
+*/
+
 function MenuSection ({uid, admin}) {
 
     let tempInventory = [];
-    const [constInventory, setConstInventory] = useState();
+    //This holds a copy of all the current inventory that was received from the database, it will not be updated
+    const [constInventory, setConstInventory] = useState(); 
+    //This is updated with only the inventory that is selected when being searched for.
     const [displayInventory, setDisplayInventory] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
@@ -15,10 +30,22 @@ function MenuSection ({uid, admin}) {
 
     let navigate = useNavigate();
 
+    /*
+        Function: UseEffect
+        Use Effect is performed when the page first loads. 
+    */
     useEffect(() => {
         fetchData();
     },[]);
 
+    /* 
+        Function: fetchData
+        Fetch Data calls the api on the backend through axios
+        This call goes to the backend process running on the server which handles
+        all API calls.
+        It parses through the JSON response data received, and sets two constant variables that hold the 
+        state of the page. 
+    */
     const fetchData = () =>{
         Axios.get("/api/get/inventory").then( //calls the backend server.js with this api command
             (response) => {
@@ -28,6 +55,7 @@ function MenuSection ({uid, admin}) {
                 loaded();
             }
         );
+        /* Backup cart information
         if(uid != null){
             Axios.post("api/getcart", {
                 id : uid
@@ -38,8 +66,17 @@ function MenuSection ({uid, admin}) {
                 }
             );
         }
+        */
     }
 
+
+    /*
+        Function: search
+        1) It then resets the display inventory to show all items
+        2) This sets up a temporary inventory list which will hold the results that the user searched for
+        3) It then sets the display inventory to be the inventory items that we populated in our temporary list that matched the search criteria
+        
+    */
     const search = () => {
         tempInventory = []; //reset list
         setDisplayInventory(constInventory);//reset display inventory
@@ -63,6 +100,11 @@ function MenuSection ({uid, admin}) {
         loaded();
     };
 
+    /*
+        Function: sortByName
+        This sorts the inventory by the item name
+        It uses temp list to populate all the currently displayed inventory and then sorts it, and sets it as the new display inventory
+    */
     const sortByName = () => {
         //reset the temp inventory list
         tempInventory = [];
@@ -76,6 +118,11 @@ function MenuSection ({uid, admin}) {
     }
 
 
+    /*
+        Function: sortByPrice
+        This sorts the inventory by the item price
+        It uses temp list to populate all the currently displayed inventory and then sorts it, and sets it as the new display inventory
+    */
     const sortByPrice = () => {
         //reset the temp inventory list
         tempInventory = [];
@@ -89,6 +136,12 @@ function MenuSection ({uid, admin}) {
     }
 
 
+    /*
+        Function: sortByAvailability
+        This sorts the inventory by the item stock
+        It uses temp list to populate all the currently displayed inventory and then sorts it, and sets it as the new display inventory
+    */
+    */
     const sortByAvailability = () => {
         //reset the temp inventory list
         tempInventory = [];
@@ -102,6 +155,10 @@ function MenuSection ({uid, admin}) {
     }
    
    
+    /*
+        Function: addToCart
+        May not be used. Holding up
+    */
     const addToCart = (item) => {
         let temp_cart = [];
 
@@ -165,18 +222,33 @@ function MenuSection ({uid, admin}) {
         }
     }
 
+    //Not required
     const deleteItem = (item_id) => {
         console.log("Item", item_id);
     }
 
+    /*
+        Function: createItem
+
+        Simply navigates to the create item page
+    */
     const createItem = () => {
         navigate("/createItem");
     }
 
+    /*
+        Function: modifyItem
+
+        Simply navigates to the modify item page
+    */
     const modifyItem = (item_id) => {
         navigate("/modifyItem" + item_id);
     }
 
+    /*
+        Function(s): loading, loaded
+        sets the loading variable to ensure the page only loads once data is fetched
+    */
     const loading = () =>{
         setLoading(true);
     }
@@ -185,16 +257,16 @@ function MenuSection ({uid, admin}) {
         setLoading(false);
     }
 
+    //Returns Loading data if isLoading is true
     if (isLoading){
         //returns only this until data is done loading
         return <div className="App">Loading Data...</div>;
     }
 
-    //once data is done loading, we do this!
+    //once data is done loading, it displays the page properly with all the inventory
     return (
         <>
             <section className="menu" id="Menu">
-                {/* OLD ONE <h1 className="heading"> {selector[3].sectionName[0]} <span>{selector[3].sectionName[1]}</span> </h1>*/}
                 <h1 className="heading"> OUR <span> PRODUCTS </span> </h1>
                 <div class="search">
                     <div className="search_head" for="search"> Search Inventory </div>

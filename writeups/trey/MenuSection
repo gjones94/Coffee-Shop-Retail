@@ -1,0 +1,98 @@
+
+Menu Section
+
+Author: Trey Jones
+
+Overview:
+Menu section is the product page that shows all the stores' inventory. 
+It is where users go to add to cart, and where admins go to modify and create items.
+
+Users can also search for inventory by name and by description.
+They can also sort inventory by name, price, and availability
+
+/*
+        Function: UseEffect
+        - Use Effect is performed when the page first loads. 
+*/
+
+/* 
+        Function: fetchData
+
+        1) Fetch Data calls the api on the backend through axios
+        2) This call goes to the backend process running on the server which handles
+           all API calls.
+        3) It parses through the JSON response data received, and sets two constant 
+	   variables that hold the 
+           state of the page. 
+*/
+
+/*
+        Function: search
+        1) It then resets the display inventory to show all items
+        2) This sets up a temporary inventory list which will hold 
+ 	   the results that the user searched for
+        3) It then sets the display inventory to be the inventory 
+	   items that we populated in our temporary list that matched the search criteria
+        
+*/
+
+/*
+        Function: sortByName
+        1) This sorts the inventory by the item name
+        2) It uses temp list to populate all the currently 
+	   displayed inventory and then sorts it, and sets it as the new display inventory
+*/
+
+/*
+        Function: sortByPrice
+        1) This sorts the inventory by the item price
+        2) It uses temp list to populate all the currently 
+	   displayed inventory and then sorts it, and sets it as the new display inventory
+*/
+
+/*
+        Function: sortByAvailability
+        1) This sorts the inventory by the item stock
+        2) It uses temp list to populate all the currently 
+	   displayed inventory and then sorts it, and sets it as the new display inventory
+*/
+
+
+/*
+        Function: createItem
+
+        - Simply navigates to the create item page
+*/
+
+
+/*
+        Function: modifyItem
+
+        - Simply navigates to the modify item page
+*/
+
+
+
+ /*
+        Function(s): loading, loaded
+        - sets the loading variable to ensure the page only loads once data is fetched
+*/
+
+
+
+//once data is done loading, it displays the page properly with all the inventory
+
+The display inventory return statement cycles through all the displayInventory data
+and maps each item to a box container with buttons. 
+
+Those buttons will be different depending on the login data (admin, uid) that was passed in to the
+page on load from app.jsx
+
+if admin is 1, then there will not be an add to cart button, but rather a modify and create item
+button for each displayed item.
+
+If an item is out of stock, the add to cart button is disabled
+and it says the item is out of stock.
+
+
+

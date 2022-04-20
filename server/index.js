@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const mysql = require("mysql");
 const multer = require("multer");
-const { application } = require("express");
-const { send } = require("process");
 
 const build_directory = path.join(__dirname, '../build');
 
