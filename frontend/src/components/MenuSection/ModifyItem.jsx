@@ -8,6 +8,7 @@ import axios from "axios";
 function ModifyItem ({uid, admin}) {
 
     const [item_id, set_id] = useState("");
+    const [item_id_update, set_updated_id] = useState("");
     const [item_type, set_type] = useState("");
     const [item_name, set_name ] = useState("");
     const [item_description, set_description] = useState("");
@@ -37,6 +38,7 @@ function ModifyItem ({uid, admin}) {
                 items.map(item => {
                     if(item.item_id === id){
                         set_id(item.item_id);
+                        set_updated_id(item.item_id);
                         set_type(item.item_type);
                         set_name(item.item_name);
                         set_description(item.item_description);
@@ -59,6 +61,7 @@ function ModifyItem ({uid, admin}) {
 
         Axios.post("api/modifyItem", {
             id : item_id,
+            updated_id : item_id_update,
             name : item_name,
             type : item_type,
             description : item_description,
@@ -68,7 +71,8 @@ function ModifyItem ({uid, admin}) {
             sale_price : item_sale_price,
             image : image_name
         });
-
+        //navigate back to main menu
+        navigate("/menu");
     }
 
     const uploadImage = event => {
@@ -134,11 +138,11 @@ function ModifyItem ({uid, admin}) {
 
                         <span className="input_label" >Item ID:</span>
                         <input 
-                            value={item_id} 
-                            onChange={event => set_id(event.target.value)}
+                            value={item_id_update}
+                            onChange={event => set_updated_id(event.target.value)}
                             className="item_input" 
                             type="text"
-                            placeholder={item_id}
+                            placeholder={item_id_update}
                             required
                         />
 

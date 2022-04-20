@@ -25,32 +25,32 @@ function Orders({admin}){
         navigate('/home');
     }
 
-  admin = 1; // REMOVE LATER
-  if(admin !== 1){
-      return(
-        <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
-      )
-  }
+    admin = 1; // REMOVE LATER
+    if(admin !== 1){
+        return(
+            <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
+        )
+    }
 
 
-  return(
-    <>
-     <div className="Orders">
-                <h1 className="heading"> Admin Order <span>Portal</span></h1>
-                <div className="create_page">
-                    <div className="logo">
-                        <img className="create_logo" src="./images/logo.png" alt="" />
+    return(
+        <>
+        <div className="Orders">
+                    <h1 className="heading"> Admin Order <span>Portal</span></h1>
+                    <div className="create_page">
+                        <div className="logo">
+                            <img className="create_logo" src="./images/logo.png" alt="" />
+                        </div>
+                            <span className="input_label" >Users</span>
+                            <button className="btn" type="submit" onClick={users} >Users</button>
+                            <span className="input_label">Discounts</span>
+                            <button className="btn" type="submit" onClick={discounts} >Discounts</button>
+                            <span className="input_label">Inventory</span>
+                            <button className="btn" type="submit" onClick={inventory} >Inventory</button>
                     </div>
-                        <span className="input_label" >Users</span>
-                        <button className="btn" type="submit" onClick={users} >Users</button>
-                        <span className="input_label">Discounts</span>
-                        <button className="btn" type="submit" onClick={discounts} >Discounts</button>
-                        <span className="input_label">Inventory</span>
-                        <button className="btn" type="submit" onClick={inventory} >Inventory</button>
-                </div>
-        </div>
-    </>
-  )
+            </div>
+        </>
+    )
 }
   
 export default Orders;
