@@ -29,7 +29,7 @@ function Orders ({admin}) {
             }
         );
     }
-
+    /*
     const fetchData = () =>{
         Axios.get("/api/get/users").then( //calls the backend server.js with this api command
             (response) => {
@@ -37,7 +37,7 @@ function Orders ({admin}) {
                 loaded();
             }
         );
-    }
+    } */
 
     const searchByID = () => {
         tempOrders = []; //reset list
@@ -138,32 +138,17 @@ function Orders ({admin}) {
     }
 
     const updateOrder = () => { // to update orders to completed
-        var searchInput = order.orders_id; // may be incorrect input
+        var ordersID = order.orders_id; // may be incorrect input
         console.log(searchInput);
-
-        if(Response === "" || Response === "Order updated"){
-            setResponse("Please find an order first")
-            return
-        }
-        setUserID(UserID)
     
         //api call to update order
         //sends all the information to backend for db
-        Axios.post("/api/admin/order/update",{
-
-            email:Email,
-            firstname:FirstName,
-            lastname:LastName,
-            phone:Phone,
-            address:Address,
-            password:Password,
-            userID:UserID
-
-        })
+        Axios.post("/api/orders/update", {
+            orders_id : ordersID,
+            orders_completed: 1
+        });
         
-        setResponse("User Updated")
-    }
-
+        setResponse("Order Updated")
     }
 
     const loading = () =>{
