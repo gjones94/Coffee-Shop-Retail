@@ -89,16 +89,24 @@ function Orders ({admin}) {
     */
     const combineUsersOrders = () =>{
         console.log("combine")
+        //this combo list will hold the comprehensive order data + first and last name of the user who has this order
         let combo = []
+
+        //Cycle through all users
         users.map(user => {
+            //Cycle through all orders to pair up the order user and the user in the database to get their name
             orders.map(order => {
                 if(user.user_id === order.orders_user){
+                    //assign temp variable that holds all the standard order info
                     let data = order
-                    console.log("Data before", data)
+                    //add two fields to the data variable to hold the first name, and last name
+                    // i.e. {first : <name>, last : <name>}
                     data["first"] = user.user_first_name
                     data["last"] = user.user_last_name
-                    console.log("Data after", data)
+
+                    //add this to the comprehensive combo list
                     combo.push(data)
+
                     //change to yes no for readability
                     if(order.orders_completed == 0){
                         order.orders_completed = "No"
@@ -108,6 +116,7 @@ function Orders ({admin}) {
                 }
             })
         })
+        //set the const orders and display orders with this comprehensive order + names list
         setConstOrders(combo)
         setDisplayOrders(combo) 
         setUnsortedOrders(combo) //used for resetting the sort order back to original order in the db
@@ -177,12 +186,15 @@ function Orders ({admin}) {
             This cycles between ascending descending and normal sort
         */
         if(sortIDOrder == 0){
+            //Ascending
             tempOrders.sort((a, b) => (a.orders_id > b.orders_id) ? 1 : -1);
             setIDSort(1)
         }else if(sortIDOrder == 1){
+            //Descending
             tempOrders.sort((a, b) => (a.orders_id < b.orders_id) ? 1 : -1);
             setIDSort(2)
         }else if(sortIDOrder == 2){
+            //Normal
             tempOrders = unSortedOrders
             setIDSort(0)
         }
@@ -209,12 +221,15 @@ function Orders ({admin}) {
             This cycles between ascending descending and normal sort
         */
         if(sortPriceOrder == 0){
+            //Ascending
             tempOrders.sort((a, b) => (a.orders_total > b.orders_total) ? 1 : -1);
             setPriceSort(1)
         }else if(sortPriceOrder == 1){
+            //Descending
             tempOrders.sort((a, b) => (a.orders_total < b.orders_total) ? 1 : -1);
             setPriceSort(2)
         }else if(sortPriceOrder == 2){
+            //Normal
             tempOrders = unSortedOrders
             setPriceSort(0)
         }
@@ -239,12 +254,15 @@ function Orders ({admin}) {
             This cycles between ascending descending and normal sort
         */
         if(sortNameOrder == 0){
+            //Ascending
             tempOrders.sort((a, b) => (a.first > b.first) ? 1 : -1);
             setNameSort(1)
         }else if(sortNameOrder == 1){
+            //Descending
             tempOrders.sort((a, b) => (a.first < b.first) ? 1 : -1);
             setNameSort(2)
         }else if(sortNameOrder == 2){
+            //Normal
             tempOrders = unSortedOrders
             setNameSort(0)
         }
