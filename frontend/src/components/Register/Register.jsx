@@ -123,7 +123,7 @@ function Register(){
                             //value={item_description} 
                             onChange={event => setNumber(event.target.value)}
                             className="item_input"
-                            placeholder="INPUT NUMBERS ONLY"
+                            placeholder="Phone"
                             required
                         />
 

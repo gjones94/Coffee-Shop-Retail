@@ -28,7 +28,7 @@ const Login = ({uid, admin, onLogin}) => {
       }else if (response.data === "PASSERR"){
         alert("Incorrect combination of username and password");
       }else{
-        
+
           let users = JSON.parse(JSON.stringify(response.data));
           console.log(users);
           console.log(users[0].user_id, users[0].user_admin)
@@ -58,6 +58,7 @@ const Login = ({uid, admin, onLogin}) => {
             value={frontName} 
             onChange={event => setName(event.target.value)}
             className="login__input" 
+            placeholder ="Email"
           />
 
           <span className="login__password">Password:</span>

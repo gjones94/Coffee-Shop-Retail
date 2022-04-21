@@ -36,13 +36,13 @@ function Admin({admin}){
                     <div className="logo">
                         <img className="create_logo" src="./images/logo.png" alt="" />
                     </div>
-                        <span className="input_label" >Users</span>
+                        <span className="input_label" ></span>
                         <button className="btn" type="submit" onClick={users} >Users</button>
-                        <span className="input_label">Discounts</span>
+                        <span className="input_label"></span>
                         <button className="btn" type="submit" onClick={discounts} >Discounts</button>
-                        <span className="input_label">Inventory</span>
+                        <span className="input_label"></span>
                         <button className="btn" type="submit" onClick={inventory} >Inventory</button>
-                        <span className="input_label">Orders</span>
+                        <span className="input_label"></span>
                         <button className="btn" type="submit" onClick={orders} >Orders</button>
                 </div>
         </div>
