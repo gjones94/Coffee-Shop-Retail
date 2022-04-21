@@ -168,11 +168,14 @@ function Orders ({admin}) {
                                     <div className="price">Date: {item.orders_date} </div>
                                     <div className="price">Order Total: ${item.orders_total} </div>
                                     <div className="price">User: {item.orders_user} </div>
-                                    <pre>
-                                        <code>
-                                            <div className="price">Items: {item.orders_items} </div>
-                                        </code>
-                                    </pre>
+                                    <div className="price"> 
+                                        Items: 
+                                        <pre>
+                                            <code>
+                                                {item.orders_items}
+                                            </code>
+                                        </pre>
+                                    </div>
                                 </div>
                             )
                         }
