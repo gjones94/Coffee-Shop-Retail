@@ -19,8 +19,10 @@ function Register(){
     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}\b/
     const passwordRegex = /(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/
     const numberRegex = /^[0-9]+$/
-    const submitInfo = () =>{
 
+
+    const submitInfo = () =>{
+        const validBreak = 0;
         if(!emailRegex.test(frontEmail)){
             alert("Please enter a valid email address")
             return;
@@ -34,21 +36,42 @@ function Register(){
             return;
         }
 
-        if(frontConfirm === frontPW){
-            Axios.post("/api/register/insert",{
-            first: frontFirst,
-            last: frontLast,
-            email: frontEmail,
-            address: frontAddress,
-            number: frontNumber,
-            password : frontPW,
-            });
+        Axios.post("/api/register/validate",{
+            email: frontEmail
+        }).then((response) =>{
+            console.log(response)
+            if(response.data == "not valid"){
+                alert("This email already has an account associated with it")
+                return;
+            }
 
-            alert("Thank you for registering ", frontFirst, "!")
-            navigate("/Login")
-        }else{
-            alert("The passwords do not match, please check and try again")
-        }
+            if(response.data == "valid"){
+
+                if(frontConfirm === frontPW){
+         
+
+                    Axios.post("/api/register/insert",{
+                    first: frontFirst,
+                    last: frontLast,
+                    email: frontEmail,
+                    address: frontAddress,
+                    number: frontNumber,
+                    password : frontPW,
+                    });
+        
+                    alert("Thank you for registering ", frontFirst, "!")
+                    navigate("/Login")
+                }else{
+                    alert("The passwords do not match, please check and try again")
+                }
+                
+            }
+
+        });
+
+       
+
+        
     }
 
    

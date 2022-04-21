@@ -82,12 +82,24 @@ app.post("/api/register/insert",(req,res) => {
     const addr = req.body.address
     const number = req.body.number
     const pw = req.body.password
-
+    console.log("here")
     const sqlInsert="INSERT INTO users (user_id, user_email, user_first_name, user_last_name, user_phone,user_address,password) VALUES (?,?,?,?,?,?,?);"
     db.query(sqlInsert,[id,email,first,last,number,addr,pw],(res,err) => {
-        //console.log(res)
     });
 
+})
+
+app.post("/api/register/validate",(req,res) => {
+    const email = req.body.email
+    const sqlFind ="SELECT user_email FROM users WHERE user_email = ?";
+    db.query(sqlFind,[email],(err,result)=>{
+        console.log(result)
+        if(result == ""){
+            res.send("valid")
+        }else{
+            res.send("not valid")
+        }
+    })
 })
 
 
