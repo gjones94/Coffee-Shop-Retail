@@ -339,10 +339,10 @@ app.post('/api/get/cart', (req, res) => {
 /*Cooper Wineberg*/
 app.get('/api/get/orders', (req, res) => {
     console.log("fetch orders called") //debugging purposes
-    const sqlSelect = "SELECT * FROM orders"; //mysql command to get full list of users
+    const sqlSelect = "SELECT * FROM orders"; //mysql command to get full list of orders
     db.query(sqlSelect,(err,result) =>{
         console.log(result);
-	    res.send(result); //sends over the list of inventory
+	    res.send(result); //sends over the list of orders
     })
 });
 
@@ -352,7 +352,7 @@ app.post('/api/orders/update', (req, res) => {
     const orders_id = req.body.orders_id
     const orders_completed = req.body.orders_completed;
 
-    const sqlUpdate = "UPDATE orders SET orders_completed = ? WHERE orders_id = ?"; //mysql command to get full list of users
+    const sqlUpdate = "UPDATE orders SET orders_completed = ? WHERE orders_id = ?"; //mysql command to get full list of orders
     const values = orders_completed;
     console.log(orders_id, orders_completed)
     db.query(sqlUpdate,values,(err,res) => {
