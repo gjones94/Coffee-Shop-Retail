@@ -154,7 +154,7 @@ function Orders ({admin}) {
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
                 </div>
                 <div class="box">
-                    <button className="btn" type="submit" onClick={sortByName}>Sort By Price</button>
+                    <button className="btn" type="submit" onClick={sortByName}>Sort By Name</button>
                 </div>
                 </div>
 
