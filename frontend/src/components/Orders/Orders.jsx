@@ -137,13 +137,13 @@ function Orders ({admin}) {
     const sortByDate = () => {
     }
 
-    const updateOrder = () => { // to update orders to completed
-        console.log(ordersID);// may be incorrect input
+    const updateOrder = (order_id) => { // to update orders to completed
+        console.log(order_id);// may be incorrect input
     
         //api call to update order
         //sends all the information to backend for db
         Axios.post("/api/orders/update", {
-            orders_id : ordersID,
+            orders_id : order_id,
             orders_completed: 1
         });
         
@@ -209,12 +209,7 @@ function Orders ({admin}) {
                                     <div className="price">Completed: {order.orders_completed} </div>
                                     <div className="price">Items: {order.items}</div>
                                     <div class="box">
-                                        <script>
-                                        function getOrderID(){
-                                            let orderID = document.getElementById({order.orders_id}).value();
-                                        }
-                                        </script>
-                                        <button className="btn" type="submit" onClick={updateOrder}>Order Completed</button>
+                                        <button className="btn" type="submit" onClick={() => updateOrder(order.orders_id)} >Complete Order</button>
                                     </div>
                                 </div>
                             )
