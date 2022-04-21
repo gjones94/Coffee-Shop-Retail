@@ -159,23 +159,25 @@ function Orders ({admin}) {
                 </div>
 
                 <div className="box-container">
-                    {displayOrders.map(item => 
+                    {displayOrders.map(order => 
                         {
-                            console.log(item)
+                            console.log(order)
                             return( 
                                 <div className="box">
-                                    <div className="price">Order ID: {item.orders_id} </div>
-                                    <div className="price">Date: {item.orders_date} </div>
-                                    <div className="price">Order Total: ${item.orders_total} </div>
-                                    <div className="price">User: {item.orders_user} </div>
-                                    <div className="price"> 
-                                        Items: 
-                                        <pre>
-                                            <code>
-                                                {item.orders_items}
-                                            </code>
-                                        </pre>
-                                    </div>
+                                    <div className="price">Order ID: {order.orders_id} </div>
+                                    <div className="price">Date: {order.orders_date} </div>
+                                    <div className="price">Order Total: ${order.orders_total} </div>
+                                    <div className="price">User: {order.orders_user} </div>
+                                    {items.map(item => 
+                                    {
+                                        console.log("Item is", item);  
+                                        return (
+                                            <div className='box'>
+                                                <div className="price">Item: {item} </div>
+                                            </div>
+                                        )
+                                    }
+                                )}    
                                 </div>
                             )
                         }
