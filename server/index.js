@@ -346,14 +346,14 @@ app.get('/api/get/orders', (req, res) => {
     })
 });
 
-app.post('/api/orders/update', (req, res) => {
+app.post('/api/orders/update', (req, res) => { // delete then insert
     console.log("update orders called") //debugging purposes
 
     const orders_id = req.body.orders_id
     const orders_completed = req.body.orders_completed;
 
     const sqlUpdate = "UPDATE orders SET orders_completed = ? WHERE orders_id = ?"; //mysql command to get full list of orders
-    const values = orders_completed;
+    const values = [orders_completed, orders_id];
     console.log(orders_id, orders_completed)
     db.query(sqlUpdate,values,(err,res) => {
         if(err){

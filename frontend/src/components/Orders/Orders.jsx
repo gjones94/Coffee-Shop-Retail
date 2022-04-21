@@ -139,7 +139,7 @@ function Orders ({admin}) {
 
     const updateOrder = (order_id) => { // to update orders to completed
         console.log(order_id);// may be incorrect input
-        var orderID = parseInt(order_id)
+        var orderID = parseInt(order_id);
         //api call to update order
         //sends all the information to backend for db
         Axios.post("/api/orders/update", {
