@@ -30,7 +30,7 @@ function Orders ({admin}) {
         );
     }
 
-    const search = () => {
+    const searchByID = () => {
         tempOrders = []; //reset list
         setDisplayOrders(constOrders);//reset display orders
         loading();
@@ -42,7 +42,30 @@ function Orders ({admin}) {
             return;
         }else{
             constOrders.map(order => {
-                if(order.orders_id.includes === searchInput || order.orders_user.includes === searchInput){
+                if(order.orders_id.includes == searchInput){
+                    tempOrders.push(order);
+                }else{
+                }
+            });
+        }
+        //set display to the filtered list
+        setDisplayOrders(tempOrders);
+        loaded();
+    };
+
+    const searchByUsers = () => {
+        tempOrders = []; //reset list
+        setDisplayOrders(constOrders);//reset display orders
+        loading();
+        var searchInput = searchValue;
+
+        //check for whitespace only
+        if (/^\s*$/.test(searchInput)){
+            loaded();
+            return;
+        }else{
+            constOrders.map(order => {
+                if(order.orders_user.includes == searchInput){
                     tempOrders.push(order);
                 }else{
                 }
@@ -119,8 +142,11 @@ function Orders ({admin}) {
                         type="search" 
                         id="search"
                     />
-                    <button className="btn" type="submit" onClick={search}>Submit</button>
-                
+                    <button className="btn" type="submit" onClick={searchByID}>Search Orders by ID</button>
+                    
+                <div class="box">
+                    <button className="btn" type="submit" onClick={searchByUsers}>Search Orders by ID</button>
+                </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByID}>Sort By ID</button>
                 </div>
@@ -138,8 +164,11 @@ function Orders ({admin}) {
                             console.log(item)
                             return( 
                                 <div className="box">
-                                    <div className="price">ID: {item.orders_id} </div>
+                                    <div className="price">Order ID: {item.orders_id} </div>
                                     <div className="price">Date: {item.orders_date} </div>
+                                    <div className="price">Order Total: ${item.orders_total} </div>
+                                    <div className="price">User: {item.orders_user} </div>
+                                    <div className="price">User: {item.orders_items} </div>
                                 </div>
                             )
                         }
