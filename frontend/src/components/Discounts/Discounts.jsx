@@ -24,9 +24,11 @@ function Discount ({admin}){
             loaded();
         })
     }
+
     const loaded = () =>{
         setLoading(false)
     }
+
     const loading = () => {
         setLoading(true)
     }
@@ -41,11 +43,7 @@ function Discount ({admin}){
     }
 
     const modifyDiscount = (id) => {
-        alert("Modified");
-    }
-
-    const deleteDiscount = (id) => {
-        alert("Deleted");
+        navigate("modifyDiscount" + id)
     }
 
     if(isLoading){
@@ -64,7 +62,7 @@ function Discount ({admin}){
         return (
             <>
             <div className="create_discount">
-                    <h1 className="heading"> Add <span>Discount</span></h1>
+                    <h1 className="heading"> Add | Modify <span>Discount</span></h1>
                     <div className="create_page">
     
                         <div className="logo">
@@ -86,7 +84,7 @@ function Discount ({admin}){
                                 placeholder="Percent Amount"
                                 required 
                             />
-                            <button className="btn" type="submit" onClick={addDiscount} >Create Discount</button>
+                            <button className="btn" type="submit" onClick={addDiscount} > </button>
                     </div>
             </div>
     
@@ -100,7 +98,6 @@ function Discount ({admin}){
                                         <h3>Code: {discount.discount_code}</h3>
                                         <div className="code">Amount: {discount.discount_percent}%</div>
                                         <button className="btn" type="Modify" onClick={() => modifyDiscount(discount.discount_id)} >Modify Discount</button>
-                                        <button className="btn" type="submit" onClick={() => deleteDiscount(discount.discount_id)} >Delete Discount</button>
                                     </div>
                                 )
                             }

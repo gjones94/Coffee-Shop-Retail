@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
-import './CreateItem.css';
+import './ModifyDiscount.css';
 import Axios from 'axios';
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
-function ModifyItem ({uid, admin}) {
+
+function ModifyDiscount (admin) {
 
     const [item_id, set_id] = useState("");
     const [item_id_update, set_updated_id] = useState("");
