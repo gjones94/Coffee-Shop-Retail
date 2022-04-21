@@ -137,7 +137,7 @@ function Orders ({admin}) {
     const sortByDate = () => {
     }
 
-    const updateOrder = () => { // to update orders to completed
+    const updateOrder = (order.orders_id) => { // to update orders to completed
         var ordersID = order.orders_id; // may be incorrect input
         console.log(searchInput);
     
@@ -148,7 +148,6 @@ function Orders ({admin}) {
             orders_completed: 1
         });
         
-        setResponse("Order Updated")
     }
 
     const loading = () =>{
@@ -211,9 +210,11 @@ function Orders ({admin}) {
                                     <div className="price">Completed: {order.orders_completed} </div>
                                     <div className="price">Items: {order.items}</div>
                                     <div class="box">
-                                        <input 
-                                        value={order.orders_id} // may be incorrect input
-                                        />
+                                        <script>
+                                        function getOrderID(){
+                                            let orderID = document.getElementById({order.orders_id}).value();
+                                        }
+                                        </script>
                                         <button className="btn" type="submit" onClick={updateOrder}>Order Completed</button>
                                     </div>
                                 </div>
