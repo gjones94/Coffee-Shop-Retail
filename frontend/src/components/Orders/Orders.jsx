@@ -114,8 +114,11 @@ function Orders ({admin}) {
                         order.orders_completed = "Yes"
                     }
                     //change date to be readable
-                    const order_date = new Date(order.orders_date)
-                    order.orders_date = order_date.toDateString()
+                    //add one field to the data variable to hold the date
+                    // i.e. {date: <date Obj>}
+                    const order_date = new Date(order.orders_date);
+                    order.orders_date = order_date.toDateString();
+                    data["date"] = order_date;
                 }
             })
         })
@@ -258,11 +261,11 @@ function Orders ({admin}) {
         */
         if(sortNameOrder == 0){
             //Ascending
-            tempOrders.sort((a, b) => (a.first > b.first) ? 1 : -1);
+            tempOrders.sort((a, b) => (a.date > b.date) ? 1 : -1);
             setNameSort(1)
         }else if(sortNameOrder == 1){
             //Descending
-            tempOrders.sort((a, b) => (a.first < b.first) ? 1 : -1);
+            tempOrders.sort((a, b) => (a.date < b.date) ? 1 : -1);
             setNameSort(2)
         }else if(sortNameOrder == 2){
             //Normal
@@ -274,7 +277,37 @@ function Orders ({admin}) {
     }
     
     const sortByDate = () => {
-        //TODO
+        //reset other sorts
+        setNameSort(0)
+        setDateSort(0)
+        setPriceSort(0)
+
+        //reset the temp inventory list
+        tempOrders = [];
+        //add all current items to list
+
+        displayOrders.map(order => {
+            tempOrders.push(order);
+        });
+
+        /*
+            This cycles between ascending descending and normal sort
+        */
+        if(setNameSort == 0){
+            //Ascending
+            tempOrders.sort((a, b) => (a.orders_id > b.orders_id) ? 1 : -1);
+            setNameSort(1)
+        }else if(setNameSort == 1){
+            //Descending
+            tempOrders.sort((a, b) => (a.orders_id < b.orders_id) ? 1 : -1);
+            setNameSort(2)
+        }else if(setNameSort == 2){
+            //Normal
+            tempOrders = unSortedOrders
+            setNameSort(0)
+        }
+
+        setDisplayOrders(tempOrders);
     }
 
     const updateOrder = (order_id) => { // to update orders to completed
