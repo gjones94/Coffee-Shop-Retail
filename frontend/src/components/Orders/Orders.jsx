@@ -113,6 +113,9 @@ function Orders ({admin}) {
                     }else{
                         order.orders_completed = "Yes"
                     }
+                    //change date to be readable
+                    const order_date = new Date(order.orders_date)
+                    order.orders_date = order_date.toDateString()
                 }
             })
         })
