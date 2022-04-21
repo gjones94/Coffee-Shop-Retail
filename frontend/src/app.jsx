@@ -7,6 +7,7 @@ import HomeSection from './components/HomeSection/HomeSection'
 import MenuSection from './components/MenuSection/MenuSection'
 import CreateItem from './components/MenuSection/CreateItem'
 import ModifyItem from './components/MenuSection/ModifyItem'
+import ModifyDiscount from './components/Discounts/ModifyDiscount'
 import Header from './components/Header/Header'
 import ReviewSection from './components/ReviewSection/ReviewSection'
 import Login from './components/Login/Login'
@@ -79,7 +80,7 @@ function App() {
                     <Route path ="/admin" element ={<Admin admin={adminID}/>}/>
                     <Route path ="/createItem" element={<CreateItem/>}/>
                     <Route path ="/modifyItem:id" element={<ModifyItem admin={adminID}/>}/>
-                    <Route path ="/modifyDiscount:id" element={<ModifyItem admin={adminID}/>}/>
+                    <Route path ="/modifyDiscount:id" element={<ModifyDiscount admin={adminID}/>}/>
                     <Route path ="/orders" element ={<Orders admin={adminID}/>}/>
                     {/*<Route path="/cart" element={<Cart_Test uid={loginID} uname={name}/>} />*/}
                 </Routes>

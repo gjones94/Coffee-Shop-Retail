@@ -13,7 +13,7 @@ function ModifyDiscount (admin) {
     const [isLoading, setLoading] = useState(true);
     let navigate = useNavigate();
 
-    let {d_code} = useParams();
+    let {id} = useParams();
 
     useEffect(() => {
         fetchData();
@@ -21,22 +21,25 @@ function ModifyDiscount (admin) {
 
     const fetchData = () =>{
         
+        console.log("parameter_code", id);
         Axios.post('/api/get/discount', {
-            code: d_code
+            code: id
         }).then((response) => {
             loading();
-            let discount = JSON.parse(JSON.stringify(response.data));
-            setCode(discount.discount_code)
-            setPercent(discount.discount_code)
-            setId(discount.discount_id)
+            let temp = JSON.parse(JSON.stringify(response.data));
+            console.log("discount",temp[0])
+            setCode(temp[0].discount_code)
+            setPercent(temp[0].discount_percent)
+            setId(temp[0].discount_id)
+            console.log("new discount is", temp);
             loaded();
-        });
+        })
     }
 
     const modifyDiscount = () => {
 
         Axios.post("api/modify/discount", {
-            code : discount_code,
+            code : Code,
             percent : Percent,
             id : Id
         });
@@ -84,7 +87,7 @@ function ModifyDiscount (admin) {
                             onChange={event => setCode(event.target.value)}
                             className="item_input" 
                             type="text"
-                            placeholder={item_id_update}
+                            placeholder={Code}
                             required
                         />
 

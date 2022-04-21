@@ -270,6 +270,22 @@ app.post("/api/admin/discount/insert",(req,res) =>{
     db.query(sqlInsert,[Code,Percent])
 })
 
+app.post('/api/modify/discount', (req, res) => {
+    const code = req.body.code;
+    const perc = req.body.percent;
+    const id = req.body.id;
+    const values = [code, perc, id]
+    const query = 'UPDATE discounts SET discount_code = ?, discount_percent = ? WHERE discount_id = ?'
+
+    db.query(query,values, (err, res) => {
+        if(err){
+            console.log(err.message);
+        }
+    });
+
+
+})
+
 /*-------------------------CART APIS-----------------------------*/
 
 app.post('/api/addToCart', (req, res) => {
