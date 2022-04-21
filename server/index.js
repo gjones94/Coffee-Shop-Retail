@@ -353,7 +353,8 @@ app.post('/api/orders/update', (req, res) => {
     const orders_completed = req.body.orders_completed;
 
     const sqlUpdate = "UPDATE orders SET orders_completed = ? WHERE orders_id = ?"; //mysql command to get full list of users
-    const values = [orders_completed];
+    const values = orders_completed;
+    console.log(orders_id, orders_completed)
     db.query(sqlUpdate,values,(err,res) => {
         if(err){
             console.error(err.message);

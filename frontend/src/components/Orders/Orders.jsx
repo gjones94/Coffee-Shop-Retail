@@ -207,7 +207,7 @@ function Orders ({admin}) {
                                     <div className="price">Order Total: ${order.orders_total} </div>
                                     <div className="price">User: {order.orders_user} </div>
                                     <div className="price">Completed: {order.orders_completed} </div>
-                                    <div className="price">Items: {order.items}</div>
+                                    <div className="price">Items: {order.orders_items}</div>
                                     <div class="box">
                                         <button className="btn" type="submit" onClick={() => updateOrder(order.orders_id)} >Complete Order</button>
                                     </div>
