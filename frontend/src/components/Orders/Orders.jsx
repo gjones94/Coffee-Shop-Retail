@@ -29,6 +29,15 @@ function Orders ({admin}) {
             }
         );
     }
+    /*
+    const fetchData = () =>{
+        Axios.get("/api/get/users").then( //calls the backend server.js with this api command
+            (response) => {
+                let users = JSON.parse(JSON.stringify(response.data));
+                loaded();
+            }
+        );
+    } */
 
     const searchByID = () => {
         tempOrders = []; //reset list
@@ -102,16 +111,9 @@ function Orders ({admin}) {
     }
 
     const sortByName = () => {
-        /*
-        //reset the temp inventory list
-        tempOrders = [];
-        //add all current items to list
-        displayOrders.map(order => {
-            tempOrders.push(order);
-        });
+    }
 
-        tempOrders.sort((a,b) => (a.orders_total > b.orders_total) ? 1 : -1);
-        setDisplayOrders(tempOrders); */
+    const sortByDate = () => {
     }
 
     const loading = () =>{
@@ -156,6 +158,9 @@ function Orders ({admin}) {
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByName}>Sort By Name</button>
                 </div>
+                <div class="box">
+                    <button className="btn" type="submit" onClick={sortByDate}>Sort By Date</button>
+                </div>
                 </div>
 
                 <div className="box-container">
@@ -168,16 +173,14 @@ function Orders ({admin}) {
                                     <div className="price">Date: {order.orders_date} </div>
                                     <div className="price">Order Total: ${order.orders_total} </div>
                                     <div className="price">User: {order.orders_user} </div>
-                                    {items.map(item => 
-                                    {
-                                        console.log("Item is", item);  
-                                        return (
-                                            <div className='box'>
-                                                <div className="price">Item: {item} </div>
-                                            </div>
-                                        )
-                                    }
-                                )}    
+                                    <div className="price">
+                                        Items: 
+                                        <pre>
+                                            <code>
+                                                {order.items}
+                                            </code>
+                                        </pre>
+                                    </div>
                                 </div>
                             )
                         }
