@@ -42,7 +42,7 @@ function Orders ({admin}) {
             return;
         }else{
             constOrders.map(order => {
-                if(order.orders_id.includes == searchInput){
+                if(order.orders_id == searchInput){
                     tempOrders.push(order);
                 }else{
                 }
@@ -65,7 +65,7 @@ function Orders ({admin}) {
             return;
         }else{
             constOrders.map(order => {
-                if(order.orders_user.includes == searchInput){
+                if(order.orders_user == searchInput){
                     tempOrders.push(order);
                 }else{
                 }
@@ -145,7 +145,7 @@ function Orders ({admin}) {
                     <button className="btn" type="submit" onClick={searchByID}>Search Orders by ID</button>
                     
                 <div class="box">
-                    <button className="btn" type="submit" onClick={searchByUsers}>Search Orders by ID</button>
+                    <button className="btn" type="submit" onClick={searchByUsers}>Search Orders by User</button>
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByID}>Sort By ID</button>
