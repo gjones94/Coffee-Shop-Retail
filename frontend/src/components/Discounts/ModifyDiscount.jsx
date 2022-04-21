@@ -2,13 +2,13 @@ import React, {useState, useEffect} from "react";
 import './ModifyDiscount.css';
 import Axios from 'axios';
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 
 
 function ModifyDiscount (admin) {
 
     const[Code,setCode] = useState("")
     const[Percent,setPercent] = useState("")
+    const[Id, setId] = useState(""); 
 
     const [isLoading, setLoading] = useState(true);
     let navigate = useNavigate();
@@ -28,16 +28,17 @@ function ModifyDiscount (admin) {
             let discount = JSON.parse(JSON.stringify(response.data));
             setCode(discount.discount_code)
             setPercent(discount.discount_code)
+            setId(discount.discount_id)
             loaded();
         });
     }
 
     const modifyDiscount = () => {
-        uploadImage();
 
         Axios.post("api/modify/discount", {
             code : discount_code,
-            percent : Percent
+            percent : Percent,
+            id : Id
         });
         //navigate back to main menu
         navigate("/Discounts");
