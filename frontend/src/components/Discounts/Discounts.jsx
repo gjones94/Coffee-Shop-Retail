@@ -50,6 +50,7 @@ function Discount ({admin}){
     }
 
     //Redirect people who logged out back to home
+    admin = 1
     if(admin == null){
             navigate('/home');
     }
@@ -60,6 +61,7 @@ function Discount ({admin}){
     }else{
         return (
             <>
+            <section className="menu" id="Menu">
             <div className="create_discount">
                     <h1 className="heading"> Add <span>Discount</span></h1>
                     <div className="create_page">
@@ -83,10 +85,10 @@ function Discount ({admin}){
                                 placeholder="Percent Amount"
                                 required 
                             />
-                            <button className="btn" type="submit" onClick={addDiscount} > </button>
+                            <button className="btn" type="submit" onClick={addDiscount}> Add Discount </button>
                     </div>
             </div>
-    
+            </section>
             <section className="menu" id="Menu">
                 <h1 className="heading"> CURRENT <span> DISCOUNTS </span> </h1>
                     <div className="box-container">

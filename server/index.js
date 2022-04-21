@@ -176,6 +176,17 @@ app.post("/api/insert/item", (req, res) => {
 /*-------------------------USER APIS-----------------------------*/
 
 
+app.get("/api/get/users", (req, res) => {
+    console.log("fetch users called") //debugging purposes
+    const sqlSelect = "SELECT * FROM users"; //mysql command to get full list of users
+    db.query(sqlSelect,(err,result) =>{
+        if(err){
+            console.log(err.message);
+        }
+	    res.send(result); //sends over the list of inventory
+    })
+});
+
 //api for insert 
 app.post("/api/insert",(req,res) => {
     //use body parser to get information from frontend, and stored
