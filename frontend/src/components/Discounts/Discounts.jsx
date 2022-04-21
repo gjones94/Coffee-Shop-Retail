@@ -42,7 +42,7 @@ function Discount ({admin}){
     }
 
     const modifyDiscount = (code) => {
-        navigate("modifyDiscount" + code)
+        navigate("/modifyDiscount" + code)
     }
 
     if(isLoading){
