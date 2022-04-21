@@ -137,9 +137,8 @@ function Orders ({admin}) {
     const sortByDate = () => {
     }
 
-    const updateOrder = (order.orders_id) => { // to update orders to completed
-        var ordersID = order.orders_id; // may be incorrect input
-        console.log(searchInput);
+    const updateOrder = () => { // to update orders to completed
+        console.log(ordersID);// may be incorrect input
     
         //api call to update order
         //sends all the information to backend for db
