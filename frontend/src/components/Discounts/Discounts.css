@@ -194,7 +194,7 @@ cursor: pointer;
 
 @media screen and (max-width: 500px) {
 
-    .create_item {
+    .create_discount {
         background-color: var(--black);
     }
 
