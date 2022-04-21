@@ -75,10 +75,11 @@ function App() {
                     <Route path="/Login" element={<Login uid={loginID} admin={adminID} onLogin={handleLogin}/>} />
                     <Route path ="/ModifyUser" element ={<ModifyUser/>}/>
                     <Route path ="/Discounts" element = {<Discounts admin={adminID}/>}/>
-                    <Route path = "/Register" element = {<Register/>}/>
+                    <Route path ="/Register" element = {<Register/>}/>
                     <Route path ="/admin" element ={<Admin admin={adminID}/>}/>
                     <Route path ="/createItem" element={<CreateItem/>}/>
-                    <Route path ="/modifyItem:id" element={<ModifyItem uid={loginID} admin={adminID}/>}/>
+                    <Route path ="/modifyItem:id" element={<ModifyItem admin={adminID}/>}/>
+                    <Route path ="/modifyDiscount:id" element={<ModifyItem admin={adminID}/>}/>
                     <Route path ="/orders" element ={<Orders admin={adminID}/>}/>
                     {/*<Route path="/cart" element={<Cart_Test uid={loginID} uname={name}/>} />*/}
                 </Routes>

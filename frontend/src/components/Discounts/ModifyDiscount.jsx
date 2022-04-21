@@ -7,90 +7,41 @@ import axios from "axios";
 
 function ModifyDiscount (admin) {
 
-    const [item_id, set_id] = useState("");
-    const [item_id_update, set_updated_id] = useState("");
-    const [item_type, set_type] = useState("");
-    const [item_name, set_name ] = useState("");
-    const [item_description, set_description] = useState("");
-    const [item_price, set_price ] = useState("");
-    const [item_stock, set_stock] = useState("");
-    const [item_sale, set_sale] = useState("");
-    const [item_sale_price, set_sale_price] = useState("");
-    const [image_file, setImageFile] = useState("");
-    const [image_name, setImageName] = useState("");
+    const[Code,setCode] = useState("")
+    const[Percent,setPercent] = useState("")
 
     const [isLoading, setLoading] = useState(true);
-
     let navigate = useNavigate();
 
-    let {id} = useParams();
+    let {d_code} = useParams();
 
     useEffect(() => {
         fetchData();
     },[]);
 
     const fetchData = () =>{
-        Axios.get("/api/get/inventory").then( //calls the backend server.js with this api command
-            (response) => {
-                let items = JSON.parse(JSON.stringify(response.data));
-                console.log(items);
-
-                items.map(item => {
-                    if(item.item_id === id){
-                        set_id(item.item_id);
-                        set_updated_id(item.item_id);
-                        set_type(item.item_type);
-                        set_name(item.item_name);
-                        set_description(item.item_description);
-                        set_price(item.item_price);
-                        set_stock(item.item_stock);
-                        set_sale(item.item_onsale);
-                        set_sale_price(item.item_saleprice)
-                        setImageName(item.item_image);
-                    }
-                    
-                });
-
-                loaded();
-            }
-        );
+        
+        Axios.post('/api/get/discount', {
+            code: d_code
+        }).then((response) => {
+            loading();
+            let discount = JSON.parse(JSON.stringify(response.data));
+            setCode(discount.discount_code)
+            setPercent(discount.discount_code)
+            loaded();
+        });
     }
 
-    const modifyItem = () => {
+    const modifyDiscount = () => {
         uploadImage();
 
-        Axios.post("api/modifyItem", {
-            id : item_id,
-            updated_id : item_id_update,
-            name : item_name,
-            type : item_type,
-            description : item_description,
-            price : item_price,
-            stock : item_stock,
-            sale : item_sale,
-            sale_price : item_sale_price,
-            image : image_name
+        Axios.post("api/modify/discount", {
+            code : discount_code,
+            percent : Percent
         });
         //navigate back to main menu
-        navigate("/menu");
+        navigate("/Discounts");
     }
-
-    const uploadImage = event => {
-        const data = new FormData();
-
-        data.append('name', image_name);
-        data.append('image', image_file); 
-
-        Axios.post("/api/upload/image", 
-            data, 
-            {
-                headers: {
-                    "Content-type": "multipart/form-data"
-                },
-            }
-        ).then(res => console.log(res)).catch(err => console.log(err));
-    }
-
 
     const loading = () =>{
         setLoading(true);
@@ -100,12 +51,10 @@ function ModifyDiscount (admin) {
         setLoading(false);
     }
 
-
     if (isLoading){
         //returns only this until data is done loading
         return <div className="App">Fetching Data...</div>;
     }
-
 
     //Redirect people who logged out back to home
     if(admin == null){
@@ -120,113 +69,38 @@ function ModifyDiscount (admin) {
     }
 
     return (
-        <div className="create_item">
-                <h1 className="heading"> Modify <span>Item</span></h1>
-                <div className="create_page">
+        <div className="modify_item">
+                <h1 className="heading"> Modify <span>Discount</span></h1>
+                <div className="modify_page">
 
                     <div className="logo">
                         <img className="create_logo" src="./images/logo.png" alt="" />
                     </div>
 
-                        <span className="input_label" >Item ID:</span>
+                        <span className="input_label" >Discount Code:</span>
                         <input 
-                            value={item_id_update}
-                            onChange={event => set_updated_id(event.target.value)}
+                            value={Code}
+                            onChange={event => setCode(event.target.value)}
                             className="item_input" 
                             type="text"
                             placeholder={item_id_update}
                             required
                         />
 
-                        <span className="input_label">Item Type:</span>
+                        <span className="input_label">Discount Percent:</span>
                         <input 
-                            value={item_type} 
-                            onChange={event => set_type(event.target.value)}
+                            value={Percent} 
+                            onChange={event => setPercent(event.target.value)}
                             className="item_input" 
                             type="text"
-                            placeholder={item_type}
+                            placeholder={Percent}
                             required 
                         />
-
-                        <span className="input_label">Item Name:</span>
-                        <input 
-                            value={item_name} 
-                            onChange={event => set_name(event.target.value)}
-                            className="item_input" 
-                            type="text"
-                            placeholder={item_name}
-                            required 
-                        />
-
-                        <span className="input_label" >Item Description:</span>
-                        <textarea
-                            value={item_description} 
-                            onChange={event => set_description(event.target.value)}
-                            className="item_description" 
-                            placeholder={item_description}
-                            required
-                        />
-
-
-                        <span className="input_label" >Item Price</span>
-                        <input 
-                            value={item_price} 
-                            onChange={event => set_price(event.target.value)}
-                            className="item_input" 
-                            type="text"
-                            placeholder={item_price}
-                            required
-                        />
-
-                        <span className="input_label" >Item Stock:</span>
-                        <input 
-                            value={item_stock} 
-                            onChange={event => set_stock(event.target.value)}
-                            className="item_input" 
-                            type="text"
-                            placeholder={item_stock}
-                            required
-                        />
-
-                        <span className="input_label" >On Sale:</span>
-                        <input 
-                            value={item_sale} 
-                            onChange={event => set_sale(event.target.value)}
-                            className="item_input" 
-                            type="text"
-                            placeholder={item_sale}
-                            required
-                        />
-
-                        <span className="input_label" >Item On Sale Price</span>
-                        <input 
-                            value={item_sale_price} 
-                            onChange={event => set_sale_price(event.target.value)}
-                            className="item_input" 
-                            type="text"
-                            placeholder={item_sale_price}
-                            required
-                        />
-
-                        <span className="input_label" >Item Image</span>
-                        <input 
-                            onChange={event => {
-                                const file = event.target.files[0];
-                                const name = file.name;
-                                setImageFile(file);
-                                setImageName(name);
-                            }}
-                            name="Upload File"
-                            className="item_input" 
-                            type="file"
-                            required
-                        />
-
-                        <button className="btn" type="submit" onClick={modifyItem} >Update Item</button>
+                        <button className="btn" type="submit" onClick={modifyDiscount} >Update Discount</button>
 
                 </div>
         </div>
     );  
 }
 
-export default ModifyItem;
+export default ModifyDiscount;

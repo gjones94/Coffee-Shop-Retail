@@ -8,7 +8,6 @@ function Discount ({admin}){
     const[Percent,setPercent] = useState("")
     const [discountList, setDiscountList] = useState();
     const [isLoading, setLoading] = useState(true)
-    const [loggedIn, setLoggedIn] = useState(true)
 
     let navigate = useNavigate();
     
@@ -42,8 +41,8 @@ function Discount ({admin}){
         fetchData();
     }
 
-    const modifyDiscount = (id) => {
-        navigate("modifyDiscount" + id)
+    const modifyDiscount = (code) => {
+        navigate("modifyDiscount" + code)
     }
 
     if(isLoading){
@@ -62,7 +61,7 @@ function Discount ({admin}){
         return (
             <>
             <div className="create_discount">
-                    <h1 className="heading"> Add | Modify <span>Discount</span></h1>
+                    <h1 className="heading"> Add <span>Discount</span></h1>
                     <div className="create_page">
     
                         <div className="logo">
@@ -97,7 +96,7 @@ function Discount ({admin}){
                                     <div className="box">
                                         <h3>Code: {discount.discount_code}</h3>
                                         <div className="code">Amount: {discount.discount_percent}%</div>
-                                        <button className="btn" type="Modify" onClick={() => modifyDiscount(discount.discount_id)} >Modify Discount</button>
+                                        <button className="btn" type="Modify" onClick={() => modifyDiscount(discount.discount_code)} >Modify Discount</button>
                                     </div>
                                 )
                             }
