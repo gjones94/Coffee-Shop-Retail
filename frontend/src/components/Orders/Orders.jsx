@@ -29,7 +29,7 @@ function Orders ({admin}) {
             }
         );
     }
-    /*
+
     const fetchData = () =>{
         Axios.get("/api/get/users").then( //calls the backend server.js with this api command
             (response) => {
@@ -37,7 +37,7 @@ function Orders ({admin}) {
                 loaded();
             }
         );
-    } */
+    }
 
     const searchByID = () => {
         tempOrders = []; //reset list
@@ -52,6 +52,11 @@ function Orders ({admin}) {
         }else{
             constOrders.map(order => {
                 if(order.orders_id == searchInput){
+                    if(order.orders_completed == 0){
+                        order.orders_completed = "No"
+                    }else{
+                        order.orders_completed = "Yes"
+                    }
                     tempOrders.push(order);
                 }else{
                 }
@@ -75,6 +80,11 @@ function Orders ({admin}) {
         }else{
             constOrders.map(order => {
                 if(order.orders_user == searchInput){
+                    if(order.orders_completed == 0){
+                        order.orders_completed = "No"
+                    }else{
+                        order.orders_completed = "Yes"
+                    }
                     tempOrders.push(order);
                 }else{
                 }
@@ -90,6 +100,11 @@ function Orders ({admin}) {
         tempOrders = [];
         //add all current items to list
         displayOrders.map(order => {
+            if(order.orders_completed == 0){
+                order.orders_completed = "No"
+            }else{
+                order.orders_completed = "Yes"
+            }
             tempOrders.push(order);
         });
 
@@ -103,6 +118,11 @@ function Orders ({admin}) {
         tempOrders = [];
         //add all current items to list
         displayOrders.map(order => {
+            if(order.orders_completed == 0){
+                order.orders_completed = "No"
+            }else{
+                order.orders_completed = "Yes"
+            }
             tempOrders.push(order);
         });
 
@@ -111,9 +131,39 @@ function Orders ({admin}) {
     }
 
     const sortByName = () => {
+
+    }
+    
+    const sortByDate = () => {
     }
 
-    const sortByDate = () => {
+    const updateOrder = () => { // to update orders to completed
+        var searchInput = order.orders_id; // may be incorrect input
+        console.log(searchInput);
+
+        if(Response === "" || Response === "Order updated"){
+            setResponse("Please find an order first")
+            return
+        }
+        setUserID(UserID)
+    
+        //api call to update order
+        //sends all the information to backend for db
+        Axios.post("/api/admin/order/update",{
+
+            email:Email,
+            firstname:FirstName,
+            lastname:LastName,
+            phone:Phone,
+            address:Address,
+            password:Password,
+            userID:UserID
+
+        })
+        
+        setResponse("User Updated")
+    }
+
     }
 
     const loading = () =>{
@@ -173,13 +223,13 @@ function Orders ({admin}) {
                                     <div className="price">Date: {order.orders_date} </div>
                                     <div className="price">Order Total: ${order.orders_total} </div>
                                     <div className="price">User: {order.orders_user} </div>
-                                    <div className="price">
-                                        Items: 
-                                        <pre>
-                                            <code>
-                                                {order.items}
-                                            </code>
-                                        </pre>
+                                    <div className="price">Completed: {order.orders_completed} </div>
+                                    <div className="price">Items: {order.items}</div>
+                                    <div class="box">
+                                        <input 
+                                        value={order.orders_id} // may be incorrect input
+                                        />
+                                        <button className="btn" type="submit" onClick={updateOrder}>Order Completed</button>
                                     </div>
                                 </div>
                             )

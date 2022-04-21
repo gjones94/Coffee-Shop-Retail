@@ -330,6 +330,21 @@ app.get('/api/get/orders', (req, res) => {
     })
 });
 
+app.post('/api/orders/update', (req, res) => {
+    console.log("update orders called") //debugging purposes
+
+    const orders_id = req.body.orders_id
+    const orders_completed = req.body.orders_completed;
+
+    const sqlUpdate = "UPDATE orders SET orders_completed = ? WHERE orders_id = ?"; //mysql command to get full list of users
+    const values = [orders_completed];
+    db.query(sqlUpdate,values,(err,res) => {
+        if(err){
+            console.error(err.message);
+        }
+    });
+});
+
 app.listen(3001, () => {
     //console.log("build directory: ", build_directory);
     //console.log('running on port 3001')
