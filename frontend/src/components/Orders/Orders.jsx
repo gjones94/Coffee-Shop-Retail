@@ -121,6 +121,16 @@ function Orders ({admin}) {
                     var year = date.getUTCFullYear();
                     
                     data['date'] = (year + month + day);
+
+                    //change items to be more readable
+                    var list = order.orders_items;
+                    let item_list = new Array(list.length);
+                    Object.keys(list).forEach(function(key) {
+                        item_list[key] = ('Item : ' + key + ', Amount : ' + list[key])
+                    })
+                    item_list.shift();
+                    order.orders_items = item_list;
+                    console.log(item_list)
                 }
             })
         })
