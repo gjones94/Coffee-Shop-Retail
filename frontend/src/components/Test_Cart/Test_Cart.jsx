@@ -15,6 +15,7 @@ const Test_Cart = ({uid, uname}) =>{
     const [discountAmt, setDiscountAmount] = useState(0)
     const [total, setTotal] = useState(0);
     const [tax, setTax] = useState(0)
+    const [empty, setEmpty] = useState(true)
 
     let navigate = useNavigate();
 
@@ -43,7 +44,7 @@ const Test_Cart = ({uid, uname}) =>{
     },[cartDetails, discountAmt])
 
     useEffect( () => {
-        if(total && tax && subTotal){
+        if(total && tax && subTotal && !empty){
             loaded()
         }
     },[total, tax, subTotal])
@@ -65,6 +66,9 @@ const Test_Cart = ({uid, uname}) =>{
         }).then( //calls the backend server.js with this api command
             (response) => {
                 let items = JSON.parse(JSON.stringify(response.data)); //get items in the user's cart
+                items.map(item =>{
+                    setEmpty(false)
+                })
                 setCart(items); 
             }
         );
@@ -224,8 +228,9 @@ const Test_Cart = ({uid, uname}) =>{
             })
         }
     }
-
-    if(isLoading){
+    if(empty){
+        return <h1 className="heading"> CART IS EMPTY </h1>
+    }else if(isLoading){
         return <h1 className="heading"> FETCHING<span>DATA</span></h1>
     }else if(uid == null){
         return(
