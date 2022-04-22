@@ -193,11 +193,9 @@ const Test_Cart = ({uid, uname}) =>{
 
 
             //deletes items in user cart after checkout
-            /*
             Axios.post("/api/cart/delete", {
                 user : uid
             })
-            */
             alert("Done")
        }else{
             alert("Order cannot be filled due to low inventory levels")
