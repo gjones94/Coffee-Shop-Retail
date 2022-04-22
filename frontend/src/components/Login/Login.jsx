@@ -5,7 +5,6 @@ import {useState,useEffect} from "react";
 import './Login.css';
 import Axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
-import Register from '../Register/Register';
 
 const Login = ({uid, admin, onLogin}) => {
 

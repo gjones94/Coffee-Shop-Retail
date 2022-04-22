@@ -307,7 +307,7 @@ app.post('/api/addToCart', (req, res) => {
     const sqlInsert = "INSERT INTO cart (user_id, item_id, item_qty) VALUES (?,?,?);"
     db.query(sqlInsert,[uid, id, qty], (err, res) =>{
         if(err){
-            //console.log(err.message);
+            console.log(err.message);
         }
     });
 })
@@ -318,7 +318,7 @@ app.post('/api/updateCartQty', (req, res) => {
 
     //sqlUpdate = "UPDATE cart SET item_qty = ?, item_id = ? WHERE id = ?"
     sqlUpdate = "UPDATE cart SET item_qty = ? WHERE item_id = ?"
-    const values = [qty, i_item_id, i_id];
+    const values = [qty, i_item_id];
 
     db.query(sqlUpdate,values,(err,res) => {
 
@@ -331,6 +331,7 @@ app.post('/api/updateCartQty', (req, res) => {
 
 //Get this user's cart
 app.post('/api/get/cart', (req, res) => {
+    console.log("Get cart called");
     const id = req.body.id; //get this users cart
     query = "SELECT * from cart WHERE user_id = ?";
     db.query(query, id, (err, result) => {
@@ -339,6 +340,55 @@ app.post('/api/get/cart', (req, res) => {
         }
         console.log(result);
         res.send(result);
+    })
+})
+
+app.post('/api/cart/checkout', (req, res) => {
+    const date = req.body.date
+    const items = JSON.stringify(req.body.items)
+    const total = req.body.t_total
+    const user = req.body.user
+    const status = 0
+
+    const query = 'INSERT INTO orders (orders_date, orders_items, orders_total, orders_user, orders_completed) VALUES (?,?,?,?,?);'
+    const values = [date, items, total, user, status]
+
+    db.query(query, values, (err, response) =>{
+        if(err){
+            console.log(err.message);
+        }
+        res.send(response)
+    })
+
+})
+
+/*
+    Used to update the inventory after a user has checked out
+*/
+app.post('/api/item/updateQty', (req, res) =>{
+    const id = req.body.id
+    const qty = req.body.qty
+    console.log("quantity inserted is qty")
+    const update_query = 'UPDATE item SET item_stock = ? WHERE item_id = ?'
+    db.query(update_query, [qty, id], (err, res) => {
+        if(err){
+            console.log(err.message)
+        }
+        console.log(res)
+    })
+
+})
+
+app.post('/api/cart/delete', (req, res) => {
+    console.log("Db to delete cart")
+    const uid = req.body.user
+
+    const query = 'DELETE FROM cart WHERE user_id = ?'
+    db.query(query, uid, (err, response) => {
+        if(err){
+            console.log(err,message);
+        }
+        res.send(response);
     })
 })
 

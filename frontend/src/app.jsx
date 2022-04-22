@@ -21,7 +21,7 @@ import Admin from './components/Admin/Admin'
 import ModifyUser from './components/ModifyUser/ModifyUser'
 import Discounts from './components/Discounts/Discounts'
 import Orders from './components/Orders/Orders'
-//import Cart_Test from './components/zzCart_Test/Cart'
+import Test_Cart from './components/Test_Cart/Test_Cart'
 
 
 
@@ -89,7 +89,7 @@ function App() {
                     <Route path ="/modifyItem:id" element={<ModifyItem admin={adminID}/>}/>
                     <Route path ="/modifyDiscount:id" element={<ModifyDiscount admin={adminID}/>}/>
                     <Route path ="/orders" element ={<Orders admin={adminID}/>}/>
-                    {/*<Route path="/cart" element={<Cart_Test uid={loginID} uname={name}/>} />*/}
+                    <Route path="/cart" element={<Test_Cart uid={loginID} uname={name}/>} />
                 </Routes>
                 <Footer />
                 </div>

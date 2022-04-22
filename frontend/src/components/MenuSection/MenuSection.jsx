@@ -26,7 +26,7 @@ function MenuSection ({uid, admin}) {
     const [displayInventory, setDisplayInventory] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
-    const [cart, setCart] = useState();
+    const [cart, setCart] = useState(null);
 
     //used to sort states (ascending, descending, etc)
     const [sortNameOrder, setNameSort] = useState(0)
@@ -42,8 +42,14 @@ function MenuSection ({uid, admin}) {
         Use Effect is performed when the page first loads. 
     */
     useEffect(() => {
-        fetchData();
+        fetchInventory();
     },[]);
+
+    useEffect( () => {
+        if(uid){
+            fetchCart();
+        }   
+    },[uid])
 
     /* 
         Function: fetchData
@@ -53,7 +59,7 @@ function MenuSection ({uid, admin}) {
         It parses through the JSON response data received, and sets two constant variables that hold the 
         state of the page. 
     */
-    const fetchData = () =>{
+    const fetchInventory = () =>{
         Axios.get("/api/get/inventory").then( //calls the backend server.js with this api command
             (response) => {
                 let items = JSON.parse(JSON.stringify(response.data));
@@ -63,9 +69,11 @@ function MenuSection ({uid, admin}) {
                 loaded();
             }
         );
-        /* Backup cart information
+    }
+
+    const fetchCart = () =>{
         if(uid != null){
-            Axios.post("api/getcart", {
+            Axios.post("api/get/cart", {
                 id : uid
             }).then((response) => 
                 {
@@ -74,9 +82,7 @@ function MenuSection ({uid, admin}) {
                 }
             );
         }
-        */
     }
-
 
     /*
         Function: search
@@ -225,17 +231,12 @@ function MenuSection ({uid, admin}) {
         if(uid == null){
             alert("You must login to add to your cart");
         }else{
-            let actual_price = 0
-            if(item.item_onsale == 1){
-                actual_price = item.item_sale_price;
-            }else{
-                actual_price = item.item_price;
-            }
-
+            
             //set default cart states
             let empty = true 
             let item_exists = false
 
+            console.log("cart is", cart)
             //put everything into a temp cart to modify
             cart.map(cart_item => {
                 empty = false; //cart was not empty
@@ -271,13 +272,6 @@ function MenuSection ({uid, admin}) {
             }
             
             setCart(temp_cart)
-            /*
-            Axios.post("api/addtocart", {
-                user : uid,
-                id : item_id,
-                price : actual_price
-            });
-            */
             alert("Added to cart!");
         }
     }
@@ -380,7 +374,7 @@ function MenuSection ({uid, admin}) {
                                     <div className="box">
                                         <img src={imageBase + item.item_image} alt="" />
                                         <h3>{item.item_name}</h3>
-                                        <div className="price">${item.item_price}<span> ${item.item_saleprice}</span></div>
+                                        <div className="price">${price}<span> {crossout}</span></div>
                                         <div className="price">Available: {item.item_stock} </div>
                                         <div className="desc">{item.item_description}</div>
                                         {item.item_stock > 0 && <button className="btn" type="submit" onClick={() => addToCart(item)} >Add to Cart</button>} 
