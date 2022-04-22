@@ -46,12 +46,18 @@ function App() {
         }
     })
 
+    /*
+        This function is passed as a callback function to the login page. The login page then sets these
+        variables in the app.jsx page (this page) that are passed to it so that every page can have access to them.
+    */
     const handleLogin = (name, id, admin) => {
         set_name(name);
         set_uid(id);
         set_aid(admin);
     }
-
+    /*
+        Sets everything to null once a signout occurs
+    */
     const handleSignout = () => {
         set_name(null);
         set_uid(null);
@@ -61,6 +67,7 @@ function App() {
 
     return (
         <>
+            {!data} {/* Delay for data to load */}
 
             {data && <>
               <Router>
@@ -74,7 +81,7 @@ function App() {
                     <Route path="/about" element={<AboutUs/>} />
                     <Route path="/contact" element={<ContactSection/>} />
                     <Route path="/Login" element={<Login uid={loginID} admin={adminID} onLogin={handleLogin}/>} />
-                    <Route path ="/ModifyUser" element ={<ModifyUser/>}/>
+                    <Route path ="/ModifyUser" element ={<ModifyUser admin={adminID}/>}/>
                     <Route path ="/Discounts" element = {<Discounts admin={adminID}/>}/>
                     <Route path ="/Register" element = {<Register/>}/>
                     <Route path ="/admin" element ={<Admin admin={adminID}/>}/>
@@ -89,7 +96,7 @@ function App() {
               </Router>
             </>}
 
-            {!data} {/* Delay for data to load */}
+            
 
         </>
     )

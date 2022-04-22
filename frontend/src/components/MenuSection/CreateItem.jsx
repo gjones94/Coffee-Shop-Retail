@@ -20,9 +20,11 @@ function CreateItem () {
     let navigate = useNavigate();
 
     const createItem = () => {
-        uploadImage();
 
-        Axios.post("api/insert/item", {
+        let name_okay = uploadImage();
+        
+        if(name_okay){
+            Axios.post("api/insert/item", {
             id : item_id,
             type : item_type,
             name : item_name,
@@ -32,24 +34,36 @@ function CreateItem () {
             sale : item_sale,
             sale_price : item_sale_price,
             image : image_name
-        });
-        alert("Item Created")
-        navigate("/MenuSection")
+            });
+            alert("Item Created")
+            navigate("/menu")
+        }
     }
     const uploadImage = () => {
-        const data = new FormData();
+        var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/;
+        if(format.test(image_name)){
+            alert("Name for image must not contain any special characters other than '.' and must not contain spaces")
+            return false
+        }
+        if(image_file){
+            const data = new FormData();
 
-        data.append('name', image_name);
-        data.append('image', image_file); 
+            data.append('name', image_name);
+            data.append('image', image_file); 
 
-        Axios.post("/api/upload/image", 
-            data, 
-            {
-                headers: {
-                    "Content-type": "multipart/form-data"
-                },
-            }
-        ).then(res => console.log(res)).catch(err => console.log(err));
+            Axios.post("/api/upload/image", 
+                data, 
+                {
+                    headers: {
+                        "Content-type": "multipart/form-data"
+                    },
+                }
+            ).then(res => console.log(res)).catch(err => console.log(err));
+        }else{
+            console.log("No image uploaded for item, no upload occurs");
+        }
+        return true
+        
     }
 
 
