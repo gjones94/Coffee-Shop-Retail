@@ -125,6 +125,7 @@ function Orders ({admin}) {
                     combo.push(data)
 
                     //change items to be more readable
+                    /*
                     var list = order.orders_items;
                     let item_list = new Array(list.length);
                     Object.keys(list).forEach(function(key) {
@@ -133,6 +134,7 @@ function Orders ({admin}) {
                     item_list.shift();
                     order.orders_items = item_list;
                     console.log(item_list)
+                    */
                 }
             })
         })
