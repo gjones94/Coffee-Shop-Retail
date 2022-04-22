@@ -104,8 +104,6 @@ function Orders ({admin}) {
                     data["first"] = user.user_first_name
                     data["last"] = user.user_last_name
 
-                    //add this to the comprehensive combo list
-                    combo.push(data)
 
                     //change to yes no for readability
                     if(order.orders_completed == 0){
@@ -121,6 +119,10 @@ function Orders ({admin}) {
                     var year = date.getUTCFullYear();
                     
                     data['date'] = (year + month + day);
+                    order.orders_date = date.toDateString();
+
+                    //add this to the comprehensive combo list
+                    combo.push(data)
 
                     //change items to be more readable
                     var list = order.orders_items;
