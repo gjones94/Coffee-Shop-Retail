@@ -113,12 +113,14 @@ function Orders ({admin}) {
                     }else{
                         order.orders_completed = "Yes"
                     }
-                    //change date to be readable
-                    //add one field to the data variable to hold the date
-                    // i.e. {date: <date Obj>}
-                    const order_date = new Date(order.orders_date);
-                    order.orders_date = order_date.toDateString();
-                    data["date"] = order_date;
+                    //change date to be Year month day
+                    //change field to the data variable to hold the date
+                    var date = new Date(order.orders_date);
+                    var month = date.getUTCMonth() + 1; //months from 1-12
+                    var day = date.getUTCDate();
+                    var year = date.getUTCFullYear();
+                    
+                    data['date'] = (year + month + day);
                 }
             })
         })
@@ -279,7 +281,7 @@ function Orders ({admin}) {
     const sortByDate = () => {
         //reset other sorts
         setNameSort(0)
-        setDateSort(0)
+        setIDSort(0)
         setPriceSort(0)
 
         //reset the temp inventory list
@@ -293,18 +295,22 @@ function Orders ({admin}) {
         /*
             This cycles between ascending descending and normal sort
         */
-        if(setNameSort === 0){
+        console.log("Order date compare", tempOrders[0].date)
+        console.log("Order date compare", tempOrders[1].date)
+        console.log("Order date compare", tempOrders[1].date < tempOrders[0].date)
+        console.log("Order date compare", tempOrders[1].date > tempOrders[0].date)
+        if(sortDateOrder === 0){
             //Ascending
-            tempOrders.sort((a, b) => (a.orders_id > b.orders_id) ? 1 : -1);
-            setNameSort(1)
-        }else if(setNameSort === 1){
+            tempOrders.sort((a, b) => (a.date > b.date) ? 1 : -1);
+            setDateSort(1)
+        }else if(sortDateOrder === 1){
             //Descending
-            tempOrders.sort((a, b) => (a.orders_id < b.orders_id) ? 1 : -1);
-            setNameSort(2)
-        }else if(setNameSort === 2){
+            tempOrders.sort((a, b) => (a.date < b.date) ? 1 : -1);
+            setDateSort(2)
+        }else if(sortDateOrder === 2){
             //Normal
             tempOrders = unSortedOrders
-            setNameSort(0)
+            setDateSort(0)
         }
 
         setDisplayOrders(tempOrders);
@@ -333,7 +339,11 @@ function Orders ({admin}) {
     }
 
     
-    //combineUsersOrders();
+    /*
+    if(admin == null){
+        navigate('/home')
+    }
+    */
    
     if (isLoading){
         //returns only this until data is done loading
@@ -371,9 +381,6 @@ function Orders ({admin}) {
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByDate}>Sort By Date</button>
-                </div>
-                <div class="box">
-                    <button className="btn" type="submit" onClick={combineUsersOrders}>Test</button>
                 </div>
                 </div>
 
