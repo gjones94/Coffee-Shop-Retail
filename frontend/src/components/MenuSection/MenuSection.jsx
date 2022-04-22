@@ -22,10 +22,17 @@ function MenuSection ({uid, admin}) {
     //This holds a copy of all the current inventory that was received from the database, it will not be updated
     const [constInventory, setConstInventory] = useState(); 
     //This is updated with only the inventory that is selected when being searched for.
+    const [unsortedInventory, setUnsortedInventory] = useState();
     const [displayInventory, setDisplayInventory] = useState();
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
     const [cart, setCart] = useState();
+
+    //used to sort states (ascending, descending, etc)
+    const [sortNameOrder, setNameSort] = useState(0)
+    const [sortPriceOrder, setPriceSort] = useState(0)
+    const [sortAOrder, setASort] = useState(0)
+
     const imageBase = './images/'
 
     let navigate = useNavigate();
@@ -52,6 +59,7 @@ function MenuSection ({uid, admin}) {
                 let items = JSON.parse(JSON.stringify(response.data));
                 setDisplayInventory(items);
                 setConstInventory(items);
+                setUnsortedInventory(items);
                 loaded();
             }
         );
@@ -85,6 +93,7 @@ function MenuSection ({uid, admin}) {
 
         //check for whitespace only
         if (/^\s*$/.test(searchInput)){
+            setUnsortedInventory(constInventory)
             loaded();
             return;
         }else{
@@ -97,6 +106,7 @@ function MenuSection ({uid, admin}) {
         }
         //set display to the filtered list
         setDisplayInventory(tempInventory);
+        setUnsortedInventory(tempInventory);
         loaded();
     };
 
@@ -106,6 +116,10 @@ function MenuSection ({uid, admin}) {
         It uses temp list to populate all the currently displayed inventory and then sorts it, and sets it as the new display inventory
     */
     const sortByName = () => {
+        //reset other sorts
+        setPriceSort(0);
+        setASort(0);
+
         //reset the temp inventory list
         tempInventory = [];
         //add all current items to list
@@ -113,7 +127,20 @@ function MenuSection ({uid, admin}) {
             tempInventory.push(item);
         });
 
-        tempInventory.sort((a,b) => (a.item_name > b.item_name) ? 1 : -1);
+        if(sortNameOrder === 0){
+            //Ascending
+            tempInventory.sort((a, b) => (a.item_name > b.item_name) ? 1 : -1);
+            setNameSort(1)
+        }else if(sortNameOrder === 1){
+            //Descending
+            tempInventory.sort((a, b) => (a.item_name < b.item_name) ? 1 : -1);
+            setNameSort(2)
+        }else if(sortNameOrder === 2){
+            //Normal
+            tempInventory = unsortedInventory
+            setNameSort(0)
+        }
+
         setDisplayInventory(tempInventory);
     }
 
@@ -124,6 +151,10 @@ function MenuSection ({uid, admin}) {
         It uses temp list to populate all the currently displayed inventory and then sorts it, and sets it as the new display inventory
     */
     const sortByPrice = () => {
+        //reset other sorts
+        setNameSort(0);
+        setASort(0);
+
         //reset the temp inventory list
         tempInventory = [];
         //add all current items to list
@@ -131,7 +162,20 @@ function MenuSection ({uid, admin}) {
             tempInventory.push(item);
         });
 
-        tempInventory.sort((a,b) => (a.item_price > b.item_price) ? 1 : -1);
+        if(sortPriceOrder === 0){
+            //Ascending
+            tempInventory.sort((a, b) => (a.item_price > b.item_price) ? 1 : -1);
+            setPriceSort(1)
+        }else if(sortPriceOrder === 1){
+            //Descending
+            tempInventory.sort((a, b) => (a.item_price < b.item_price) ? 1 : -1);
+            setPriceSort(2)
+        }else if(sortPriceOrder === 2){
+            //Normal
+            tempInventory = unsortedInventory
+            setPriceSort(0)
+        }
+
         setDisplayInventory(tempInventory);
     }
 
@@ -142,6 +186,10 @@ function MenuSection ({uid, admin}) {
         It uses temp list to populate all the currently displayed inventory and then sorts it, and sets it as the new display inventory
     */
     const sortByAvailability = () => {
+        //reset other sorts
+        setNameSort(0);
+        setPriceSort(0);
+
         //reset the temp inventory list
         tempInventory = [];
         //add all current items to list
@@ -149,7 +197,20 @@ function MenuSection ({uid, admin}) {
             tempInventory.push(item);
         });
 
-        tempInventory.sort((a,b) => (a.item_stock > b.item_stock) ? 1 : -1);
+        if(sortAOrder === 0){
+            //Ascending
+            tempInventory.sort((a, b) => (a.item_stock > b.item_stock) ? 1 : -1);
+            setASort(1)
+        }else if(sortAOrder === 1){
+            //Descending
+            tempInventory.sort((a, b) => (a.item_stock < b.item_stock) ? 1 : -1);
+            setASort(2)
+        }else if(sortAOrder === 2){
+            //Normal
+            tempInventory = unsortedInventory
+            setASort(0)
+        }
+
         setDisplayInventory(tempInventory);
     }
    
@@ -221,10 +282,6 @@ function MenuSection ({uid, admin}) {
         }
     }
 
-    //Not required
-    const deleteItem = (item_id) => {
-        console.log("Item", item_id);
-    }
 
     /*
         Function: createItem
@@ -287,7 +344,7 @@ function MenuSection ({uid, admin}) {
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByPrice}>Sort By Price</button>
                 </div>
-                {admin == 1 &&
+                {admin === 1 &&
                     <div class="box">
                         <button className="btn" type="submit" onClick={createItem}>Create Item</button>
                     </div> 
@@ -327,7 +384,7 @@ function MenuSection ({uid, admin}) {
                                         <div className="price">Available: {item.item_stock} </div>
                                         <div className="desc">{item.item_description}</div>
                                         {item.item_stock > 0 && <button className="btn" type="submit" onClick={() => addToCart(item)} >Add to Cart</button>} 
-                                        {item.item_stock == 0 && <div className="price">Out of Stock</div> && <button className="btnDisabled" type="submit">Add to Cart</button>}
+                                        {item.item_stock === 0 && <div className="price">Out of Stock</div> && <button className="btnDisabled" type="submit">Add to Cart</button>}
                                         {/*<div className="price">${item.item_description}</div>*/}
                                         {/*OLD ADD TO CART<a href="#" className="btn">{selector[3].menuBtn}</a>*/}
                                     </div>

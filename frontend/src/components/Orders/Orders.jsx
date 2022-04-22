@@ -191,15 +191,15 @@ function Orders ({admin}) {
         /*
             This cycles between ascending descending and normal sort
         */
-        if(sortIDOrder == 0){
+        if(sortIDOrder === 0){
             //Ascending
             tempOrders.sort((a, b) => (a.orders_id > b.orders_id) ? 1 : -1);
             setIDSort(1)
-        }else if(sortIDOrder == 1){
+        }else if(sortIDOrder === 1){
             //Descending
             tempOrders.sort((a, b) => (a.orders_id < b.orders_id) ? 1 : -1);
             setIDSort(2)
-        }else if(sortIDOrder == 2){
+        }else if(sortIDOrder === 2){
             //Normal
             tempOrders = unSortedOrders
             setIDSort(0)
@@ -226,15 +226,15 @@ function Orders ({admin}) {
         /*
             This cycles between ascending descending and normal sort
         */
-        if(sortPriceOrder == 0){
+        if(sortPriceOrder === 0){
             //Ascending
             tempOrders.sort((a, b) => (a.orders_total > b.orders_total) ? 1 : -1);
             setPriceSort(1)
-        }else if(sortPriceOrder == 1){
+        }else if(sortPriceOrder === 1){
             //Descending
             tempOrders.sort((a, b) => (a.orders_total < b.orders_total) ? 1 : -1);
             setPriceSort(2)
-        }else if(sortPriceOrder == 2){
+        }else if(sortPriceOrder === 2){
             //Normal
             tempOrders = unSortedOrders
             setPriceSort(0)
@@ -259,15 +259,15 @@ function Orders ({admin}) {
         /*
             This cycles between ascending descending and normal sort
         */
-        if(sortNameOrder == 0){
+        if(sortNameOrder === 0){
             //Ascending
             tempOrders.sort((a, b) => (a.date > b.date) ? 1 : -1);
             setNameSort(1)
-        }else if(sortNameOrder == 1){
+        }else if(sortNameOrder === 1){
             //Descending
             tempOrders.sort((a, b) => (a.date < b.date) ? 1 : -1);
             setNameSort(2)
-        }else if(sortNameOrder == 2){
+        }else if(sortNameOrder === 2){
             //Normal
             tempOrders = unSortedOrders
             setNameSort(0)
@@ -293,15 +293,15 @@ function Orders ({admin}) {
         /*
             This cycles between ascending descending and normal sort
         */
-        if(setNameSort == 0){
+        if(setNameSort === 0){
             //Ascending
             tempOrders.sort((a, b) => (a.orders_id > b.orders_id) ? 1 : -1);
             setNameSort(1)
-        }else if(setNameSort == 1){
+        }else if(setNameSort === 1){
             //Descending
             tempOrders.sort((a, b) => (a.orders_id < b.orders_id) ? 1 : -1);
             setNameSort(2)
-        }else if(setNameSort == 2){
+        }else if(setNameSort === 2){
             //Normal
             tempOrders = unSortedOrders
             setNameSort(0)
