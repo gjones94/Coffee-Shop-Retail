@@ -22,6 +22,7 @@
 }
 
 .menu .box-container .box img{
+    border-radius: 25px;
     height: 10rem;
 }
 
