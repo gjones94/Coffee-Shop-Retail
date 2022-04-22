@@ -23,8 +23,7 @@ function ModifyUser({admin}){
     const [OldPhone,setOldPhone] = useState("")
     const [OldAddress,setOldAddress] = useState("")
     const [UserID,setUserID] = useState("")
-    const [Response,setResponse] = useState("")
-    const [Test,setTest] = useState("")
+    
 
     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}\b/
     const passwordRegex = /(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/
@@ -35,7 +34,7 @@ function ModifyUser({admin}){
     //populates the user info list whenever a user is found.
     useEffect(() => {
 
-        if(Response === "User Found"){
+        
         UserList.map(val => {
 
                   
@@ -44,15 +43,15 @@ function ModifyUser({admin}){
             setOldFirstName(val.user_first_name)
             setOldLastName(val.user_last_name)
             setOldAddress(val.user_address)
-            setOldPhone(val.phone)
+            setOldPhone(val.user_phone)
             setOldPassword(val.password)
             
            
           });
-        }
+        
         
        
-        if (Response !== "User Updated"){
+       
         if(Email == ""){
             setEmail(OldEmail)
         }
@@ -70,11 +69,12 @@ function ModifyUser({admin}){
         }
         if(Password === ""){
             setPassword(OldPassword)
-        }
-    }
         
+    }
+    
     });
 
+ 
 
 
     //finduser function, activated from the find button on the page
@@ -103,17 +103,18 @@ function ModifyUser({admin}){
             }else{ 
                 
                 makeList(response.data) //makes the list for the user that stores all the information received from backend
-                //setResponse("User Found") //tells the page that a user was found
+               // setResponse("User Found") //tells the page that a user was found
             }
         });
     }
 
     //update user function
     const updateUser = () =>{
+        
 
-        if(Response === "" || Response === "User updated"){
-            setResponse("Please find a user first")
-            return
+        if(InEmail == "" && UserList.length == 0){
+            alert("Please find a user first")
+            return;
         }
 
 
@@ -130,7 +131,6 @@ function ModifyUser({admin}){
         
         //setting userID
         setUserID(UserID)
-    
         //api call to update users
         //sends all the information to backend for db
         Axios.post("/api/admin/user/update",{
@@ -143,9 +143,12 @@ function ModifyUser({admin}){
             password:Password,
             userID:UserID
 
-        })
+        }).then((response) =>{
+            makeList(response.data)
+        });
         
-        setResponse("User Updated")
+        alert("User Updated")
+        
     }
 
    if(admin == null){
