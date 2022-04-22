@@ -148,9 +148,9 @@ function ModifyUser({admin}){
         setResponse("User Updated")
     }
 
-    if(admin == null){
+   /* if(admin == null){
         navigate('/home');
-    }
+    }*/
 
     return(
         <div className ="create_item">

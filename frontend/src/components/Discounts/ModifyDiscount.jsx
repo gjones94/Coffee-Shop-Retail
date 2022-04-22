@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import './ModifyDiscount.css';
+//import './ModifyDiscount.css';
 import Axios from 'axios';
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
