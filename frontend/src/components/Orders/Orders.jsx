@@ -13,7 +13,7 @@ function Orders ({admin}) {
     const [displayOrders, setDisplayOrders] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearch] = useState("");
-    const [users, setUsers] = useState(null)
+    const [users, setUsers] = useState(null);
     const [sortNameOrder, setNameSort] = useState(0);
     const [sortIDOrder, setIDSort] = useState(0);
     const [sortDateOrder, setDateSort] = useState(0);
