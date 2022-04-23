@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import {useNavigate } from "react-router-dom";
 import Axios from 'axios'
 //import { useSelector } from 'react-redux'
-import './Orders.css'
+import './Orders.css' // check with Zak to get the order displayed correctly (3 per row etc.)
 
 function Orders ({admin}) {
 	
@@ -125,6 +125,7 @@ function Orders ({admin}) {
                     combo.push(data)
 
                     //change items to be more readable
+                    /*
                     var list = order.orders_items;
                     list = JSON.parse(list);
                     let item_list = new Array(list.length);
@@ -134,6 +135,7 @@ function Orders ({admin}) {
                     item_list.shift();
                     order.orders_items = item_list;
                     console.log(item_list)
+                    */
                 }
             })
         })
@@ -167,7 +169,7 @@ function Orders ({admin}) {
         loaded();
     };
 
-    const searchByUsers = () => {
+    const searchByUsers = () => { // Need the sort changed to names
         tempOrders = []; //reset list
         setDisplayOrders(constOrders);//reset display orders
         loading();
@@ -258,7 +260,7 @@ function Orders ({admin}) {
         setDisplayOrders(tempOrders);
     }
 
-    const sortByName = () => {
+    const sortByName = () => { 
         //reset the other sorts
         setPriceSort(0)
         setDateSort(0)
@@ -351,12 +353,9 @@ function Orders ({admin}) {
         setLoading(false);
     }
 
-    
-    /*
     if(admin == null){
         navigate('/home')
     }
-    */
    
     if (isLoading){
         //returns only this until data is done loading
