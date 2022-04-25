@@ -67,7 +67,16 @@ function App() {
 
     return (
         <>
-            {!data} {/* Delay for data to load */}
+            {!data && <div style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
+                <Loader
+                    type="Rings"
+                    color="#6ac7ba"
+                    height={80}
+                    width={80}
+                    timeout={5000} />
+
+            </div>}         
 
             {data && <>
               <Router>
