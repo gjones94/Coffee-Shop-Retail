@@ -33,7 +33,8 @@
     padding: 1rem;
     font-size: 3rem;
     margin-left: 1rem;
-    margin-right: auto;
+    margin-right: 1rem;
+    display: inline;
 }
 
 .header .icons div:hover{
