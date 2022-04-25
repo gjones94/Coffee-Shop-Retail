@@ -20,7 +20,7 @@ const ReviewSection = () => {
                         <img src={quote} alt="" className="quote" />
                         <p>"This stuff is great! I love their selection of infusions and accessories, all offered at fair prices."</p>
                         <img src={p1} className="user" alt="" />
-                        <h3>Johnathan Taylor-Thomas</h3>
+                        <h3>Johnathan Thomas</h3>
                         <div className="stars">
                             <i className="fas fa-star"></i>
                             <i className="fas fa-star"></i>
