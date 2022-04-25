@@ -55,10 +55,20 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
                             <span className="header__navItems">Admin</span>
                         </Link>
                     }
-                    {uid != null && 
-                        <Link className="fas fa-shopping-cart" style={{textDecoration: 'none'}} to="/cart"></Link>
-                    }
-
+                    <div className="icons">
+                        {uid != null &&
+                            <h1 className="heading"> {u_name} </h1>
+                        }
+                        {uid != null && 
+                            <Link className="fas fa-shopping-cart" style={{textDecoration: 'none'}} to="/cart"></Link>
+                        }
+                        {uid != null &&
+                        <div>
+                            <button className="btn" type="submit" onClick={signOut}>Sign Out</button>
+                        </div> 
+                        }
+                        <div className="fas fa-bars" id="menu-btn" onClick={handleMenuBtn}></div>
+                    </div>
                 </nav>
                 {/*
                     <div>
@@ -66,22 +76,6 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
                     </div>
                 }
                 */}
-                {uid != null &&
-                    <div>
-                        <button className="btn" type="submit" onClick={signOut}>Sign Out</button>
-                    </div> 
-                }
-                <div className="icons">
-                    {uid != null &&
-                        <h1 className="heading"> {u_name} </h1>
-                    }
-                    {/* 
-                    <div className="fas fa-search" id="search-btn" onClick={handleSearchBox}></div>
-                    <div className="fas fa-bars" id="menu-btn" onClick={handleMenuBtn}></div>
-                    <div className="fas fa-user" id ="user-btn"></div>
-                    <div className="fas fa-shopping-cart" id="cart-btn" onClick={handleCart}></div>
-                    */}
-                </div>
 
                 <div className="search-form">
                     <input type="search" id="search-box" placeholder="Search" />
