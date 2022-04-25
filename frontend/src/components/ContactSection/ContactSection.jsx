@@ -31,7 +31,7 @@ const ContactSection = () => {
                             <input type="number" placeholder="number" />
                         </div>
                         {/* eslint-disable-next-line */}
-                        <a href="#" className="btn">{"submit"}</a>
+                        <a href="/home" className="btn">{"submit"}</a>
                     </form>
 
                 </div>
