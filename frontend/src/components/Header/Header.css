@@ -107,6 +107,9 @@
         padding:.5rem;
         font-size: 2rem;
     }
+    .header .logo img{
+        height: 5rem;
+    }
 
     .header .search-form{
         width: 35%;
