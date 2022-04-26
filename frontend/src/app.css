@@ -81,6 +81,17 @@ section{
     cursor: pointer;
 }
 
+.btnOut {
+    margin-top: .5rem;
+    display: inline-block;
+    padding:.9rem 1rem;
+    border-radius: 18px;
+    font-size: 1.2rem;
+    color:#fff;
+    background: var(--main-color);
+    cursor: pointer;
+}
+
 .btn:hover{
     letter-spacing: .2rem;
 }
