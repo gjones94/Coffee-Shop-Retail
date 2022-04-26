@@ -160,8 +160,8 @@ function Register(){
 
                         <button className="btn" type="submit" onClick={submitInfo} >Register</button>
 
-                        <span className="create__head2">Sign Up for emails to get special news and offers</span>
-                        <span className="create__head3">By signing up, you agree to our <span className="underlineHead3">Privacy Policy</span> and <span className="underlineHead3">Terms of Use</span></span>
+                        <span className="create_head2">Sign Up for emails to get special news and offers</span>
+                        <span className="create_head3">By signing up, you agree to our <span className="underlineHead3">Privacy Policy</span> and <span className="underlineHead3">Terms of Use</span></span>
                     {/*</form>*/}
 
                 </div>
