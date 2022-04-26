@@ -27,9 +27,6 @@ const Footer = () => {
                     <Link style={{textDecoration: 'none'}} to="/login">
                         <span className="header__navItems">Login</span>
                      </Link>
-                    <Link style={{textDecoration: 'none'}} to="/admin">
-                        <span className="header__navItems">Admin</span> 
-                     </Link>
                 </nav>              
                 <div className="credit">Group 13 | all rights reserved</div>
                 
