@@ -48,15 +48,17 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
                     }
                 </nav>
                     <div className="icons">
+                        {uid != null && 
+                            <Link to="/cart">
+                                <div className="fas fa-shopping-cart" id='cart-btn'> </div>
+                            </Link>
+                        }
                         {uid != null &&
                             <div className="heading"> {u_name} </div>
                         }
-                        {uid != null && 
-                            <Link className="fas fa-shopping-cart" style={{textDecoration: 'none'}} to="/cart"></Link>
-                        }
                         {uid != null &&
                         <div>
-                            <button className="btn" type="submit" onClick={signOut}>Sign Out</button>
+                            <button className="btnOut" type="submit" onClick={signOut}>Sign Out</button>
                         </div> 
                         }
                         <div className="fas fa-bars" id="menu-btn" onClick={handleMenuBtn}></div>
