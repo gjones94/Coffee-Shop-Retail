@@ -96,6 +96,11 @@ section{
     letter-spacing: .2rem;
 }
 
+.btnOut:hover{
+    letter-spacing: .2rem;
+}
+
+
 @media (max-width:991px){
 
     html{
