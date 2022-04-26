@@ -63,8 +63,8 @@
 
 
 .login__head2 {
-  padding: 2rem;
   width: 85%;
+  margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -74,7 +74,6 @@
 }
 
 .login__head3 {
-  padding: 3rem;
   width: 85%;
   margin-left: auto;
   margin-right: auto;
