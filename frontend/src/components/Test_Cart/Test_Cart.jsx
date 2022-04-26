@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import Axios from 'axios'
-//import './Cart.css'
+import './Cart.css'
 import { useNavigate} from "react-router-dom";
 
 const Test_Cart = ({uid, uname}) =>{ 
