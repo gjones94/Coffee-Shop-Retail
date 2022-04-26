@@ -16,6 +16,7 @@ margin-bottom: 2rem;
 display: flex;
 flex-direction: column;
 align-items: center;
+padding: 1rem;
 }
   
 .create_logo {
@@ -80,8 +81,8 @@ color: #fff;
 
 
 .create_head2 {
-padding: 2rem;
 width: 85%;
+margin-top: 1rem;
 margin-left: auto;
 margin-right: auto;
 text-align: center;
@@ -91,7 +92,6 @@ color: rgb(216, 214, 214);
 }
 
 .create_head3 {
-padding: 3rem;
 width: 85%;
 margin-left: auto;
 margin-right: auto;
