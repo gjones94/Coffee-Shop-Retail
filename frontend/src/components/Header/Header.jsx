@@ -10,15 +10,6 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
     searchForm.classList.remove('active');
     }
 
-    const handleSearchBox = () => {
-        let navbar = document.querySelector('.navbar');
-        let searchForm = document.querySelector('.search-form');
-
-        searchForm.classList.toggle('active');
-        navbar.classList.remove('active');
-    }
-
-
     return (
         <>
             <div className="header">
@@ -55,9 +46,10 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
                             <span className="header__navItems">Admin</span>
                         </Link>
                     }
+                </nav>
                     <div className="icons">
                         {uid != null &&
-                            <h1 className="heading"> {u_name} </h1>
+                            <div className="heading"> {u_name} </div>
                         }
                         {uid != null && 
                             <Link className="fas fa-shopping-cart" style={{textDecoration: 'none'}} to="/cart"></Link>
@@ -69,13 +61,6 @@ const NavBar = ({u_name ,uid, admin, signOut}) => {
                         }
                         <div className="fas fa-bars" id="menu-btn" onClick={handleMenuBtn}></div>
                     </div>
-                </nav>
-                {/*
-                    <div>
-                        <h1 className="heading"> Welcome {u_name} </h1>
-                    </div>
-                }
-                */}
 
                 <div className="search-form">
                     <input type="search" id="search-box" placeholder="Search" />
