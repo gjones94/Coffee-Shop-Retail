@@ -234,7 +234,7 @@ const Test_Cart = ({uid, uname}) =>{
         return <h1 className="heading"> FETCHING<span>DATA</span></h1>
     }else if(uid == null){
         return(
-            <h1 className="heading"> UNAUTHORIZED<span>ACCESS</span></h1>
+            <h1 className="heading"> PLEASE<span> LOG IN</span></h1>
         )
     }else{
         return (
