@@ -256,6 +256,8 @@ const Test_Cart = ({uid, uname}) =>{
                                         </div>
                                         <div class="column">
                                             Quantity: {item.qty}
+                                        </div>
+                                         <div class="column">
                                             <button className="btn" type="submit" onClick={() => plus(item)}>+</button>
                                             <button className="btn" type="submit" onClick={() => minus(item)}>-</button>
                                             <button className="btn" type="submit" onClick={() => remove(item)}>Remove</button>
