@@ -409,7 +409,7 @@ app.get('/api/get/orders', (req, res) => {
     })
 });
 
-app.post('/api/orders/update', (req, res) => { // delete then insert
+app.post('/api/orders/update', (req, res) => { // insert
     console.log("update orders called") //debugging purposes
 
     const orders_id = req.body.orders_id
