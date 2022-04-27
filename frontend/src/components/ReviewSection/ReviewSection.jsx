@@ -32,7 +32,7 @@ const ReviewSection = () => {
 
                     <div className="box">
                         <img src={quote} alt="" className="quote" />
-                        <p>"Beans and Leaves had everything I need! Would definitely purchase from them again."</p>
+                        <p>"Beans and Leaves had everything I need and more! Would definitely purchase from them again."</p>
                         <img src={p2} className="user" alt="" />
                         <h3>Kate Beckinsale</h3>
                         <div className="stars">
