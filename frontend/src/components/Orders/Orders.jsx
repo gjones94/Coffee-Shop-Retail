@@ -408,9 +408,7 @@ function Orders ({admin}) {
                                     <div className="price">User: {order.first} {order.last} </div>
                                     <div className="price">Completed: {order.orders_completed} </div>
                                     <div className="price">Items: {order.orders_items}</div>
-                                    <div class="box">
-                                        <button className="btn" type="submit" onClick={() => updateOrder(order.orders_id)} >Complete Order</button>
-                                    </div>
+                                    <button className="btn" type="submit" onClick={() => updateOrder(order.orders_id)} >Complete Order</button>
                                 </div>
                             )
                         }
