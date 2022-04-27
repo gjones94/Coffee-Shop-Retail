@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 .cart_item {
-    background-color: #545454;
+    background-color: black;
     padding: 20px;
     font-size: 2rem;
     border-radius: 18px;
@@ -146,7 +146,7 @@
     font-weight: 400;
 }
 .container {
-    background: var(--bg);
+    background: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -165,7 +165,7 @@
 
 @media screen and (max-width: 500px) {
     .cart_item {
-        background-color: var(--black);
+        background-color: black;
     }
 
     .column {
