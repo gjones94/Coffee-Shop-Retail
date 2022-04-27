@@ -198,6 +198,8 @@ function Orders ({admin}) {
         setNameSort(0)
         setDateSort(0)
         setPriceSort(0)
+	sortByIncompletedOrders(0)
+	sortByCompletedOrders(0)
 
         //reset the temp inventory list
         tempOrders = [];
@@ -233,6 +235,8 @@ function Orders ({admin}) {
         setNameSort(0)
         setDateSort(0)
         setIDSort(0)
+	sortByIncompletedOrders(0)
+	sortByCompletedOrders(0)
 
         //reset the temp inventory list
         tempOrders = [];
@@ -267,6 +271,8 @@ function Orders ({admin}) {
         setPriceSort(0)
         setDateSort(0)
         setIDSort(0)
+	sortByIncompletedOrders(0)
+	sortByCompletedOrders(0)
 
         tempOrders = []
 
@@ -300,6 +306,8 @@ function Orders ({admin}) {
         setNameSort(0)
         setIDSort(0)
         setPriceSort(0)
+	sortByIncompletedOrders(0)
+	sortByCompletedOrders(0)
 
         //reset the temp inventory list
         tempOrders = [];
@@ -352,8 +360,7 @@ function Orders ({admin}) {
         setNameSort(0)
         setDateSort(0)
         setPriceSort(0)
-	sortByCompletedOrders(0)
-	sortByUncompletedOrders(0)
+	sortByIncompletedOrders(0)
 	    
 	displayOrders.map(order => {
             if(order.orders_completed == "Yes"){
@@ -370,7 +377,6 @@ function Orders ({admin}) {
         setDateSort(0)
         setPriceSort(0)
 	sortByCompletedOrders(0)
-	sortByUncompletedOrders(0)
 	    
 	displayOrders.map(order => {
             if(order.orders_completed == "No"){
