@@ -32,8 +32,8 @@
     cursor: pointer;
     padding: 1rem;
     font-size: 1.75rem;
-    margin-left: .75rem;
-    margin-right: .75rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
     display: inline;
 }
 
@@ -108,7 +108,7 @@
         font-size: 2rem;
     }
     .header .logo img{
-        height: 5rem;
+        height: 3rem;
     }
 
     .header .search-form{
