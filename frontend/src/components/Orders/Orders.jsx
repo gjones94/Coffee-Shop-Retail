@@ -360,6 +360,7 @@ function Orders ({admin}) {
         setNameSort(0)
         setDateSort(0)
         setPriceSort(0)
+	setIDSort(0)
 	sortByIncompletedOrders(0)
 	    
 	displayOrders.map(order => {
@@ -376,6 +377,7 @@ function Orders ({admin}) {
         setNameSort(0)
         setDateSort(0)
         setPriceSort(0)
+	setIDSort(0)
 	sortByCompletedOrders(0)
 	    
 	displayOrders.map(order => {
