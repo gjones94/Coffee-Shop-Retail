@@ -346,6 +346,40 @@ function Orders ({admin}) {
         fetchOrders();
         loaded(); 
     }
+    
+    const sortByCompletedOrders = () => { // to update orders to completed
+        //reset other sorts
+        setNameSort(0)
+        setDateSort(0)
+        setPriceSort(0)
+	sortByCompletedOrders(0)
+	sortByUncompletedOrders(0)
+	    
+	displayOrders.map(order => {
+            if(order.orders_completed == "Yes"){
+		tempOrders.push(order);
+	    }
+        });
+
+        setDisplayOrders(tempOrders);
+    }
+    
+    const sortByIncompletedOrders = () =>{
+        //reset other sorts
+        setNameSort(0)
+        setDateSort(0)
+        setPriceSort(0)
+	sortByCompletedOrders(0)
+	sortByUncompletedOrders(0)
+	    
+	displayOrders.map(order => {
+            if(order.orders_completed == "No"){
+		tempOrders.push(order);
+	    }
+        });
+
+        setDisplayOrders(tempOrders);
+    }
 
     const loading = () =>{
         setLoading(true);
@@ -395,6 +429,12 @@ function Orders ({admin}) {
                 </div>
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByDate}>Sort By Date</button>
+                </div>
+		<div class="box">
+                    <button className="btn" type="submit" onClick={sortByCompletedOrders}>Sort By Completed Orders</button>
+                </div>
+		<div class="box">
+                    <button className="btn" type="submit" onClick={sortByIncompletedOrders}>Sort By Incompleted Orders</button>
                 </div>
                 </div>
 
