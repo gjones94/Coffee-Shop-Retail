@@ -182,7 +182,9 @@ function Orders ({admin}) {
             return;
         }else{
             constOrders.map(order => {
-                tempOrders.push(order);
+                if(order.user_first_name.toLowerCase().includes(searchInput.toLowerCase()) || order.user_last_name.toLowerCase().includes(searchInput.toLowerCase())){
+                    tempOrders.push(order);
+                }
             });
         }
         //set display to the filtered list
