@@ -397,9 +397,8 @@ function Orders ({admin}) {
                 </div>
 
                 <div className="box-container">
-                    {displayOrders.map(order => 
+                    {displayOrders.map(order =>
                         {
-                            console.log(order)
                             return( 
                                 <div className="box">
                                     <div className="price">Order ID: {order.orders_id} </div>

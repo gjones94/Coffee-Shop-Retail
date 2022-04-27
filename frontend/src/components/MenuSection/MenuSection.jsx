@@ -258,7 +258,11 @@ function MenuSection ({uid, admin}) {
                    Axios.post("api/updateCartQty", {
                       item_id : item.item_id,
                       qty : temp.item_qty
-                   });
+                   }).then(response =>{
+                        console.log(response)
+                   }).catch(error => {
+                        console.log(error)
+                   })
                 }
             })
 
@@ -267,7 +271,12 @@ function MenuSection ({uid, admin}) {
                     uid : uid,
                     id : item.item_id,
                     qty : 1
-                });
+                }).then(response =>{
+                    console.log(response)
+                }).catch(error => {
+                    console.log(error)
+                })
+
                 temp_cart.push(new_item) //do this to save local state
             }
             

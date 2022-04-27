@@ -3,7 +3,7 @@ import Axios from 'axios'
 import './Cart.css'
 import { useNavigate} from "react-router-dom";
 
-const Test_Cart = ({uid, uname}) =>{ 
+const Cart = ({uid, uname}) =>{ 
 
     const [inventory, setInventory] = useState(null)
     const [cart, setCart] = useState(null);
@@ -25,13 +25,15 @@ const Test_Cart = ({uid, uname}) =>{
 
     useEffect(() =>{
         if(inventory && uid){
-            console.log(inventory)
+            console.log("UseEffect: Fetching cart")
+            console.log("Inventory is", inventory)
             fetchCart(); 
         }
     },[inventory, uid])
 
     useEffect( () => {
         if(cart){
+            console.log("UseEffect: Setting details")
             console.log(cart)
             setCartDetails();
         }
@@ -39,18 +41,21 @@ const Test_Cart = ({uid, uname}) =>{
 
     useEffect( () => {
         if(cartDetails && discountAmt != null){
+            console.log("UseEffect: Calculating total")
             calculateTotal();
         }
     },[cartDetails, discountAmt])
 
     useEffect( () => {
         if(total && tax && subTotal && !empty){
+            console.log("UseEffect: setting loaded")
             loaded()
         }
-    },[total, tax, subTotal])
+    },[total, tax, subTotal, empty])
 
 
     const fetchInventory = () =>{
+        console.log("Function: fetchInventory")
         Axios.get("/api/get/inventory").then( //calls the backend server.js with this api command
             (response) => {
                 let items = JSON.parse(JSON.stringify(response.data));
@@ -60,18 +65,22 @@ const Test_Cart = ({uid, uname}) =>{
     }
 
     const fetchCart = () => {
-        console.log("Trying to fetch cart")
+        console.log("Function: fetchCart")
         Axios.post("/api/get/cart", {
             id : uid
         }).then( //calls the backend server.js with this api command
             (response) => {
                 let items = JSON.parse(JSON.stringify(response.data)); //get items in the user's cart
-                items.map(item =>{
+                console.log("length is", Object.keys(items).length)
+                if(Object.keys(items).length != 0){
+                    console.log("Not empty!")
                     setEmpty(false)
-                })
+                }
                 setCart(items); 
             }
-        );
+        ).catch(error =>{
+            console.log(error)
+        });
     }
 
     const calculateTotal = () => {
@@ -136,7 +145,8 @@ const Test_Cart = ({uid, uname}) =>{
         cartDetails.map(c_item =>{
             let t_item = c_item
             if(c_item.item_id == item.item_id){
-                if(t_item.qty != 0){
+                //stops at qty of 1, otherwise user can just remove the item altogether.
+                if(t_item.qty != 1){
                     t_item.qty -= 1
                 }
                 console.log()
@@ -200,7 +210,8 @@ const Test_Cart = ({uid, uname}) =>{
             Axios.post("/api/cart/delete", {
                 user : uid
             })
-            alert("Done")
+            alert("Thank you for your purchase!")
+            navigate('/home')
        }else{
             alert("Order cannot be filled due to low inventory levels")
        }
@@ -302,4 +313,4 @@ const Test_Cart = ({uid, uname}) =>{
     }
 }
 
-export default Test_Cart;
+export default Cart;

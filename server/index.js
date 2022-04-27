@@ -307,9 +307,12 @@ app.post('/api/addToCart', (req, res) => {
     const qty = req.body.qty;
 
     const sqlInsert = "INSERT INTO cart (user_id, item_id, item_qty) VALUES (?,?,?);"
-    db.query(sqlInsert,[uid, id, qty], (err, res) =>{
+    db.query(sqlInsert,[uid, id, qty], (err, response) =>{
         if(err){
             console.log(err.message);
+            res.send(err)
+        }else{
+            res.send(response)
         }
     });
 })
@@ -322,10 +325,13 @@ app.post('/api/updateCartQty', (req, res) => {
     sqlUpdate = "UPDATE cart SET item_qty = ? WHERE item_id = ?"
     const values = [qty, i_item_id];
 
-    db.query(sqlUpdate,values,(err,res) => {
+    db.query(sqlUpdate,values,(err,response) => {
 
         if(err){
             console.error(err.message);
+            res.send(error)
+        }else{
+            res.send(response)
         }
     });
 
@@ -340,7 +346,6 @@ app.post('/api/get/cart', (req, res) => {
         if(err){
             console.error(err.message);
         }
-        console.log(result);
         res.send(result);
     })
 })
@@ -372,11 +377,12 @@ app.post('/api/item/updateQty', (req, res) =>{
     const qty = req.body.qty
     console.log("quantity inserted is qty")
     const update_query = 'UPDATE item SET item_stock = ? WHERE item_id = ?'
-    db.query(update_query, [qty, id], (err, res) => {
+    db.query(update_query, [qty, id], (err, response) => {
         if(err){
             console.log(err.message)
+            res.send(err)
         }
-        console.log(res)
+        res.send(response)
     })
 
 })
