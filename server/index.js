@@ -363,6 +363,7 @@ app.post('/api/cart/checkout', (req, res) => {
     db.query(query, values, (err, response) =>{
         if(err){
             console.log(err.message);
+            res.send(err)
         }
         res.send(response)
     })
@@ -395,6 +396,22 @@ app.post('/api/cart/delete', (req, res) => {
     db.query(query, uid, (err, response) => {
         if(err){
             console.log(err,message);
+            res.send(err)
+        }
+        res.send(response);
+    })
+})
+
+app.post('/api/cart/delete/item', (req, res) => {
+    console.log("Db to delete cart item")
+    const uid = req.body.user
+    const id = req.body.id
+
+    const query = 'DELETE FROM cart WHERE user_id = ? and item_id = ?'
+    db.query(query, [uid,id], (err, response) => {
+        if(err){
+            console.log(err,message);
+            res.send(err)
         }
         res.send(response);
     })

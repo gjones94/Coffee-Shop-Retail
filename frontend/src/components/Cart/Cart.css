@@ -31,9 +31,15 @@
     align-items: center;
 }
 
-.column {
+.column{
     float: left;
     width: 25%;
+}
+
+.column_header{
+    float: left;
+    width: .25%;
+    font-size: 3rem;
 }
 
 /* Clear floats after the columns */

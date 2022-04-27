@@ -132,7 +132,14 @@ const Cart = ({uid, uname}) =>{
             let t_item = c_item
             if(c_item.item_id == item.item_id){
                 t_item.qty += 1
-                console.log()
+                Axios.post("api/updateCartQty", {
+                    item_id : item.item_id,
+                    qty : t_item.qty
+                 }).then(response =>{
+                      console.log(response)
+                 }).catch(error => {
+                      console.log(error)
+                 })
             }
             temp.push(t_item)
         })
@@ -148,6 +155,14 @@ const Cart = ({uid, uname}) =>{
                 //stops at qty of 1, otherwise user can just remove the item altogether.
                 if(t_item.qty != 1){
                     t_item.qty -= 1
+                    Axios.post("api/updateCartQty", {
+                        item_id : item.item_id,
+                        qty : t_item.qty
+                     }).then(response =>{
+                          console.log(response)
+                     }).catch(error => {
+                          console.log(error)
+                     })
                 }
                 console.log()
             }
@@ -162,6 +177,15 @@ const Cart = ({uid, uname}) =>{
         cartDetails.map(c_item =>{
             if(item.item_id != c_item.item_id){
                 temp.push(c_item)
+                Axios.post("/api/cart/delete/item", {
+                    user : uid,
+                    id : item.item_id,
+                }).then(response =>{
+                    console.log(response)
+                }).catch((error) =>{
+                    console.log(error) 
+                })
+
             }
         })
         setDetails(temp)
@@ -189,10 +213,11 @@ const Cart = ({uid, uname}) =>{
                     t_total : total.toFixed(2),
                     user : uid,
                     status : 0
+            }).then(response =>{
+                console.log(response)
             }).catch((error) =>{
-                    console.log(error.message)
+                console.log(error.message)
             })
-
             // item_qty is the existing stock, qty is the amount being purchase
             //updates the inventory with new quantities after purchase
             cartDetails.map(item =>{
@@ -260,10 +285,10 @@ const Cart = ({uid, uname}) =>{
                             return( 
                                     <div class='row'>
                                         <div class="column">
-                                            Item: {item.item_name}
+                                            {item.item_name}
                                         </div>
                                         <div class="column">
-                                            Price: {item.item_price.toFixed(2)}
+                                            Price: ${item.item_price.toFixed(2)}
                                         </div>
                                         <div class="column">
                                             Quantity: {item.qty}
