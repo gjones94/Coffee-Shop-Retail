@@ -17,7 +17,7 @@ function Register(){
 
     let navigate = useNavigate();
     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}\b/
-    const passwordRegex = /(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/
+    const passwordRegex = /(?=[A-Za-z0-9@#*$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!*=])(?=.{8,}).*$/
     const numberRegex = /^[0-9]+$/
 
 

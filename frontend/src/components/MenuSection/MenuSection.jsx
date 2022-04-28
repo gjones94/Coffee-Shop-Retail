@@ -56,7 +56,7 @@ function MenuSection ({uid, admin}) {
         Fetch Data calls the api on the backend through axios
         This call goes to the backend process running on the server which handles
         all API calls.
-        It parses through the JSON response data received, and sets two constant variables that hold the 
+        It parses through the JSON response data received, and sets three inventory variables that help hold the 
         state of the page. 
     */
     const fetchInventory = () =>{
