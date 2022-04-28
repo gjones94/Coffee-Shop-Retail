@@ -365,6 +365,7 @@ function Orders ({admin}) {
     }
 
     const showAllOrders = () => {
+        setUnsortedOrders(constOrders)
         setDisplayOrders(constOrders)
     }
 
