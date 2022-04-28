@@ -200,7 +200,6 @@ const Cart = ({uid, uname}) =>{
                 success = false
             }else{
                 c_obj[item.item_id] = item.qty
-                console.log("This will get sent items", c_obj);
             }
        })
        

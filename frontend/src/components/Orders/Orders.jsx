@@ -121,21 +121,19 @@ function Orders ({admin}) {
                     data['date'] = (year + month + day);
                     order.orders_date = date.toDateString();
 
-                    //add this to the comprehensive combo list
-                    combo.push(data)
 
                     //change items to be more readable
-                    /*
                     var list = order.orders_items;
                     list = JSON.parse(list);
-                    let item_list = new Array(list.length);
-                    Object.keys(list).forEach(function(key) {
-                        item_list[key] = ('Item : ' + key + ', Amount : ' + list[key])
+                    console.log("List ", list)
+                    Object.keys(list).map(key =>{
+                        console.log("Key is ", key, " Value is ", list[key])
                     })
-                    item_list.shift();
-                    order.orders_items = item_list;
-                    console.log(item_list)
-                    */
+
+                    console.log("Item list", list)
+                    data['itemqty'] = list
+                    //add this to the comprehensive combo list
+                    combo.push(data)
                 }
             })
         })
@@ -148,7 +146,6 @@ function Orders ({admin}) {
     const searchByID = () => {
         tempOrders = []; //reset list
         setDisplayOrders(constOrders);//reset display orders
-        loading();
         var searchInput = searchValue;
 
         //check for whitespace only
@@ -166,13 +163,11 @@ function Orders ({admin}) {
         //set display to the filtered list
         setDisplayOrders(tempOrders);
         setUnsortedOrders(tempOrders)
-        loaded();
     };
 
     const searchByUsers = () => { // Need the sort changed to names
         tempOrders = []; //reset list
         setDisplayOrders(constOrders);//reset display orders
-        loading();
         var searchInput = searchValue;
 
         //check for whitespace only
@@ -182,7 +177,7 @@ function Orders ({admin}) {
             return;
         }else{
             constOrders.map(order => {
-                if(order.user_first_name.toLowerCase().includes(searchInput.toLowerCase()) || order.user_last_name.toLowerCase().includes(searchInput.toLowerCase())){
+                if(order.first.toLowerCase().includes(searchInput.toLowerCase()) || order.last.toLowerCase().includes(searchInput.toLowerCase())){
                     tempOrders.push(order);
                 }
             });
@@ -190,7 +185,6 @@ function Orders ({admin}) {
         //set display to the filtered list
         setDisplayOrders(tempOrders);
         setUnsortedOrders(tempOrders)
-        loaded();
     };
 
     const sortByID = () => {
@@ -300,7 +294,6 @@ function Orders ({admin}) {
         setNameSort(0)
         setIDSort(0)
         setPriceSort(0)
-	setIDSort(0)
 	    
         //reset the temp inventory list
         tempOrders = [];
@@ -348,35 +341,25 @@ function Orders ({admin}) {
         loaded(); 
     }
     
-    const sortByCompletedOrders = () => { // to update orders to completed
-        //reset other sorts
-        setNameSort(0)
-        setDateSort(0)
-        setPriceSort(0)
-	setIDSort(0)
+    const showCompletedOrders = () => { // to update orders to completed
 	    
-	displayOrders.map(order => {
-            if(order.orders_completed == "Yes"){
-		tempOrders.push(order);
-	    }
+        setDisplayOrders(constOrders);//reset display orders
+        constOrders.map(order => {
+            if(order.orders_completed === "Yes"){
+                tempOrders.push(order);
+            }
         });
 
         setDisplayOrders(tempOrders);
     }
     
-    const sortByIncompletedOrders = () =>{
-        //reset other sorts
-        setNameSort(0)
-        setDateSort(0)
-        setPriceSort(0)
-	setIDSort(0)
-	sortByCompletedOrders(0)
-	    
-	displayOrders.map(order => {
-            if(order.orders_completed == "No"){
-		tempOrders.push(order);
-	    }
-        });
+    const showIncompleteOrders = () =>{
+
+        setDisplayOrders(constOrders);//reset display orders
+        constOrders.map(order => {
+            if(order.orders_completed === "No"){
+            tempOrders.push(order);
+        }});
 
         setDisplayOrders(tempOrders);
     }
@@ -430,11 +413,11 @@ function Orders ({admin}) {
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByDate}>Sort By Date</button>
                 </div>
-		<div class="box">
-                    <button className="btn" type="submit" onClick={sortByCompletedOrders}>Show Completed Orders</button>
+		        <div class="box">
+                    <button className="btn" type="submit" onClick={showCompletedOrders}>Show Order History</button>
                 </div>
-		<div class="box">
-                    <button className="btn" type="submit" onClick={sortByIncompletedOrders}>Show Incompleted Orders</button>
+                <div class="box">
+                    <button className="btn" type="submit" onClick={showIncompleteOrders}>Show Currently Placed Orders</button>
                 </div>
                 </div>
 
@@ -448,7 +431,13 @@ function Orders ({admin}) {
                                     <div className="price">Order Total: ${order.orders_total} </div>
                                     <div className="price">User: {order.first} {order.last} </div>
                                     <div className="price">Completed: {order.orders_completed} </div>
-                                    <div className="price">Items: {order.orders_items}</div>
+                                    {Object.keys(order.itemqty).map(key => {
+                                        console.log(key)
+                                        let quantity = order.itemqty[key]
+                                        return(
+                                            <div className="price">Item: {key} Quantity: {quantity}  </div>
+                                        )
+                                    })}
                                     <button className="btn" type="submit" onClick={() => updateOrder(order.orders_id)} >Complete Order</button>
                                 </div>
                             )
