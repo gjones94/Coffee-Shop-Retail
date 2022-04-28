@@ -364,6 +364,10 @@ function Orders ({admin}) {
         setDisplayOrders(tempOrders);
     }
 
+    const showAllOrders = () => {
+        setDisplayOrders(constOrders)
+    }
+
     const loading = () =>{
         setLoading(true);
     }
@@ -396,8 +400,10 @@ function Orders ({admin}) {
                         type="search" 
                         id="search"
                     />
+                    <button className="btn" type="submit" onClick={showAllOrders}>Show All Orders</button>
+                    <button className="btn" type="submit" onClick={showIncompleteOrders}>Show Currently Placed Orders</button>
+                    <button className="btn" type="submit" onClick={showCompletedOrders}>Show Order History</button>
                     <button className="btn" type="submit" onClick={searchByID}>Search Orders by ID</button>
-                    
                 <div class="box">
                     <button className="btn" type="submit" onClick={searchByUsers}>Search Orders by User</button>
                 </div>
@@ -413,12 +419,7 @@ function Orders ({admin}) {
                 <div class="box">
                     <button className="btn" type="submit" onClick={sortByDate}>Sort By Date</button>
                 </div>
-		        <div class="box">
-                    <button className="btn" type="submit" onClick={showCompletedOrders}>Show Order History</button>
-                </div>
-                <div class="box">
-                    <button className="btn" type="submit" onClick={showIncompleteOrders}>Show Currently Placed Orders</button>
-                </div>
+		        
                 </div>
 
                 <div className="box-container">
@@ -431,14 +432,18 @@ function Orders ({admin}) {
                                     <div className="price">Order Total: ${order.orders_total} </div>
                                     <div className="price">User: {order.first} {order.last} </div>
                                     <div className="price">Completed: {order.orders_completed} </div>
+                                    <div className="price_underline"> Items </div>
                                     {Object.keys(order.itemqty).map(key => {
                                         console.log(key)
                                         let quantity = order.itemqty[key]
                                         return(
-                                            <div className="price">Item: {key} Quantity: {quantity}  </div>
+                                            <div className="price">{key} : {quantity} </div>
                                         )
                                     })}
-                                    <button className="btn" type="submit" onClick={() => updateOrder(order.orders_id)} >Complete Order</button>
+                                    {/*Only show complete button if an order is NOT completed */}
+                                    {order.orders_completed ===  "No" &&
+                                        <button className="btn" type="submit" onClick={() => updateOrder(order.orders_id)} >Complete Order</button>
+                                    }
                                 </div>
                             )
                         }
