@@ -431,10 +431,10 @@ function Orders ({admin}) {
                     <button className="btn" type="submit" onClick={sortByDate}>Sort By Date</button>
                 </div>
 		<div class="box">
-                    <button className="btn" type="submit" onClick={sortByCompletedOrders}>Sort By Completed Orders</button>
+                    <button className="btn" type="submit" onClick={sortByCompletedOrders}>Show Completed Orders</button>
                 </div>
 		<div class="box">
-                    <button className="btn" type="submit" onClick={sortByIncompletedOrders}>Sort By Incompleted Orders</button>
+                    <button className="btn" type="submit" onClick={sortByIncompletedOrders}>Show Incompleted Orders</button>
                 </div>
                 </div>
 
