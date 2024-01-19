@@ -1,5 +1,5 @@
-Senior Year School Project
-- Coffee Shop Retail site specializing in Coffee, Tea and your favorite Merch!
+<h1> Senior Year School Project </h1>
+<h4>Coffee Shop Retail site specializing in Coffee, Tea and your favorite Merch!</hr>
 
 Authors
 Gerald Jones (Yyertsenoj94)
