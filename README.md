@@ -1,5 +1,7 @@
 <h1> Senior Year School Project </h1>
-<h4>Coffee Shop Retail site specializing in Coffee, Tea and your favorite Merch!</hr>
+<h4>Coffee Shop Retail site specializing in Coffee, Tea and your favorite Merch!</h4><br>
+
+</hr>
 
 **Team Members**<br>
 ![image](https://github.com/gjones94/Coffee-Shop-Retail/assets/141204905/dcde2736-6da6-46c9-9610-1998b7a83f17)
