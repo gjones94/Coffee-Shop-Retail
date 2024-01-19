@@ -10,4 +10,8 @@
 **Home Page**<br>
 ![image](https://github.com/gjones94/Coffee-Shop-Retail/assets/141204905/c30f9062-fcf1-468c-a4c6-ef037141d48c)
 
+**Site Pages**<br>
+![image](https://github.com/gjones94/Coffee-Shop-Retail/assets/141204905/bed1733f-3e76-4bf4-848b-8475decaee45)
 
+**DB Schema**<br>
+![image](https://github.com/gjones94/Coffee-Shop-Retail/assets/141204905/80757cac-b3a9-41ce-b7b6-60f68722b506)
