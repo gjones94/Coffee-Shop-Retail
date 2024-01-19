@@ -1,11 +1,10 @@
-To deploy to prod:
+Senior Year School Project
+- Coffee Shop Retail site specializing in Coffee, Tea and your favorite Merch!
 
-1) make sure that .school.pem is in the ui folder
-2) make transfer executable
-3) run transfer
-
-To push to github
-git add .
-git commit -m "<message>"
-git push
-
+Authors
+Gerald Jones (Yyertsenoj94)
+Estela Rodriguez-Greenfield (evieuy)
+Zakariah Ftaiti (ZakDevTx)
+Kevin Chan (kchan5782)
+Cooper Wineberg (cmw1999)
+Alejandro Navarro (adnq22)
